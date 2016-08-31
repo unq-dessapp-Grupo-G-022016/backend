@@ -1,9 +1,0 @@
-model/Price.class
-model/Bundle.class
-model/User.class
-model/MusicEvent.class
-model/MovieEvent.class
-model/Profile.class
-model/Event.class
-model/TripManager.class
-model/FoodEvent.class
