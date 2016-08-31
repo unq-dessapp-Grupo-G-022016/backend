@@ -9,10 +9,13 @@ import java.util.Set;
 public class Profile {
 
 
+
+
     Set<String>musicalGenres = new HashSet<String>();
     Set<String>movieTypes = new HashSet<String>();
     Set<String>foodTypes = new HashSet<String>();
 
 
-
+    public Profile() {
+    }
 }

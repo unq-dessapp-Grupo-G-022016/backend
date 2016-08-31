@@ -18,7 +18,13 @@ public class Price {
     }
 
 
+    public void setAmmount(int ammount){
+        this.ammount = ammount;
+    }
 
+    public Price(int ammount){
+        setAmmount(ammount);
+    }
 
 }
 
