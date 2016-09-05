@@ -2,7 +2,6 @@ package model;
 
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -11,12 +10,24 @@ import java.util.Set;
 public class Event {
 
     String name;
-    String addres;
+    String address;
     String details;
     Price price;
-    LocalDateTime date = LocalDateTime.now();
+    LocalDateTime startTime;
+    LocalDateTime endTime;
+    Set<User>attenders;
 
-    Set<User>attenders = new HashSet<User>();
+    public Event(String name, String address, String details, Price price, LocalDateTime date, LocalDateTime duration, Set<User> attenders) {
+        this.name = name;
+        this.address = address;
+        this.details = details;
+        this.price = price;
+        this.startTime = date;
+        this.endTime = duration;
+        this.attenders = attenders;
+    }
+
+    public Event(){}
 
 
     public Price price(){
