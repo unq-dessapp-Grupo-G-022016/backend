@@ -17,6 +17,9 @@ public class Price {
         return false;
     }
 
+    public int ammount(){
+        return ammount;
+    }
 
     public void setAmmount(int ammount){
         this.ammount = ammount;

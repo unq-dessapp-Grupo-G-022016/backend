@@ -12,7 +12,7 @@ public class Bundle {
 
 
     public List<Event> cheapTrip(List<Event>allEvents, Price price){
-        Stream<Event> events= allEvents.stream().filter(e -> e.price().ammount > price.ammount);
+        Stream<Event> events= allEvents.stream().filter(e -> e.price().ammount() <= price.ammount());
         return events.collect(Collectors.toList());
     }
 /*
