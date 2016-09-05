@@ -15,10 +15,19 @@
 
   <dependencies>
     <dependency>
-      <groupId>junit</groupId>
+      <!--groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>3.8.1</version>
+      <scope>test</scope-->
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>2.1.0-beta.120</version>
     </dependency>
   </dependencies>
   
@@ -29,7 +38,7 @@
       <groupId>org.apache.maven.plugins</groupId>
       <artifactId>maven-compiler-plugin</artifactId>
       <configuration>
-          <verbose>true</verbose>
+          <verbose>false</verbose>
           <source>1.8</source>
           <target>1.8</target>
           <showWarnings>true</showWarnings>
