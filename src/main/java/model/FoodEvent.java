@@ -17,6 +17,10 @@ public class FoodEvent extends Event {
         this.endTime = duration;
         this.attenders = attenders;
     }
+
+    public bool isFoodEvent(){
+    	return true;
+    }
 }
 
 
