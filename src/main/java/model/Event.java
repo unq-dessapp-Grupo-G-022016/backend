@@ -33,7 +33,9 @@ public class Event {
     public Price price(){
         return price;
     }
-
+    public boolean isFoodEvent(){
+        return false;
+    }
 
 
 }

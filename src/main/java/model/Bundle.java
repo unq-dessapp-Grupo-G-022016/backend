@@ -31,7 +31,7 @@ public class Bundle {
     }
 
     private List<Event> freeEvents(List<Event>allEvents){
-        Stream<Event> events= allEvents.stream().filter(e -> e.price().ammount() = 0);
+        Stream<Event> events= allEvents.stream().filter(e -> e.price().ammount() == 0);
         return events.collect(Collectors.toList());
     }
 /*
