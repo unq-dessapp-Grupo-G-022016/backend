@@ -42,6 +42,10 @@ public class Event {
 
     public boolean isMusicEvent(){return false;}
 
+    public boolean timeCompatible(Event event){
+        return this.endTime.isBefore(event.startTime);
+    }
+
 }
 
 

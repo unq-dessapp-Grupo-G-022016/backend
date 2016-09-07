@@ -54,3 +54,5 @@ fabric.properties
 # Maven
 log/
 target/
+
+*.iml
