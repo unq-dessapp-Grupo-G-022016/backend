@@ -1,6 +1,7 @@
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import org.jooq.lambda.Seq;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -28,6 +29,23 @@ public void test0(){
             // use mock in test....
             assertEquals(test.getUniqueId(), 43);
             
+    }
+
+
+    @Test public void crossJoinTest(){
+
+
+        Seq.of(1, 2).crossJoin(Seq.of("A", "B"));
+
+        Seq.of(1, 2).crossJoin(Seq.of("A", "B"));
+        Seq.of(1, 2, 3).crossJoin(Seq.of("A", "B"));
+        Seq.of(1, 2,3).crossJoin(Seq.of("A", "B","C","D"));
+        Seq.of(1, 2).crossJoin(Seq.of("A", "B")).crossJoin(Seq.of(6,3));
+
+        //assertEquals(0,Seq.of(1, 2).crossJoin(Seq.of("A", "B")));
+
+        assertEquals(0,0);
+
     }
 
 /*
