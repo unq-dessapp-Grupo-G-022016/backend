@@ -1,5 +1,8 @@
 package model;
 
+import org.jooq.lambda.Seq;
+import org.jooq.lambda.tuple.Tuple2;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -16,13 +19,14 @@ public class Bundle {
         Stream<Event> events= allEvents.stream().filter(e -> e.price().ammount() <= price.ammount());
         return events.collect(Collectors.toList());
     }
-/*
-    public List<Bundle> aCheapBundle(List<Event>allEvents, Price price){
-        cheapFoodEvents = cheapFood();
-        freeEvents = freeEvent();
-        return ... a list of pair of a cheap food event and a free event
+
+    public Seq<Tuple2<List<Event>, List<Event>>> aCheapBundle(List<Event>allEvents, Price price){
+        List<Event> cheapFoodEvents = cheapFood(allEvents,price);
+        List<Event> freeEvents = freeEvents(allEvents);
+
+        return Seq.of(cheapFoodEvents).crossJoin(Seq.of(freeEvents));
     }
-*/
+
 
 
 

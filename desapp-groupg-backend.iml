@@ -15,5 +15,6 @@
     <orderEntry type="library" name="Maven: org.mockito:mockito-core:2.1.0-beta.120" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: net.bytebuddy:byte-buddy:1.4.20" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.objenesis:objenesis:2.4" level="project" />
+    <orderEntry type="library" name="Maven: org.jooq:jool:0.9.11" level="project" />
   </component>
 </module>
