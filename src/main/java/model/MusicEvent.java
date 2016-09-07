@@ -8,12 +8,9 @@ import java.util.Set;
  */
 public class MusicEvent extends Event {
     public MusicEvent(String name, String address, String details, Price price, LocalDateTime date, LocalDateTime duration, Set<User> attenders) {
-        this.name = name;
-        this.address = address;
-        this.details = details;
-        this.price = price;
-        this.startTime = date;
-        this.endTime = duration;
-        this.attenders = attenders;
+        super(name, address, details, price, date, duration, attenders);
     }
+
+    public boolean isMusicEvent(){return true;}
+
 }

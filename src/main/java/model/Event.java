@@ -33,10 +33,14 @@ public class Event {
     public Price price(){
         return price;
     }
+
     public boolean isFoodEvent(){
         return false;
     }
 
+    public boolean isMovieEvent(){return false;}
+
+    public boolean isMusicEvent(){return false;}
 
 }
 

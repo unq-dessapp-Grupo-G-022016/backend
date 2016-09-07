@@ -34,6 +34,17 @@ public class Bundle {
         Stream<Event> events= allEvents.stream().filter(e -> e.price().ammount() == 0);
         return events.collect(Collectors.toList());
     }
+
+    /*
+    public List<Bundle>bundles(List<Event>listA, List<Event>listB){
+
+
+
+
+    }
+
+     */
+
 /*
 
     public List<Event> friendlyTrip(){
