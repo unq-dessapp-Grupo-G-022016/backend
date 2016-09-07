@@ -1,13 +1,13 @@
 package model;
 
 import org.jooq.lambda.Seq;
-import org.jooq.lambda.tuple.Tuple0;
-import org.jooq.lambda.tuple.Tuple1;
 import org.jooq.lambda.tuple.Tuple2;
 
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static org.jooq.lambda.Seq.seq;
 
 
 /**
@@ -23,23 +23,19 @@ public class Bundle {
         return events.collect(Collectors.toList());
     }
 
-    public List<Tuple2<Tuple1, Tuple1>> aSeqCheapBundle(List<Event>allEvents, Price price){
+    public List<Tuple2<Event, Event>> aSeqCheapBundle(List<Event>allEvents, Price price){
         List<Event> cheapFoodEvents = cheapFood(allEvents,price);
         List<Event> freeEvents = freeEvents(allEvents);
 
-        Tuple1 foodTuple;
-        foodTuple = new Tuple1(listToString(cheapFoodEvents));
-        Tuple1 movieTuple = new Tuple1(listToString(freeEvents));
+        Stream s1 = cheapFoodEvents.stream();
+        Seq<Event> seq1 = seq(s1);
 
-        return Seq.of(foodTuple).crossJoin(Seq.of(movieTuple)).toList();
+        Stream s2 = freeEvents.stream();
+        Seq<Event> seq2 = seq(s2);
+
+        //return Seq.of(foodTuple).crossJoin(Seq.of(movieTuple)).toList();
+        return seq1.crossJoin(seq2).toList();
     }
-
-    public String listToString(List<Event> events) {
-        return events.stream().map(Object::toString).collect(Collectors.joining(","));
-    }
-
-
-
 
     /*
 
