@@ -20,11 +20,11 @@ public class Bundle {
         return events.collect(Collectors.toList());
     }
 
-    public Seq<Tuple2<List<Event>, List<Event>>> aCheapBundle(List<Event>allEvents, Price price){
+    public List<Tuple2<List<Event>, List<Event>>> aSeqCheapBundle(List<Event>allEvents, Price price){
         List<Event> cheapFoodEvents = cheapFood(allEvents,price);
         List<Event> freeEvents = freeEvents(allEvents);
 
-        return Seq.of(cheapFoodEvents).crossJoin(Seq.of(freeEvents));
+        return Seq.of(cheapFoodEvents).crossJoin(Seq.of(freeEvents)).toList();
     }
 
 
