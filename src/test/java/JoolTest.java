@@ -48,7 +48,7 @@ public class JoolTest {
 
 
         //assertEquals(0,tuple(bundle.listToString(allEvents)));
-        //assertEquals(0,bundle.aSeqCheapBundle(allEvents,new Price(0)));
+        //assertEquals(0,bundle.cheap(allEvents,new Price(0)));
         assertTrue(true);
     }
 

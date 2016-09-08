@@ -23,4 +23,8 @@ public class SpecificEvent extends Event {
 
     public boolean hasCategory(){return this.category != null;}
 
+    public Category category(){
+        return category;
+    }
+
 }

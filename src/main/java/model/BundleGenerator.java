@@ -1,5 +1,6 @@
 package model;
 
+import model.data.Category;
 import org.jooq.lambda.Seq;
 import org.jooq.lambda.tuple.Tuple2;
 
@@ -23,9 +24,11 @@ public class BundleGenerator {
         return events.collect(Collectors.toList());
     }
 
-    public List<Bundle> aSeqCheapBundle(List<Event>allEvents, Price price){
+    public List<Bundle> cheap(List<Event>allEvents, Price price, Profile profile){
         List<Event> cheapFoodEvents = cheapFood(allEvents,price);
         List<Event> freeEvents = freeEvents(allEvents);
+
+        profileFoodMatcher(cheapFoodEvents,profile);
 
         Seq<Event> seq1 = seq(cheapFoodEvents.stream());
         Seq<Event> seq2 = seq(freeEvents.stream());
@@ -39,7 +42,8 @@ public class BundleGenerator {
 
         return bList;
     }
-    private void toBundleAndAddingToList(Tuple2<Event,Event> t,List<Bundle> bList) {
+
+    private void toBundleAndAddingToList(Tuple2<Event, Event> t, List<Bundle> bList) {
 
         Event a = t.v1;
         Event b = t.v2;
@@ -49,7 +53,7 @@ public class BundleGenerator {
         bList.add(bundle);
     }
 
-    private List<Event> cheapFood(List<Event>allEvents, Price price){
+    private List<Event> cheapFood(List<Event> allEvents, Price price){
         Stream<Event> events=
                 allEvents.stream().filter(e ->
                         e.price().ammount() <= price.ammount() &&
@@ -57,11 +61,41 @@ public class BundleGenerator {
         return events.collect(Collectors.toList());
     }
 
-    private List<Event> freeEvents(List<Event>allEvents){
+    private List<Event> freeEvents(List<Event> allEvents){
         Stream<Event> events= allEvents.stream().filter(e -> e.price().ammount() == 0);
         return events.collect(Collectors.toList());
     }
 
+    private List<Event> profileFoodMatcher(List<Event> es, Profile p){
+        return profileMatcher(es,p.foodTypes);
+    }
+
+    private List<Event> profileMatcher(List<Event> es, Set<Category> cs){
+        Iterator<Event> it = es.iterator();
+
+        while (it.hasNext()){
+            Event e = it.next();
+            if (!eventMatch(e,cs)) {
+                it.remove();
+            }
+        }
+
+        return es;
+    }
+
+    private boolean eventMatch(Event e, Set<Category> cs){
+        boolean res = true;
+        if (e.hasCategory()) {
+            for (Category c : cs){
+                res = c.isEqual(((SpecificEvent) e).category);
+            }
+        }
+        /*
+        if (e.hasCategory()){
+            res = cs.contains(((SpecificEvent) e).category);
+        }*/
+        return res;
+    }
     /*
 
     //profile filter
