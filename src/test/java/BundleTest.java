@@ -2,7 +2,6 @@ import model.*;
 import org.jooq.lambda.Seq;
 import org.junit.Assert;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ public class BundleTest {
     public void cheapTripTest(){
 
         List<Event> allEvents = new ArrayList<>();
-        Bundle bundle = new Bundle();
+        BundleGenerator bundle = new BundleGenerator();
 
         Price priceEventMock = Mockito.mock(Price.class);
         Price cheapPrice = Mockito.mock(Price.class);
@@ -39,7 +38,7 @@ public class BundleTest {
     public void cheapTripTestSeq(){
 
         List<Event> allEvents = new ArrayList<>();
-        Bundle bundle = new Bundle();
+        BundleGenerator bundleG = new BundleGenerator();
 
         Price priceEventMock = Mockito.mock(Price.class);
         Price cheapPrice = Mockito.mock(Price.class);
@@ -66,7 +65,7 @@ public class BundleTest {
         when(priceEventMock.ammount()).thenReturn(10);
         when(cheapPrice.ammount()).thenReturn(30);
 
-        Assert.assertEquals(9, bundle.aSeqCheapBundle(allEvents,cheapPrice).size());
+        Assert.assertEquals(9, bundleG.aSeqCheapBundle(allEvents,cheapPrice).size());
         //Assert.assertTrue(true);
     }
 

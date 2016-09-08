@@ -1,6 +1,5 @@
 import model.*;
 import org.jooq.lambda.Seq;
-import org.jooq.lambda.tuple.Tuple;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -24,7 +23,7 @@ public class JoolTest {
     public void test1(){
 
         List<Event> allEvents = new ArrayList<>();
-        Bundle bundle = new Bundle();
+        BundleGenerator bundle = new BundleGenerator();
         FoodEvent foodEventMock = Mockito.mock(FoodEvent.class);
         MovieEvent movieEventMock = Mockito.mock(MovieEvent.class);
         Price zeroPrice = Mockito.mock(Price.class);

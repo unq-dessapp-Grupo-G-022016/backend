@@ -10,23 +10,23 @@ public class TripManager {
 
 /*
 
-    public List<Bundle> cheapTrip(){
+    public List<BundleGenerator> cheapTrip(){
 
     }
 
-    public List<Bundle> friendlyTrip(){
+    public List<BundleGenerator> friendlyTrip(){
 
     }
 
-    public List<Bundle> feverTrip(){
+    public List<BundleGenerator> feverTrip(){
 
     }
 
-    public List<Bundle> coupleTrip(){
+    public List<BundleGenerator> coupleTrip(){
 
     }
 
-    public List<Bundle> surpriceTrip(){
+    public List<BundleGenerator> surpriceTrip(){
 
     }
 
