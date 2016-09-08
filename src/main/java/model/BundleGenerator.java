@@ -28,7 +28,7 @@ public class BundleGenerator {
         List<Event> cheapFoodEvents = cheapFood(allEvents,price);
         List<Event> freeEvents = freeEvents(allEvents);
 
-        profileFoodMatcher(cheapFoodEvents,profile);
+        cheapFoodEvents = profileFoodMatcher(cheapFoodEvents,profile);
 
         Seq<Event> seq1 = seq(cheapFoodEvents.stream());
         Seq<Event> seq2 = seq(freeEvents.stream());
@@ -62,38 +62,43 @@ public class BundleGenerator {
     }
 
     private List<Event> freeEvents(List<Event> allEvents){
-        Stream<Event> events= allEvents.stream().filter(e -> e.price().ammount() == 0);
+        // todos los eventos gratis excluyendo los de comida
+        Stream<Event> events= allEvents.stream().filter(e -> e.price().ammount() == 0 && !e.isFoodEvent());
         return events.collect(Collectors.toList());
     }
 
-    private List<Event> profileFoodMatcher(List<Event> es, Profile p){
-        return profileMatcher(es,p.foodTypes);
+    private List<Event> profileFoodMatcher(List<Event> eventList, Profile profile){
+        return profileMatcher(eventList,profile.getFoodTypes());
     }
 
-    private List<Event> profileMatcher(List<Event> es, Set<Category> cs){
-        Iterator<Event> it = es.iterator();
+    private List<Event> profileMatcher(List<Event> eventList, Set<Category> categorySet){
+        Iterator<Event> it = eventList.iterator();
 
         while (it.hasNext()){
             Event e = it.next();
-            if (!eventMatch(e,cs)) {
+            if (!eventMatch(e,categorySet)) {
                 it.remove();
             }
         }
 
-        return es;
+        return eventList;
     }
 
-    private boolean eventMatch(Event e, Set<Category> cs){
-        boolean res = true;
-        if (e.hasCategory()) {
-            for (Category c : cs){
-                res = c.isEqual(((SpecificEvent) e).category);
+    public boolean eventMatch(Event event, Set<Category> categorySet){
+        boolean res = false;
+        if (event.hasCategory()) {
+            Iterator<Category> it = categorySet.iterator();
+            while (it.hasNext() && res == false){
+                Category category = it.next();
+                String s1 = category.getName();
+                String s2 = ((SpecificEvent) event).getCategory().getName();
+                res = s1.contentEquals(s2);
+                //res = getCategory.isEqual(((SpecificEvent) event).getCategory());
             }
         }
-        /*
-        if (e.hasCategory()){
-            res = cs.contains(((SpecificEvent) e).category);
-        }*/
+        else{
+            res = true; // events without category are valid
+        }
         return res;
     }
     /*

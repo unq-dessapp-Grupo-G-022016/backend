@@ -23,7 +23,7 @@ public class SpecificEvent extends Event {
 
     public boolean hasCategory(){return this.category != null;}
 
-    public Category category(){
+    public Category getCategory(){
         return category;
     }
 

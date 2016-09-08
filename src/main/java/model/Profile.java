@@ -3,7 +3,6 @@ package model;
 import model.data.Category;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -68,4 +67,7 @@ public class Profile {
         return categories;
     }
 
+    public Set<Category> getFoodTypes(){
+        return this.foodTypes;
+    }
 }
