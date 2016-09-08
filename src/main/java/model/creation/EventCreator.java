@@ -1,6 +1,7 @@
 package model.creation;
 
 import model.*;
+import model.data.Category;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -18,6 +19,8 @@ public class EventCreator {
     LocalDateTime startTime;
     LocalDateTime endTime;
     Set<User> attenders = new HashSet<User>();
+    boolean hasCategory = false;
+    Category category;
 
 
 
@@ -72,17 +75,30 @@ public class EventCreator {
     }
 
     public FoodEvent createFoodEvent(){
+        if(hasCategory){
+            return new FoodEvent(name,address,details,price, startTime, endTime,attenders,category);
+        }
         return new FoodEvent(name,address,details,price, startTime, endTime,attenders);
     }
 
     public MovieEvent createMovieEvent(){
+        if(hasCategory){
+            return new MovieEvent(name,address,details,price, startTime, endTime,attenders,category);
+        }
         return new MovieEvent(name,address,details,price, startTime, endTime,attenders);
     }
 
     public MusicEvent createMusicEvent(){
+        if(hasCategory){
+            return new MusicEvent(name,address,details,price, startTime, endTime,attenders,category);
+        }
         return new MusicEvent(name,address,details,price, startTime, endTime,attenders);
     }
 
-
+    public EventCreator withCategory(Category category){
+        this.hasCategory = true;
+        this.category = category;
+        return this;
+    }
 
 }

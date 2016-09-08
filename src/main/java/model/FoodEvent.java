@@ -1,14 +1,21 @@
 package model;
 
+import model.data.Category;
+
 import java.time.LocalDateTime;
+import java.util.Locale;
 import java.util.Set;
 
 /**
  * Created by leog on 30/08/16.
  */
-public class FoodEvent extends Event {
+public class FoodEvent extends SpecificEvent {
 
     public FoodEvent(String name, String address, String details, Price price, LocalDateTime date, LocalDateTime duration, Set<User> attenders) {
+        super(name, address, details, price, date, duration, attenders);
+    }
+
+    public FoodEvent(String name, String address, String details, Price price, LocalDateTime date, LocalDateTime duration, Set<User> attenders, Category category) {
         super(name, address, details, price, date, duration, attenders);
     }
 

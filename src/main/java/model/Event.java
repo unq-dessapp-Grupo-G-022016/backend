@@ -46,6 +46,8 @@ public class Event {
         return this.endTime.isBefore(event.startTime);
     }
 
+    public boolean hasCategory(){return false;}
+
 }
 
 

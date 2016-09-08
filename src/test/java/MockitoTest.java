@@ -44,6 +44,8 @@ public void test0(){
 
         //assertEquals(0,Seq.of(1, 2).crossJoin(Seq.of("A", "B")));
 
+        //assertEquals(0,Seq.of(1, 2).crossJoin(Seq.of("A", "B")).crossJoin(Seq.of(6,3)));
+
         assertEquals(0,0);
 
     }
