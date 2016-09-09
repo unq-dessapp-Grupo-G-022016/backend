@@ -37,10 +37,33 @@ public class BundleGenerator {
 
     public List<Bundle> friendlyTrip(List<Event>allEvents, Profile userProfile, Profile friendProfile ){
 
-        List<Event> userMatching = profileMatcher(allEvents,userProfile.allCategories());
-        List<Event> friendMatching = profileMatcher(allEvents, friendProfile.allCategories());
+        //List<Event> userMatching = profileMatcher(allEvents,userProfile.allCategories());
+        //List<Event> friendMatching = profileMatcher(allEvents, friendProfile.allCategories());
+        //return eventListCrossJoin(userMatching, friendMatching);
 
-        return eventListCrossJoin(userMatching, friendMatching);
+        Set<Category> friendlyCategories = categoriesMatcher(userProfile.allCategories(),friendProfile.allCategories());
+        List<Event> userMatching = profileMatcher(allEvents,friendlyCategories);
+
+        List<Event> foodEvents = foodEvents(userMatching);
+        List<Event> notFoodEvents = notFoodEvents(userMatching);
+
+        return eventListCrossJoin(foodEvents,notFoodEvents);
+
+    }
+
+    private List<Event> foodEvents(List<Event> allEvents){
+        Stream<Event> foodEvents = allEvents.stream().filter(e -> e.isFoodEvent());
+        return foodEvents.collect(Collectors.toList());
+    }
+
+    private List<Event> notFoodEvents(List<Event> allEvents){
+        Stream<Event> foodEvents = allEvents.stream().filter(e -> !e.isFoodEvent());
+        return foodEvents.collect(Collectors.toList());
+    }
+
+    public Set<Category> categoriesMatcher(Set<Category> catList1,Set<Category> catList2){
+        Stream<Category> categories = catList1.stream().filter(c -> catList2.contains(c));
+        return categories.collect(Collectors.toSet());
     }
 
 
@@ -61,7 +84,6 @@ public class BundleGenerator {
 
         return bList;
     }
-
 
 
     private void toBundleAndAddingToList(Tuple2<Event, Event> t, List<Bundle> bList) {

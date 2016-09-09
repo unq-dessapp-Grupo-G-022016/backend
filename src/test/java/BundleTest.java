@@ -90,7 +90,6 @@ public class BundleTest {
 
     @Test
     public void cheapTripTestSeqWithMatcher(){
-// UNFINISHED11
         List<Event> allEvents = new ArrayList<>();
         BundleGenerator bundleG = new BundleGenerator();
 
@@ -213,5 +212,90 @@ public class BundleTest {
     }
 
 */
+    @Test
+    public void friendlyTripTestSeqWithMatcher(){
+        List<Event> allEvents = new ArrayList<>();
+        BundleGenerator bundleG = new BundleGenerator();
+
+        Price zeroPrice = Mockito.mock(Price.class);
+
+        Profile profile = Mockito.mock(Profile.class);
+        Profile profileFriend = Mockito.mock(Profile.class);
+        MovieEvent movieEventMock = Mockito.mock(MovieEvent.class);
+
+        Category veganFood = Mockito.mock(Category.class);
+        Category fastFood = Mockito.mock(Category.class);
+        Category mexicanFood = Mockito.mock(Category.class);
+
+        FoodEvent veganFoodEventMock = Mockito.mock(FoodEvent.class);
+        FoodEvent mexicanFoodEventMock = Mockito.mock(FoodEvent.class);
+        FoodEvent fastFoodEventMock = Mockito.mock(FoodEvent.class);
+
+        when(veganFoodEventMock.hasCategory()).thenReturn(true);
+        when(fastFoodEventMock.hasCategory()).thenReturn(true);
+        when(mexicanFoodEventMock.hasCategory()).thenReturn(true);
+
+        when(veganFoodEventMock.price()).thenReturn(zeroPrice);
+        when(fastFoodEventMock.price()).thenReturn(zeroPrice);
+        when(mexicanFoodEventMock.price()).thenReturn(zeroPrice);
+
+        when(veganFoodEventMock.getCategory()).thenReturn(veganFood);
+        when(fastFoodEventMock.getCategory()).thenReturn(fastFood);
+        when(mexicanFoodEventMock.getCategory()).thenReturn(mexicanFood);
+
+
+        allEvents.add(fastFoodEventMock);
+        allEvents.add(movieEventMock);
+        allEvents.add(veganFoodEventMock);
+        allEvents.add(movieEventMock);
+        allEvents.add(mexicanFoodEventMock);
+        allEvents.add(movieEventMock);
+
+        when(movieEventMock.price()).thenReturn(zeroPrice);
+
+        when(movieEventMock.isFoodEvent()).thenReturn(false);
+        when(fastFoodEventMock.isFoodEvent()).thenReturn(true);
+        when(veganFoodEventMock.isFoodEvent()).thenReturn(true);
+        when(mexicanFoodEventMock.isFoodEvent()).thenReturn(true);
+
+        Set<Category> catSet = new HashSet<Category>();
+        catSet.add(veganFood);
+        catSet.add(mexicanFood);
+        catSet.add(fastFood);
+
+        Set<Category> catSetFriend = new HashSet<Category>();
+        catSetFriend.add(veganFood);
+        //catSet.add(mexicanFood);
+        //catSet.add(fastFood);
+
+        //when(profile.getFoodTypes()).thenReturn(catSet);
+
+        when(fastFood.getName()).thenReturn("fast");
+        when(mexicanFood.getName()).thenReturn("mexican");
+        when(veganFood.getName()).thenReturn("vegan");
+        when(profileFriend.allCategories()).thenReturn(catSetFriend);
+        when(profile.allCategories()).thenReturn(catSet);
+        when(zeroPrice.ammount()).thenReturn(0);
+
+        Assert.assertEquals(3, bundleG.friendlyTrip(allEvents,profile,profileFriend).size());
+
+    }
+
+    @Test
+    public void categoriesMatcherTest(){
+        Category veganFood = Mockito.mock(Category.class);
+        Category fastFood = Mockito.mock(Category.class);
+        Category mexicanFood = Mockito.mock(Category.class);
+
+        BundleGenerator bundleG = new BundleGenerator();
+
+
+        Set<Category> categoriesSet = new HashSet<Category>();
+        categoriesSet.add(veganFood);
+        categoriesSet.add(fastFood);
+        categoriesSet.add(mexicanFood);
+
+        Assert.assertEquals(3,bundleG.categoriesMatcher(categoriesSet,categoriesSet).size());
+    }
 
 }
