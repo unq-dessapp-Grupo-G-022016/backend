@@ -25,6 +25,16 @@ public class BundleGenerator {
         user.getFriends().forEach(f -> friendsProfiles.add(f.getProfile()));
 
         Set<Category> categories = allFriendsCategories(friendsProfiles);
+
+        Iterator<Category> it = categories.iterator();
+        while (it.hasNext()){
+            Category c = it.next();
+            if (user.getProfile().allCategories().contains(c)) {
+                it.remove();
+            }
+        }
+
+
         List<Event> userMatching = profileMatcher(allEvents,categories);
 
         List<Event> foodEvents = foodEvents(userMatching);
@@ -130,7 +140,6 @@ public class BundleGenerator {
 
     private List<Event> profileMatcher(List<Event> eventList, Set<Category> categorySet){
         Iterator<Event> it = eventList.iterator();
-
         while (it.hasNext()){
             Event e = it.next();
             if (!eventMatch(e,categorySet)) {
