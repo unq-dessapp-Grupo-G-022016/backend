@@ -30,8 +30,27 @@ public class BundleGenerator {
 
         cheapFoodEvents = profileFoodMatcher(cheapFoodEvents,profile);
 
-        Seq<Event> seq1 = seq(cheapFoodEvents.stream());
-        Seq<Event> seq2 = seq(freeEvents.stream());
+        return eventListCrossJoin(cheapFoodEvents,freeEvents);
+    }
+
+
+
+    public List<Bundle> friendlyTrip(List<Event>allEvents, Profile userProfile, Profile friendProfile ){
+
+        List<Event> userMatching = profileMatcher(allEvents,userProfile.allCategories());
+        List<Event> friendMatching = profileMatcher(allEvents, friendProfile.allCategories());
+
+        return eventListCrossJoin(userMatching, friendMatching);
+    }
+
+
+    /**
+     * Return combinations between two events list.
+     */
+    private List<Bundle> eventListCrossJoin(List<Event> listA, List<Event> listB){
+
+        Seq<Event> seq1 = seq(listA.stream());
+        Seq<Event> seq2 = seq(listB.stream());
 
         List<Tuple2<Event, Event>> res = seq1.crossJoin(seq2).toList();
 
@@ -42,6 +61,8 @@ public class BundleGenerator {
 
         return bList;
     }
+
+
 
     private void toBundleAndAddingToList(Tuple2<Event, Event> t, List<Bundle> bList) {
 
@@ -168,12 +189,9 @@ public class BundleGenerator {
 
 
 
+
+
     /*
-
-
-    public List<Event> friendlyTrip(){
-
-    }
 
     public List<Event> feverTrip(){
 

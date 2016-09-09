@@ -16,7 +16,7 @@ public class FoodEvent extends SpecificEvent {
     }
 
     public FoodEvent(String name, String address, String details, Price price, LocalDateTime date, LocalDateTime duration, Set<User> attenders, Category category) {
-        super(name, address, details, price, date, duration, attenders);
+        super(name, address, details, price, date, duration, attenders, category);
     }
 
     public boolean isFoodEvent(){

@@ -53,7 +53,7 @@ public class Profile {
         return false;// ¿¿
     }
 
-    private Set<Category> allCategories(){
+    public Set<Category> allCategories(){
         Set<Category>categories = new HashSet<Category>();
         categories.addAll(movieTypes);
         categories.addAll(musicalGenres);

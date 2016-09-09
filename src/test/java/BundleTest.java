@@ -178,4 +178,40 @@ public class BundleTest {
 
     }
 
+/*
+    @Test
+    public void friendlyTripTestSeqWithMatcher(){
+
+        BundleGenerator bundleG = new BundleGenerator();
+        List<Event> allEvents = new ArrayList<>();
+
+        Profile profile = Mockito.mock(Profile.class);
+
+        Category veganFood = Mockito.mock(Category.class);
+        Category fastFood = Mockito.mock(Category.class);
+        Category mexicanFood = Mockito.mock(Category.class);
+
+        Event eventMock = Mockito.mock(Event.class);
+        Event eventAMock = Mockito.mock(Event.class);
+
+        when(eventMock.hasCategory()).thenReturn(false);
+        when(eventAMock.hasCategory()).thenReturn(false);
+
+        allEvents.add(eventMock);
+        allEvents.add(eventAMock);
+
+        Set<Category> catSet = new HashSet<Category>();
+        catSet.add(fastFood);
+        catSet.add(mexicanFood);
+        //catSet.add(fastFood);
+
+        when(profile.allCategories()).thenReturn(catSet);
+
+       // Assert.assertEquals(2, bundleG.friendlyTrip(allEvents,profile,profile).size());
+
+        Assert.assertTrue(true);
+    }
+
+*/
+
 }
