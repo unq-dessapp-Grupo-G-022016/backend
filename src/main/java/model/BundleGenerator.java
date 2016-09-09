@@ -17,11 +17,20 @@ import static org.jooq.lambda.Seq.seq;
 public class BundleGenerator {
 
 
+    public BundleGenerator() {
+    }
 
+    public List<Bundle> surpriseTrip(List<Event>allEvents, User user){
+        Set<Profile>friendsProfiles = new HashSet<Profile>();
+        user.getFriends().forEach(f -> friendsProfiles.add(f.getProfile()));
 
-    public List<Event> cheapTrip(List<Event>allEvents, Price price){
-        Stream<Event> events= allEvents.stream().filter(e -> e.price().ammount() <= price.ammount());
-        return events.collect(Collectors.toList());
+        Set<Category> categories = allFriendsCategories(friendsProfiles);
+        List<Event> userMatching = profileMatcher(allEvents,categories);
+
+        List<Event> foodEvents = foodEvents(userMatching);
+        List<Event> notFoodEvents = notFoodEvents(userMatching);
+
+        return eventListCrossJoin(foodEvents,notFoodEvents);
     }
 
     public List<Bundle> cheap(List<Event>allEvents, Price price, Profile profile){
@@ -64,6 +73,11 @@ public class BundleGenerator {
     public Set<Category> categoriesMatcher(Set<Category> catList1,Set<Category> catList2){
         Stream<Category> categories = catList1.stream().filter(c -> catList2.contains(c));
         return categories.collect(Collectors.toSet());
+    }
+    public Set<Category> allFriendsCategories(Set<Profile> profiles){
+        Set<Category> allFriendsCategories = new HashSet<Category>();
+        profiles.forEach(p -> allFriendsCategories.addAll(p.allCategories()));
+        return allFriendsCategories;
     }
 
 

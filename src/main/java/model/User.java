@@ -34,7 +34,12 @@ public class User {
         friends.remove(friend);
     }
 
-
+    public Set<User> getFriends(){
+        return this.friends;
+    }
+    public Profile getProfile(){
+        return this.profile;
+    }
 
 
 }
