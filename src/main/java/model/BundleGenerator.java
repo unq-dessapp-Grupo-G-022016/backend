@@ -21,16 +21,27 @@ public class BundleGenerator {
     }
 
     public List<Bundle> surpriseTrip(List<Event>allEvents, User user){
+        // assume that friends interest whit common interest can interest to the user
         Set<Profile>friendsProfiles = new HashSet<Profile>();
         user.getFriends().forEach(f -> friendsProfiles.add(f.getProfile()));
 
+        //Remove friends without common interest
+        Iterator<Profile> it = friendsProfiles.iterator();
+        while (it.hasNext()){
+            Profile p = it.next();
+            if ((categoriesMatcher(p.allCategories(),user.getProfile().allCategories())).size()==0) {
+                it.remove();
+            }
+        }
+
         Set<Category> categories = allFriendsCategories(friendsProfiles);
 
-        Iterator<Category> it = categories.iterator();
-        while (it.hasNext()){
-            Category c = it.next();
+        //Remove user categories
+        Iterator<Category> it2 = categories.iterator();
+        while (it2.hasNext()){
+            Category c = it2.next();
             if (user.getProfile().allCategories().contains(c)) {
-                it.remove();
+                it2.remove();
             }
         }
 
@@ -84,6 +95,7 @@ public class BundleGenerator {
         Stream<Category> categories = catList1.stream().filter(c -> catList2.contains(c));
         return categories.collect(Collectors.toSet());
     }
+
     public Set<Category> allFriendsCategories(Set<Profile> profiles){
         Set<Category> allFriendsCategories = new HashSet<Category>();
         profiles.forEach(p -> allFriendsCategories.addAll(p.allCategories()));

@@ -351,8 +351,8 @@ public class BundleTest {
 
         Set<Category> catSetFriend = new HashSet<Category>();
         catSetFriend.add(veganFood);
-        //catSet.add(mexicanFood);
-        catSetFriend.add(fastFood);
+        catSetFriend.add(mexicanFood);
+        //catSetFriend.add(fastFood);
 
         //when(profile.getFoodTypes()).thenReturn(catSet);
 

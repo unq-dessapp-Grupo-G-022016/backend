@@ -27,4 +27,12 @@ public class SpecificEvent extends Event {
         return category;
     }
 
+    public boolean hasTheSameCategory(Event anotherEvent) {
+        boolean res = false;
+        if (anotherEvent.hasCategory()){
+            this.getCategory().getName().equals(((SpecificEvent)anotherEvent).getCategory().getName());
+        }
+        return res;
+    }
+
 }

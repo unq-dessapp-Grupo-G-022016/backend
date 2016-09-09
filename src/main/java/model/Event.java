@@ -48,6 +48,10 @@ public class Event {
 
     public boolean hasCategory(){return false;}
 
+    public boolean hasTheSameCategory(Event anotherEvent){
+        return false;
+    }
+
 }
 
 
