@@ -11,8 +11,8 @@ public class MovieEvent extends Event {
 
 
 /*
-    public MovieEvent(String name, String address, String details, Price price, LocalDateTime date, LocalDateTime duration, Set<User> attenders) {
-        super(name, address, details, price, date, duration, attenders);
+    public MovieEvent(String name, String address, String details, Price getPrice, LocalDateTime date, LocalDateTime duration, Set<User> attenders) {
+        super(name, address, details, getPrice, date, duration, attenders);
     }*/
 
     public MovieEvent(String name, String address, String details, Price price, LocalDateTime date, LocalDateTime duration, Set<User> attenders, Category category) {

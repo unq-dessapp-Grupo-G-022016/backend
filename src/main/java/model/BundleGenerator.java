@@ -15,14 +15,12 @@ import static org.jooq.lambda.Seq.seq;
  */
 public class BundleGenerator {
 
-
     public BundleGenerator() {
     }
 
     public List<Bundle> surpriseTrip(List<Event>allEvents, User user){
         // assume that friends interest whit common interest can interest to the user
-        Set<Profile>friendsProfiles = new HashSet<Profile>();
-        user.getFriends().forEach(f -> friendsProfiles.add(f.getProfile()));
+        Set<Profile>friendsProfiles = user.getFriends().friendsProfiles();
 
         //Remove friends without common interest
         Iterator<Profile> it = friendsProfiles.iterator();
@@ -53,24 +51,26 @@ public class BundleGenerator {
         return eventListCrossJoin(foodEvents,notFoodEvents);
     }
 
-    public List<Bundle> cheap(List<Event>allEvents, Price price, Profile profile){
-        List<Event> cheapFoodEvents = cheapFood(allEvents,price);
+    public List<Bundle> cheap(List<Event>allEvents, User user){
+        List<Event> cheapFoodEvents = cheapFood(allEvents,user.getLowCostTrip());
         List<Event> freeEvents = freeEvents(allEvents);
 
-        cheapFoodEvents = profileFoodMatcher(cheapFoodEvents,profile);
+        cheapFoodEvents = profileFoodMatcher(cheapFoodEvents,user.getProfile());
 
         return eventListCrossJoin(cheapFoodEvents,freeEvents);
     }
 
 
 
-    public List<Bundle> friendlyTrip(List<Event>allEvents, Profile userProfile, Profile friendProfile ){
+    public List<Bundle> friendlyTrip(List<Event>allEvents, User user){
 
         //List<Event> userMatching = profileMatcher(allEvents,userProfile.allCategories());
         //List<Event> friendMatching = profileMatcher(allEvents, friendProfile.allCategories());
         //return eventListCrossJoin(userMatching, friendMatching);
+        Profile userProfile = user.getProfile();
+        Friends friends = user.getFriends();
 
-        Set<Category> friendlyCategories = categoriesMatcher(userProfile.allCategories(),friendProfile.allCategories());
+        Set<Category> friendlyCategories = categoriesMatcher(userProfile.allCategories(),friends.allCategories());
         List<Event> userMatching = profileMatcher(allEvents,friendlyCategories);
 
         List<Event> foodEvents = foodEvents(userMatching);
@@ -134,14 +134,14 @@ public class BundleGenerator {
     private List<Event> cheapFood(List<Event> allEvents, Price price){
         Stream<Event> events=
                 allEvents.stream().filter(e ->
-                        e.price().ammount() <= price.ammount() &&
+                        e.getPrice().ammount() <= price.ammount() &&
                                 e.isFoodEvent());
         return events.collect(Collectors.toList());
     }
 
     private List<Event> freeEvents(List<Event> allEvents){
         // todos los eventos gratis excluyendo los de comida
-        Stream<Event> events= allEvents.stream().filter(e -> e.price().ammount() == 0 && !e.isFoodEvent());
+        Stream<Event> events= allEvents.stream().filter(e -> e.getPrice().ammount() == 0 && !e.isFoodEvent());
         return events.collect(Collectors.toList());
     }
 
@@ -181,10 +181,10 @@ public class BundleGenerator {
     /*
 
     //profile filter
-    public List<List<Event>> aaCheapBundle(List<Event>allEvents, Price price){
+    public List<List<Event>> aaCheapBundle(List<Event>allEvents, Price getPrice){
         List<List<Event>>bundle = new ArrayList();
 
-        bundle.add(this.cheapFood(allEvents,price));
+        bundle.add(this.cheapFood(allEvents,getPrice));
         //orderByTimeFood
         bundle.add(this.freeEvents(allEvents));
 

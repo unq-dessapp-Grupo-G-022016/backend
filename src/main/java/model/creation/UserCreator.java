@@ -1,5 +1,6 @@
 package model.creation;
 
+import model.Friends;
 import model.Price;
 import model.Profile;
 import model.User;
@@ -16,7 +17,7 @@ public class UserCreator {
     Profile profile = new Profile();
     Price lowCostTrip;
     //StartPoint;
-    Set<User> friends =  new HashSet<>();
+    Friends friends =  new Friends();
     Set<String> vehicles= new HashSet<String>();
 
 

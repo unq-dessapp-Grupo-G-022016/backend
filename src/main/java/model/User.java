@@ -14,10 +14,10 @@ public class User {
     Profile profile;
     Price lowCostTrip;
     //StartPoint;
-    Set<User> friends;
+    Friends friends;
     Set<String> vehicles;
 
-    public User(String userName, Profile profile, Price lowCostTrip, Set<User> friends, Set<String> vehicles) {
+    public User(String userName, Profile profile, Price lowCostTrip, Friends friends, Set<String> vehicles) {
         this.userName = userName;
         this.profile = profile;
         this.lowCostTrip = lowCostTrip;
@@ -34,7 +34,7 @@ public class User {
         friends.remove(friend);
     }
 
-    public Set<User> getFriends(){
+    public Friends getFriends(){
         return this.friends;
     }
     public Profile getProfile(){
@@ -42,4 +42,7 @@ public class User {
     }
 
 
+    public Price getLowCostTrip() {
+        return lowCostTrip;
+    }
 }

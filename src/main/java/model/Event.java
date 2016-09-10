@@ -49,7 +49,7 @@ public class Event {
         this.category = category;
     }
 
-    public Price price(){
+    public Price getPrice(){
         return price;
     }
 
@@ -66,7 +66,7 @@ public class Event {
     }
 
     public boolean hasCategory(){
-        return (this.category.getName()=="undefined");
+        return (!(this.category.getName()=="undefined"));
     }
 
     public void setEndTime(LocalDateTime endTime) {

@@ -55,4 +55,17 @@ public class EventTest {
         Assert.assertTrue(event1.hasTheSameCategory(event2));
 
     }
+
+    @Test
+    public void hasCategory(){
+
+        Event event1 = new Event();
+
+        Category categoryMock = Mockito.mock(Category.class);
+        event1.setCategory(categoryMock);
+        when(categoryMock.getName()).thenReturn("undefined");
+
+        Assert.assertFalse(event1.hasCategory());
+
+    }
 }

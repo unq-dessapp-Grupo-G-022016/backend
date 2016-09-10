@@ -7,11 +7,7 @@ import org.mockito.Mockito;
 
 public class MockitoTest{
 
-@Test
-public void test0(){
-        assertEquals(1,1);
-}
-
+/*
 @Test
     public void test1()  {
             class MyClass {
@@ -30,7 +26,8 @@ public void test0(){
             assertEquals(test.getUniqueId(), 43);
             
     }
-
+*/
+/*
 
     @Test public void crossJoinTest(){
 
@@ -49,7 +46,7 @@ public void test0(){
         assertEquals(0,0);
 
     }
-
+*/
 /*
     // Demonstrates the return of multiple values
     @Test

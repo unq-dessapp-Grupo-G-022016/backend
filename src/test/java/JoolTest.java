@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
  * Created by alejandrok on 9/7/16.
  */
 public class JoolTest {
-
+/*
     @Test
     public void test1(){
 
@@ -36,10 +36,8 @@ public class JoolTest {
         allEvents.add(foodEventMock);
         allEvents.add(movieEventMock);
 
-
-
-        when(foodEventMock.price()).thenReturn(zeroPrice);
-        when(movieEventMock.price()).thenReturn(zeroPrice);
+        when(foodEventMock.getPrice()).thenReturn(zeroPrice);
+        when(movieEventMock.getPrice()).thenReturn(zeroPrice);
 
         when(foodEventMock.isFoodEvent()).thenReturn(true);
         when(movieEventMock.isFoodEvent()).thenReturn(false);
@@ -55,10 +53,10 @@ public class JoolTest {
 
     @Test
     public void secTest(){
-        /*
-        (tuple(1, "A"), tuple(1, "B"), tuple(2, "A"), tuple(2, "B"))
-        Seq.of(1, 2).crossJoin(Seq.of("A", "B"));
-        */
+
+        //(tuple(1, "A"), tuple(1, "B"), tuple(2, "A"), tuple(2, "B"))
+        //Seq.of(1, 2).crossJoin(Seq.of("A", "B"));
+
 
         Stream t1 = Stream.of("program", "creek");
 
@@ -67,4 +65,13 @@ public class JoolTest {
 
         Assert.assertEquals(4, seq1.crossJoin(Seq.of("A", "B")).count());
     }
+
+    @Test
+    public void secTest2(){
+        // (tuple(1, "A"), tuple(1, "B"), tuple(2, "A"), tuple(2, "B"))
+        // Seq.of(1, 2).crossJoin(Seq.of("A", "B"));
+
+        Assert.assertEquals(4,Seq.of(1, 2).crossJoin(Seq.of("A", "B")).count());
+    }
+    */
 }
