@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -407,5 +408,27 @@ public class BundleTest {
         when(profile.allCategories()).thenReturn(catSet);
 
         Assert.assertEquals(3, bundleG.allFriendsCategories(profiles).size());
+    }
+
+    @Test
+    public void orderByStartTimeTest(){
+        Bundle bundle = new Bundle();
+        LocalDateTime anyTime = LocalDateTime.now();
+
+        Event firstEvent = Mockito.mock(Event.class);
+        Event secondEvent = Mockito.mock(Event.class);
+        Event thirdEvent = Mockito.mock(Event.class);
+
+        when(firstEvent.getStartTime()).thenReturn(anyTime.plusHours(1));
+        when(secondEvent.getStartTime()).thenReturn(anyTime.plusHours(2));
+        when(thirdEvent.getStartTime()).thenReturn(anyTime.plusHours(3));
+
+        bundle.add(secondEvent);
+        bundle.add(thirdEvent);
+        bundle.add(firstEvent);
+
+        bundle.orderByStartTime();
+
+        Assert.assertEquals(firstEvent,bundle.getBundle().get(0));
     }
 }

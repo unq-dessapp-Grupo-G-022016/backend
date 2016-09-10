@@ -17,6 +17,14 @@ public class Event {
     LocalDateTime endTime;
     Set<User>attenders;
 
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
     public Event(String name, String address, String details, Price price, LocalDateTime date, LocalDateTime duration, Set<User> attenders) {
         this.name = name;
         this.address = address;
@@ -51,6 +59,7 @@ public class Event {
     public boolean hasTheSameCategory(Event anotherEvent){
         return false;
     }
+
 
 }
 
