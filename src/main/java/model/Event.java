@@ -51,7 +51,7 @@ public class Event {
     public boolean isMusicEvent(){return false;}
 
     public boolean timeCompatible(Event event){
-        return this.endTime.isBefore(event.startTime);
+        return this.getEndTime().isBefore(event.getStartTime());
     }
 
     public boolean hasCategory(){return false;}
@@ -61,6 +61,13 @@ public class Event {
     }
 
 
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
 }
 
 

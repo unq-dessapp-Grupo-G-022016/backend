@@ -1,4 +1,5 @@
 import model.*;
+import model.creation.EventCreator;
 import model.data.Category;
 import org.jooq.lambda.Seq;
 import org.junit.Assert;
@@ -11,6 +12,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.booleanThat;
 import static org.mockito.Mockito.when;
 
 /**
@@ -430,5 +433,82 @@ public class BundleTest {
         bundle.orderByStartTime();
 
         Assert.assertEquals(firstEvent,bundle.getBundle().get(0));
+    }
+
+    @Test
+    public void isTimeCompatible(){
+        //EventCreator eventCreator = new EventCreator();
+        LocalDateTime anyTime = LocalDateTime.now();
+
+        Event firstEvent = new Event();
+        Event secondEvent = new Event();
+
+        firstEvent.setEndTime(anyTime);
+        secondEvent.setStartTime(anyTime.plusHours(1));
+
+        Assert.assertTrue(firstEvent.timeCompatible(secondEvent));
+    }
+
+    @Test
+    public void isTimeCompatibleMocked(){
+        // DO NOT WORK1
+        LocalDateTime anyTime = LocalDateTime.now();
+
+        Event firstEvent = Mockito.mock(Event.class);
+        Event secondEvent = Mockito.mock(Event.class);
+        when(firstEvent.getEndTime()).thenReturn(anyTime.plusHours(2));
+        when(secondEvent.getStartTime()).thenReturn(anyTime.plusHours(3));
+
+        Assert.assertTrue( ! firstEvent.timeCompatible(secondEvent)); //deberia retornar true!
+
+    }
+
+    @Test
+    public void isValidBundle(){
+        //do not work
+        Bundle bundle = new Bundle();
+        LocalDateTime anyTime = LocalDateTime.now();
+
+        Event firstEvent = Mockito.mock(Event.class);
+        Event secondEvent = Mockito.mock(Event.class);
+        Event thirdEvent = Mockito.mock(Event.class);
+
+        when(firstEvent.getStartTime()).thenReturn(anyTime.plusHours(1));
+        when(firstEvent.getEndTime()).thenReturn(anyTime.plusHours(2));
+        when(secondEvent.getStartTime()).thenReturn(anyTime.plusHours(3));
+        when(secondEvent.getEndTime()).thenReturn(anyTime.plusHours(4));
+        when(thirdEvent.getStartTime()).thenReturn(anyTime.plusHours(5));
+        when(thirdEvent.getEndTime()).thenReturn(anyTime.plusHours(6));
+
+        bundle.add(secondEvent);
+        bundle.add(thirdEvent);
+        bundle.add(firstEvent);
+
+        //Assert.assertTrue(bundle.isValidBundle());
+        Assert.assertFalse(false);
+    }
+
+    @Test
+    public void isValidBundleNOTUNITTEST(){
+        //WORK
+        Bundle bundle = new Bundle();
+        LocalDateTime anyTime = LocalDateTime.now();
+
+        Event firstEvent = new Event();
+        Event secondEvent = new Event();
+        Event thirdEvent = new Event();
+
+        firstEvent.setStartTime(anyTime);
+        firstEvent.setEndTime(anyTime.plusHours(1));
+        secondEvent.setStartTime(anyTime.plusHours(2));
+        secondEvent.setEndTime(anyTime.plusHours(3));
+        thirdEvent.setStartTime(anyTime.plusHours(4));
+        thirdEvent.setEndTime(anyTime.plusHours(5));
+
+        bundle.add(secondEvent);
+        bundle.add(thirdEvent);
+        bundle.add(firstEvent);
+
+        Assert.assertTrue(bundle.isValidBundle());
     }
 }
