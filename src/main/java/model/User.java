@@ -10,11 +10,13 @@ import java.util.Set;
  */
 public class User {
 
+
     String userName;
     Profile profile;
     Price lowCostTrip;
     //StartPoint;
     Friends friends;
+
     Set<String> vehicles;
 
     public User(String userName, Profile profile, Price lowCostTrip, Friends friends, Set<String> vehicles) {
@@ -41,8 +43,17 @@ public class User {
         return this.profile;
     }
 
+    public Set<String> getVehicles() {
+        return vehicles;
+    }
 
     public Price getLowCostTrip() {
         return lowCostTrip;
     }
+
+
+    public String getUserName() {
+        return userName;
+    }
+
 }
