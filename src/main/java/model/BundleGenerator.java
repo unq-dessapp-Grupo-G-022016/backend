@@ -1,6 +1,5 @@
 package model;
 
-import model.data.Category;
 import org.jooq.lambda.Seq;
 import org.jooq.lambda.tuple.Tuple2;
 
@@ -169,7 +168,7 @@ public class BundleGenerator {
             while (it.hasNext() && res == false){
                 Category category = it.next();
                 String s1 = category.getName();
-                String s2 = ((SpecificEvent) event).getCategory().getName();
+                String s2 = event.getCategory().getName();
                 res = s1.contentEquals(s2);
                 //res = getCategory.isEqual(((SpecificEvent) event).getCategory());
             }

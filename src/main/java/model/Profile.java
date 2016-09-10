@@ -1,7 +1,5 @@
 package model;
 
-import model.data.Category;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -44,15 +42,15 @@ public class Profile {
     public void removeFoodCategory(Category category){
         this.foodTypes.remove(category);
     }
-
+/*
     public boolean eventCompatibility(Event event){
         //only for specific events, aka food, movie, music
         if(event.hasCategory() && event instanceof SpecificEvent){
-            return allCategories().contains(((SpecificEvent) event).category);
+            return allCategories().contains(event.category);
         }
         return false;// ¿¿
     }
-
+*/
     public Set<Category> allCategories(){
         Set<Category>categories = new HashSet<Category>();
         categories.addAll(movieTypes);
