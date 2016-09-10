@@ -2,6 +2,7 @@ package model;
 
 
 import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -86,6 +87,20 @@ public class Event {
 
     public boolean hasTheSameCategory(Event anotherEvent) {
         return this.getCategory().getName().equals(anotherEvent.getCategory().getName());
+    }
+
+    public boolean hasTheSameCategory(Set<Category> categorySet){
+        // reminder: undefineds? if this is??
+        boolean categoryNameIsInTheSet = false;
+        Iterator<Category> it = categorySet.iterator();
+        while (it.hasNext() && categoryNameIsInTheSet == false){
+            Category categoryFromSet = it.next();
+            String s1 = categoryFromSet.getName();
+            String s2 = this.getCategory().getName();
+            categoryNameIsInTheSet = s1.contentEquals(s2);
+            //res = getCategory.isEqual(((SpecificEvent) event).getCategory());
+        }
+        return categoryNameIsInTheSet;
     }
 }
 

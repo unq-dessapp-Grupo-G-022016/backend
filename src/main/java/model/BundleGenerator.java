@@ -153,7 +153,7 @@ public class BundleGenerator {
         Iterator<Event> it = eventList.iterator();
         while (it.hasNext()){
             Event e = it.next();
-            if (!eventMatch(e,categorySet)) {
+            if (!e.hasTheSameCategory(categorySet)) {
                 it.remove();
             }
         }
@@ -161,23 +161,6 @@ public class BundleGenerator {
         return eventList;
     }
 
-    public boolean eventMatch(Event event, Set<Category> categorySet){
-        boolean res = false;
-        if (event.hasCategory()) {
-            Iterator<Category> it = categorySet.iterator();
-            while (it.hasNext() && res == false){
-                Category category = it.next();
-                String s1 = category.getName();
-                String s2 = event.getCategory().getName();
-                res = s1.contentEquals(s2);
-                //res = getCategory.isEqual(((SpecificEvent) event).getCategory());
-            }
-        }
-        else{
-            res = true; // events without category are valid
-        }
-        return res;
-    }
     /*
 
     //profile filter
@@ -193,26 +176,16 @@ public class BundleGenerator {
         return this.checkTime(bundle);;
     }
 
-    /*
     private List<List<Event>> checkTime(List<List<Event>>bundleNotChecked){
         for (List<Event>list: bundleNotChecked){
             //e.checkTime
         }
 
-    }*/
+    }
 
-
-
-
-
-    /*
     private List<Event> profileMatchingEvents(List<Event>events){
         return
     }
-    */
-
-
-
 
     public  List<List<Event>> permutations(List<List<Event>> collections) {
         if (collections == null || collections.isEmpty()) {
@@ -243,12 +216,6 @@ public class BundleGenerator {
     }
 
 
-
-
-
-
-    /*
-
     public List<Event> feverTrip(){
 
     }
@@ -261,8 +228,5 @@ public class BundleGenerator {
 
     }
 */
-
-
-
 
 }

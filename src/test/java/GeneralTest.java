@@ -126,30 +126,7 @@ public class GeneralTest {
         //Assert.assertTrue(true);
     }
 
-    @Test
-    public void eventMatchTest(){
-        BundleGenerator bundleG = new BundleGenerator();
-        FoodEvent veganFoodEventMock = Mockito.mock(FoodEvent.class);
-        Category veganFood = Mockito.mock(Category.class);
-        //Category fastFood = Mockito.mock(Category.class);
-        //Category mexicanFood = Mockito.mock(Category.class);
 
-        //when(fastFood.getName()).thenReturn("fast");
-        //when(mexicanFood.getName()).thenReturn("mexican");
-        when(veganFood.getName()).thenReturn("vegan");
-        when(veganFoodEventMock.isFoodEvent()).thenReturn(true);
-        when(veganFoodEventMock.getCategory()).thenReturn(veganFood);
-        when(veganFoodEventMock.hasCategory()).thenReturn(true);
-
-        // not a mock!!
-        Set<Category> catSet = new HashSet<Category>();
-        catSet.add(veganFood);
-        //catSet.add(mexicanFood);
-        //catSet.add(fastFood);
-
-        Assert.assertTrue(bundleG.eventMatch(veganFoodEventMock,catSet));
-
-    }
 
 
     @Test

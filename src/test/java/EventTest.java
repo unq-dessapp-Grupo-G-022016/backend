@@ -1,10 +1,14 @@
+import model.BundleGenerator;
 import model.Category;
 import model.Event;
+import model.FoodEvent;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.mockito.Mockito.when;
 
@@ -66,6 +70,29 @@ public class EventTest {
         when(categoryMock.getName()).thenReturn("undefined");
 
         Assert.assertFalse(event1.hasCategory());
+
+    }
+
+    @Test
+    public void eventHasACategoryThatIsInASetOfCategories(){
+        Event event = new Event();
+
+        Category veganFood = Mockito.mock(Category.class);
+        Category fastFood = Mockito.mock(Category.class);
+        Category mexicanFood = Mockito.mock(Category.class);
+
+        event.setCategory(veganFood);
+
+        when(veganFood.getName()).thenReturn("vegan");
+        when(fastFood.getName()).thenReturn("fast");
+        when(mexicanFood.getName()).thenReturn("mexican");
+
+        Set<Category> catSet = new HashSet<Category>();
+        catSet.add(veganFood);
+        catSet.add(mexicanFood);
+        catSet.add(fastFood);
+
+        Assert.assertTrue(event.hasTheSameCategory(catSet));
 
     }
 }
