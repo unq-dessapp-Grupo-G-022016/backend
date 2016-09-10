@@ -51,15 +51,6 @@ public class BundleGenerator {
         return eventListCrossJoin(foodEvents,notFoodEvents);
     }
 
-    public List<Bundle> cheap(List<Event>allEvents, User user){
-        List<Event> cheapFoodEvents = cheapFood(allEvents,user.getLowCostTrip());
-        List<Event> freeEvents = freeEvents(allEvents);
-
-        cheapFoodEvents = profileFoodMatcher(cheapFoodEvents,user.getProfile());
-
-        return eventListCrossJoin(cheapFoodEvents,freeEvents);
-    }
-
 
 
     public List<Bundle> friendlyTrip(List<Event>allEvents, User user){
@@ -119,8 +110,6 @@ public class BundleGenerator {
 
         return bList;
     }
-
-
     private void toBundleAndAddingToList(Tuple2<Event, Event> t, List<Bundle> bList) {
 
         Event a = t.v1;
@@ -131,19 +120,13 @@ public class BundleGenerator {
         bList.add(bundle);
     }
 
-    private List<Event> cheapFood(List<Event> allEvents, Price price){
-        Stream<Event> events=
-                allEvents.stream().filter(e ->
-                        e.getPrice().ammount() <= price.ammount() &&
-                                e.isFoodEvent());
-        return events.collect(Collectors.toList());
-    }
 
-    private List<Event> freeEvents(List<Event> allEvents){
-        // todos los eventos gratis excluyendo los de comida
-        Stream<Event> events= allEvents.stream().filter(e -> e.getPrice().ammount() == 0 && !e.isFoodEvent());
-        return events.collect(Collectors.toList());
-    }
+
+
+
+
+
+
 
     private List<Event> profileFoodMatcher(List<Event> eventList, Profile profile){
         return profileMatcher(eventList,profile.getFoodTypes());
