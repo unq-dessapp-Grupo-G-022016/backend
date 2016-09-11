@@ -10,14 +10,14 @@ public class Price {
 
 
     public boolean isFree(){
-        return true;
+        return (this.ammount==0);
     }
 
-    public boolean isCheap(){
-        return false;
+    public boolean isCheap(User user){
+        return this.ammount<user.getLowCostTrip().getAmmount();
     }
 
-    public int ammount(){
+    public int getAmmount(){
         return ammount;
     }
 

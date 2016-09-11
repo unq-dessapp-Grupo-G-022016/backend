@@ -47,9 +47,9 @@ public class GeneralTest {
 
         when(foodEventMock.hasCategory()).thenReturn(false);
 
-        when(zeroPrice.ammount()).thenReturn(0);
-        when(priceEventMock.ammount()).thenReturn(10);
-        when(cheapPrice.ammount()).thenReturn(30);
+        when(zeroPrice.getAmmount()).thenReturn(0);
+        when(priceEventMock.getAmmount()).thenReturn(10);
+        when(cheapPrice.getAmmount()).thenReturn(30);
 
         // not a mock!!
         Set<Category> catSet = new HashSet<Category>();
@@ -120,7 +120,7 @@ public class GeneralTest {
         when(veganFood.getName()).thenReturn("vegan");
 
 
-        when(zeroPrice.ammount()).thenReturn(0);
+        when(zeroPrice.getAmmount()).thenReturn(0);
 
         //Assert.assertEquals(6, bundleG.cheap(allEvents,zeroPrice,profile).size());
         //Assert.assertTrue(true);
@@ -192,7 +192,7 @@ public class GeneralTest {
         when(veganFood.getName()).thenReturn("vegan");
         when(profileFriend.allCategories()).thenReturn(catSetFriend);
         when(profile.allCategories()).thenReturn(catSet);
-        when(zeroPrice.ammount()).thenReturn(0);
+        when(zeroPrice.getAmmount()).thenReturn(0);
 
         //Assert.assertEquals(3, bundleG.friendlyTrip(allEvents,profile,profileFriend).size());
 
@@ -275,7 +275,7 @@ public class GeneralTest {
         when(fastFood.getName()).thenReturn("fast");
         when(mexicanFood.getName()).thenReturn("mexican");
         when(veganFood.getName()).thenReturn("vegan");
-        when(zeroPrice.ammount()).thenReturn(0);
+        when(zeroPrice.getAmmount()).thenReturn(0);
 
         User mockUser = Mockito.mock(User.class);
         User mockFriendUser = Mockito.mock(User.class);

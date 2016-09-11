@@ -11,24 +11,38 @@ import java.util.stream.Stream;
 public class TripManager {
 
     public List<Bundle> cheapTrip(List<Event>allEvents, User user){
-        List<Event> cheapFoodEvents = cheapFood(allEvents,user.getLowCostTrip());
-        List<Event> freeEvents = freeEvents(allEvents);
+        List<Event> cheapFoodEvents = cheapFood(allEvents,user);
+        List<Event> notFoodEvents = notFoodEvent(allEvents);
+        List<Event> notFoodFreeEvents = freeEvents(notFoodEvents);
         //reminder: match the events with the profile
         //cheapFoodEvents = profileFoodMatcher(cheapFoodEvents,user.getProfile());
-        return new JoolUse().eventListCrossJoin(cheapFoodEvents,freeEvents);
+        return new JoolUse().eventListCrossJoin(cheapFoodEvents,notFoodFreeEvents);
     }
 
-    private List<Event> cheapFood(List<Event> allEvents, Price price){
-        Stream<Event> events=
-                allEvents.stream().filter(e ->
-                        e.getPrice().ammount() <= price.ammount() &&
-                                e.isFoodEvent());
+    private List<Event> cheapFood(List<Event> allEvents, User user){
+        List<Event> foodEvents = foodEvents(allEvents);
+        List<Event> cheapFoodEvents = cheapEvents(foodEvents,user);
+
+        return cheapFoodEvents;
+    }
+
+    private List<Event> cheapEvents(List<Event> allEvents, User user){
+        Stream<Event> events= allEvents.stream().filter(event -> event.isCheap(user));
+        return events.collect(Collectors.toList());
+    }
+
+    private List<Event> foodEvents(List<Event> allEvents){
+        Stream<Event> events= allEvents.stream().filter(event -> event.isFoodEvent());
+        return events.collect(Collectors.toList());
+    }
+
+    private List<Event> notFoodEvent(List<Event> allEvents){
+        Stream<Event> events= allEvents.stream().filter(event -> !(event.isFoodEvent()));
         return events.collect(Collectors.toList());
     }
 
     private List<Event> freeEvents(List<Event> allEvents){
-        // todos los eventos gratis excluyendo los de comida
-        Stream<Event> events= allEvents.stream().filter(e -> e.getPrice().ammount() == 0 && !e.isFoodEvent());
+        Stream<Event> events= allEvents.stream().filter(event -> event.isFree() );
         return events.collect(Collectors.toList());
     }
 

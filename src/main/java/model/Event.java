@@ -102,6 +102,14 @@ public class Event {
         }
         return categoryNameIsInTheSet;
     }
+
+    public boolean isFree() {
+        return (this.price.isFree());
+    }
+
+    public boolean isCheap(User user){
+        return this.getPrice().isCheap(user);
+    }
 }
 
 
