@@ -1,10 +1,3 @@
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
-
-import org.jooq.lambda.Seq;
-import org.junit.Test;
-import org.mockito.Mockito;
-
 public class MockitoTest{
 
 /*

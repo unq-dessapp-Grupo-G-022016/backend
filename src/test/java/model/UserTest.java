@@ -1,7 +1,5 @@
 package model;
 
-import model.Event;
-import model.User;
 import model.creation.UserBuilder;
 import org.junit.Assert;
 import org.junit.Test;

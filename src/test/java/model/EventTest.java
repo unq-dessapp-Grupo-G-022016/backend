@@ -1,9 +1,7 @@
 package model;
 
-import model.*;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.experimental.theories.suppliers.TestedOn;
 import org.mockito.Mockito;
 
 import java.time.LocalDateTime;

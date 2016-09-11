@@ -1,7 +1,6 @@
 package model.creation;
 
 import model.*;
-import model.Category;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;

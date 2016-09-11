@@ -1,19 +1,3 @@
-import model.*;
-import org.jooq.lambda.Seq;
-import org.junit.Assert;
-import org.junit.Test;
-import org.mockito.Mockito;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Stream;
-
-import static org.jooq.lambda.Seq.seq;
-import static org.jooq.lambda.tuple.Tuple.tuple;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.when;
-
 /**
  * Created by alejandrok on 9/7/16.
  */
