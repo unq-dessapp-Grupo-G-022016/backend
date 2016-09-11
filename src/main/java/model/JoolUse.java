@@ -5,6 +5,7 @@ import org.jooq.lambda.tuple.Tuple2;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static org.jooq.lambda.Seq.seq;
 
@@ -30,6 +31,14 @@ public class JoolUse {
 
         return bList;
     }
+
+    public Set<Category> categoriesSetsIntersection(Set<Category> categoriesA, Set<Category> categoriesB){
+        Seq<Category> seq1 = seq(categoriesA.stream());
+        Seq<Category> seq2 = seq(categoriesB.stream());
+
+        return  seq1.retainAll(seq2).toSet();
+    }
+
     private void toListOfBundles(Tuple2<Event, Event> t, List<Bundle> bList) {
 
         Event a = t.v1;
@@ -39,4 +48,6 @@ public class JoolUse {
         bundle.add(b);
         bList.add(bundle);
     }
+
+
 }

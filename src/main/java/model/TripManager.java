@@ -2,6 +2,7 @@ package model;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -13,11 +14,37 @@ public class TripManager {
 
     public List<Bundle> cheapTrip(List<Event>allEvents, User user){
         List<Event> cheapFoodEvents = cheapFood(allEvents,user);
-        List<Event> notFoodEvents = notFoodEvent(allEvents);
+        List<Event> notFoodEvents = notFoodEvents(allEvents);
         List<Event> notFoodFreeEvents = freeEvents(notFoodEvents);
-        cheapFoodEvents = profileMatcher(cheapFoodEvents, user);
-        notFoodFreeEvents = profileMatcher(notFoodFreeEvents, user);
+        cheapFoodEvents = eventsAndCategoriesMatcher(cheapFoodEvents, user.getProfile().allCategories());
+        notFoodFreeEvents = eventsAndCategoriesMatcher(notFoodFreeEvents, user.getProfile().allCategories());
         return new JoolUse().eventListCrossJoin(cheapFoodEvents,notFoodFreeEvents);
+    }
+
+    public List<Bundle> friendlyTrip(List<Event>allEvents, User user){
+
+        Set<Category> userCategories = user.getProfile().allCategories();
+        Set<Category> friendsCategories = user.getFriends().allCategories();
+        Set<Category> friendlyCategories = new JoolUse().categoriesSetsIntersection(userCategories,friendsCategories);
+
+        List<Event> matchingEvents = eventsAndCategoriesMatcher(allEvents, friendlyCategories);
+
+        List<Event> foodEvents = foodEvents(matchingEvents);
+        List<Event> notFoodEvents = notFoodEvents(matchingEvents);
+
+        return new JoolUse().eventListCrossJoin(foodEvents,notFoodEvents);
+
+    }
+
+    private List<Event> eventsAndCategoriesMatcher(List<Event> events, Set<Category> friendlyCategories) {
+        Iterator<Event> it = events.iterator();
+        while (it.hasNext()){
+            Event e = it.next();
+            if (!e.hasTheSameCategory(friendlyCategories)) {
+                it.remove();
+            }
+        }
+        return events;
     }
 
     private List<Event> profileMatcher(List<Event> events, User user) {
@@ -47,7 +74,7 @@ public class TripManager {
         return events.collect(Collectors.toList());
     }
 
-    private List<Event> notFoodEvent(List<Event> allEvents){
+    private List<Event> notFoodEvents(List<Event> allEvents){
         Stream<Event> events= allEvents.stream().filter(event -> !(event.isFoodEvent()));
         return events.collect(Collectors.toList());
     }

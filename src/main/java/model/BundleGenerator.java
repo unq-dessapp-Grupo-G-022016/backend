@@ -53,23 +53,7 @@ public class BundleGenerator {
 
 
 
-    public List<Bundle> friendlyTrip(List<Event>allEvents, User user){
 
-        //List<Event> userMatching = profileMatcher(allEvents,userProfile.allCategories());
-        //List<Event> friendMatching = profileMatcher(allEvents, friendProfile.allCategories());
-        //return eventListCrossJoin(userMatching, friendMatching);
-        Profile userProfile = user.getProfile();
-        Friends friends = user.getFriends();
-
-        Set<Category> friendlyCategories = categoriesMatcher(userProfile.allCategories(),friends.allCategories());
-        List<Event> userMatching = profileMatcher(allEvents,friendlyCategories);
-
-        List<Event> foodEvents = foodEvents(userMatching);
-        List<Event> notFoodEvents = notFoodEvents(userMatching);
-
-        return eventListCrossJoin(foodEvents,notFoodEvents);
-
-    }
 
     private List<Event> foodEvents(List<Event> allEvents){
         Stream<Event> foodEvents = allEvents.stream().filter(e -> e.isFoodEvent());

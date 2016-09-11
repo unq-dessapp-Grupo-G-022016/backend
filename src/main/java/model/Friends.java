@@ -20,7 +20,7 @@ public class Friends {
 
     public Set<Category> allCategories() {
         Set<Category> allCategories = new HashSet<Category>();
-        //TODO
+        friends.forEach(friend -> allCategories.addAll(friend.getProfile().allCategories()));
         return allCategories;
     }
 
