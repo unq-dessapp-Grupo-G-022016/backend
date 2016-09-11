@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -14,15 +16,25 @@ public class TripManager {
         List<Event> cheapFoodEvents = cheapFood(allEvents,user);
         List<Event> notFoodEvents = notFoodEvent(allEvents);
         List<Event> notFoodFreeEvents = freeEvents(notFoodEvents);
-        //reminder: match the events with the profile
-        //cheapFoodEvents = profileFoodMatcher(cheapFoodEvents,user.getProfile());
+        cheapFoodEvents = profileMatcher(cheapFoodEvents, user);
+        notFoodFreeEvents = profileMatcher(notFoodFreeEvents, user);
         return new JoolUse().eventListCrossJoin(cheapFoodEvents,notFoodFreeEvents);
+    }
+
+    private List<Event> profileMatcher(List<Event> events, User user) {
+        Iterator<Event> it = events.iterator();
+        while (it.hasNext()){
+            Event e = it.next();
+            if (!e.hasTheSameCategory(user.getProfile().allCategories())) {
+                it.remove();
+            }
+        }
+        return events;
     }
 
     private List<Event> cheapFood(List<Event> allEvents, User user){
         List<Event> foodEvents = foodEvents(allEvents);
         List<Event> cheapFoodEvents = cheapEvents(foodEvents,user);
-
         return cheapFoodEvents;
     }
 

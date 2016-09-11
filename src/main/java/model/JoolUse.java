@@ -10,8 +10,7 @@ import static org.jooq.lambda.Seq.seq;
 
 /**
  * Created by alejandroK on 10/9/2016.
- *
- * Exclude from TripManager for cobertura purposes
+ * Exclude from TripManager for mvn cobertura purposes
  */
 public class JoolUse {
     /**
@@ -27,11 +26,11 @@ public class JoolUse {
         List<Bundle> bList;
         bList = new ArrayList<>();
 
-        res.forEach(a -> toBundleAndAddingToList(a,bList));
+        res.forEach(a -> toListOfBundles(a,bList));
 
         return bList;
     }
-    private void toBundleAndAddingToList(Tuple2<Event, Event> t, List<Bundle> bList) {
+    private void toListOfBundles(Tuple2<Event, Event> t, List<Bundle> bList) {
 
         Event a = t.v1;
         Event b = t.v2;
