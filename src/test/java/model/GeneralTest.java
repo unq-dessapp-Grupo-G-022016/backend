@@ -1,3 +1,5 @@
+package model;
+
 import model.*;
 import model.Category;
 import org.junit.Assert;

@@ -1,3 +1,5 @@
+package model;
+
 import model.*;
 import org.junit.Assert;
 import org.junit.Test;

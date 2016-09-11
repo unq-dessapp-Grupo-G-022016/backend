@@ -1,3 +1,5 @@
+package model;
+
 import model.Event;
 import model.User;
 import model.creation.UserBuilder;
