@@ -33,7 +33,7 @@ public class Friends {
 
     public Set<User> getFriends() { return friends; }
 
-    public Set<Profile> friendsProfilesWithInterests(Set<Category> categories){
+    private Set<Profile> friendsProfilesWithInterests(Set<Category> categories){
         Set<Profile> profiles = new HashSet<Profile>();
         profiles.addAll(this.friendsProfiles());
         Iterator<Profile> it = profiles.iterator();
@@ -46,7 +46,7 @@ public class Friends {
         return profiles;
     }
 
-    public Set<Category> friendsInterestsWithInterests(Set<Category> categories) {
+    public Set<Category> categoriesOfUsersThatHaveAnyOfThis(Set<Category> categories) {
         Set<Category> friendsCategories = new HashSet<Category>();
         this.friendsProfilesWithInterests(categories).forEach(profile -> friendsCategories.addAll(profile.allCategories()));
         return  friendsCategories;

@@ -1,6 +1,5 @@
 package model;
 
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -40,7 +39,7 @@ public class TripManager {
     public List<Bundle> surpriseTrip(List<Event>allEvents, User user){
         // assume that friends interest whit common interest can interest to the user
         //Remove friends without common interests
-        Set<Category> categories = user.getFriends().friendsInterestsWithInterests(user.getProfile().allCategories());
+        Set<Category> categories = user.getFriends().categoriesOfUsersThatHaveAnyOfThis(user.getProfile().allCategories());
         //Remove user categories
         categories.removeAll(user.getProfile().allCategories());
         List<Event> userMatching = profileMatcher(allEvents,categories);
