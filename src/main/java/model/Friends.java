@@ -1,6 +1,7 @@
 package model;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -32,4 +33,22 @@ public class Friends {
 
     public Set<User> getFriends() { return friends; }
 
+    public Set<Profile> friendsProfilesWithInterests(Set<Category> categories){
+        Set<Profile> profiles = new HashSet<Profile>();
+        profiles.addAll(this.friendsProfiles());
+        Iterator<Profile> it = profiles.iterator();
+        while (it.hasNext()){
+            Profile p = it.next();
+            if (new JoolUse().categoriesSetsIntersection(p.allCategories(),categories).size()==0) {
+                it.remove();
+            }
+        }
+        return profiles;
+    }
+
+    public Set<Category> friendsInterestsWithInterests(Set<Category> categories) {
+        Set<Category> friendsCategories = new HashSet<Category>();
+        this.friendsProfilesWithInterests(categories).forEach(profile -> friendsCategories.addAll(profile.allCategories()));
+        return  friendsCategories;
+    }
 }

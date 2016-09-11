@@ -1,5 +1,6 @@
 package model;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -36,6 +37,18 @@ public class TripManager {
 
     }
 
+    public List<Bundle> surpriseTrip(List<Event>allEvents, User user){
+        // assume that friends interest whit common interest can interest to the user
+        //Remove friends without common interests
+        Set<Category> categories = user.getFriends().friendsInterestsWithInterests(user.getProfile().allCategories());
+        //Remove user categories
+        categories.removeAll(user.getProfile().allCategories());
+        List<Event> userMatching = profileMatcher(allEvents,categories);
+        List<Event> foodEvents = foodEvents(userMatching);
+        List<Event> notFoodEvents = notFoodEvents(userMatching);
+        return new JoolUse().eventListCrossJoin(foodEvents,notFoodEvents);
+    }
+
     private List<Event> eventsAndCategoriesMatcher(List<Event> events, Set<Category> friendlyCategories) {
         Iterator<Event> it = events.iterator();
         while (it.hasNext()){
@@ -52,6 +65,17 @@ public class TripManager {
         while (it.hasNext()){
             Event e = it.next();
             if (!e.hasTheSameCategory(user.getProfile().allCategories())) {
+                it.remove();
+            }
+        }
+        return events;
+    }
+
+    private List<Event> profileMatcher(List<Event> events, Set<Category> categories) {
+        Iterator<Event> it = events.iterator();
+        while (it.hasNext()){
+            Event e = it.next();
+            if (!e.hasTheSameCategory(categories)) {
                 it.remove();
             }
         }
