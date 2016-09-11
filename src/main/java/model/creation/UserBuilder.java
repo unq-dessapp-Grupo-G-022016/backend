@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * Created by leog on 31/08/16.
  */
-public class UserCreator {
+public class UserBuilder {
 
     String userName;
     Profile profile = new Profile();
@@ -18,23 +18,23 @@ public class UserCreator {
     Set<Event> personalEvents = new HashSet<>();
     Set<String> vehicles= new HashSet<>();
 
-    public UserCreator withUserName(String userName){
+    public UserBuilder withUserName(String userName){
         this.userName=userName;
         return this;
     }
 
-    public UserCreator withCheapAmmountOf(Price price){
+    public UserBuilder withCheapAmmountOf(Price price){
         this.lowCostTrip = price;
         return this;
     }
 
-    public UserCreator anyUser(){
+    public UserBuilder anyUser(){
         this.userName = "anyUsername";
         this.lowCostTrip= new Price(50);
         return this;
     }
 
-    public User create(){
+    public User build(){
         return new User(userName,profile,lowCostTrip,friends,personalEvents,vehicles);
     }
 

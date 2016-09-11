@@ -1,6 +1,5 @@
-import model.Price;
 import model.User;
-import model.creation.UserCreator;
+import model.creation.UserBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -11,7 +10,7 @@ public class UserBuilderTest {
 
     @Test
     public void anyUserTest(){
-        UserCreator userBuilder = new UserCreator();
+        UserBuilder userBuilder = new UserBuilder();
 
         //ej
         //User anyUserA = userBuilder.anyUser().create();
@@ -19,7 +18,7 @@ public class UserBuilderTest {
         //User anyUserB = userBuilder.anyUser().withCheapAmmountOf(new Price(2)).create();
 
 
-        User userWithUsername = userBuilder.withUserName("userName").create();
+        User userWithUsername = userBuilder.withUserName("userName").build();
 
 
 

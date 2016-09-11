@@ -17,7 +17,7 @@ public class EventTest {
 
     @Test
     public void isTimeCompatible(){
-        //EventCreator eventCreator = new EventCreator();
+        //EventBuilder eventCreator = new EventBuilder();
         LocalDateTime anyTime = LocalDateTime.now();
 
         Event firstEvent = new Event();

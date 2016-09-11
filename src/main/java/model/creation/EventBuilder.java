@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * Created by Leonardo on 5/9/2016.
  */
-public class EventCreator {
+public class EventBuilder {
 
     String name;
     String address;
@@ -25,42 +25,42 @@ public class EventCreator {
 
 
 
-    public EventCreator withName(String name){
+    public EventBuilder withName(String name){
         this.name=name;
         return this;
     }
 
-    public EventCreator withAddres(String address){
+    public EventBuilder withAddres(String address){
         this.address=address;
         return this;
     }
 
-    public EventCreator withDetails(String details){
+    public EventBuilder withDetails(String details){
         this.details=details;
         return this;
     }
 
-    public EventCreator withPrice(Price price){
+    public EventBuilder withPrice(Price price){
         this.price=price;
         return this;
     }
 
-    public EventCreator withStartTime(LocalDateTime startTime){
+    public EventBuilder withStartTime(LocalDateTime startTime){
         this.startTime=startTime;
         return this;
     }
 
-    public EventCreator withEndTime(LocalDateTime endTime){
+    public EventBuilder withEndTime(LocalDateTime endTime){
         this.endTime=endTime;
         return this;
     }
 
-    public EventCreator withAttender(User attender){
+    public EventBuilder withAttender(User attender){
         this.attenders.add(attender);
         return this;
     }
 
-    public EventCreator anyEvent(){
+    public EventBuilder anyEvent(){
         name = "anyName";
         address = "anyAddres";
         details = "anyDetails";
@@ -70,7 +70,7 @@ public class EventCreator {
         return this;
     }
 
-    public Event create(){
+    public Event build(){
         return new Event(name,address,details,price, startTime, endTime,attenders);
     }
 
@@ -85,7 +85,7 @@ public class EventCreator {
             return new MusicEvent(name,address,details,price, startTime, endTime,attenders,category);
     }
 
-    public EventCreator withCategory(Category category){
+    public EventBuilder withCategory(Category category){
         this.hasCategory = true;
         this.category = category;
         return this;

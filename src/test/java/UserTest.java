@@ -1,6 +1,6 @@
 import model.Event;
 import model.User;
-import model.creation.UserCreator;
+import model.creation.UserBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -12,9 +12,9 @@ public class UserTest {
 
     @Test
     public void createPersonalEventTest(){
-        UserCreator userBuilder = new UserCreator();
+        UserBuilder userBuilder = new UserBuilder();
 
-        User user = userBuilder.anyUser().create();
+        User user = userBuilder.anyUser().build();
         Event eventMock = Mockito.mock(Event.class);
 
         user.createPersonalEvent(eventMock);
@@ -24,10 +24,10 @@ public class UserTest {
 
     @Test
     public void friendsEventsTest(){
-        UserCreator userBuilder = new UserCreator();
+        UserBuilder userBuilder = new UserBuilder();
 
-        User userWithEvent = userBuilder.anyUser().create();
-        User friendUser = userBuilder.anyUser().create();
+        User userWithEvent = userBuilder.anyUser().build();
+        User friendUser = userBuilder.anyUser().build();
         Event eventMock = Mockito.mock(Event.class);
 
         userWithEvent.createPersonalEvent(eventMock);
