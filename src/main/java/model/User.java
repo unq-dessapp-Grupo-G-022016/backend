@@ -16,16 +16,30 @@ public class User {
     Price lowCostTrip;
     //StartPoint;
     Friends friends;
-
+    Set<Event> personalEvent;
     Set<String> vehicles;
 
-    public User(String userName, Profile profile, Price lowCostTrip, Friends friends, Set<String> vehicles) {
+    public User(String userName, Profile profile, Price lowCostTrip, Friends friends, Set<Event> personalEvent, Set<String> vehicles) {
         this.userName = userName;
         this.profile = profile;
         this.lowCostTrip = lowCostTrip;
         this.friends = friends;
+        this.personalEvent = personalEvent;
         this.vehicles = vehicles;
     }
+
+    public User(){}
+
+    public void createPersonalEvent(Event event){
+        this.personalEvent.add(event);
+    }
+
+    public Set<Event> friendsEvent(){
+        Set<Event>friendsEvents = new HashSet<>();
+        this.friends.getFriends().forEach(f -> friendsEvents.addAll(f.getPersonalEvent()));
+        return friendsEvents;
+    }
+
 
 
     public void addFriend(User friend){
@@ -39,6 +53,7 @@ public class User {
     public Friends getFriends(){
         return this.friends;
     }
+
     public Profile getProfile(){
         return this.profile;
     }
@@ -51,9 +66,7 @@ public class User {
         return lowCostTrip;
     }
 
+    public String getUserName() {return userName; }
 
-    public String getUserName() {
-        return userName;
-    }
-
+    public Set<Event> getPersonalEvent() {return this.personalEvent;}
 }

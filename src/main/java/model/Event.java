@@ -2,6 +2,7 @@ package model;
 
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -16,7 +17,7 @@ public class Event {
     Price price;
     LocalDateTime startTime;
     LocalDateTime endTime;
-    Set<User>attenders;
+    Set<User>attenders = new HashSet<>();
     Category category;
 
     public LocalDateTime getStartTime() {
@@ -110,6 +111,19 @@ public class Event {
     public boolean isCheap(User user){
         return this.getPrice().isCheap(user);
     }
+
+    public void attend(User user){
+        this.attenders.add(user);
+    }
+
+    public void attend(Set<User> users){
+        this.attenders.addAll(users);
+    }
+
+    public Set<User> getAttenders() {
+        return attenders;
+    }
+
 }
 
 

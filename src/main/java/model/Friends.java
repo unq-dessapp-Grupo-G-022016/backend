@@ -8,7 +8,7 @@ import java.util.Set;
  */
 public class Friends {
 
-    Set<User> friends;
+    Set<User> friends = new HashSet<>();
 
     public void add(User friend) {
         this.friends.add(friend);
@@ -29,4 +29,7 @@ public class Friends {
         friends.forEach(f -> friendsProfiles.add(f.getProfile()));
         return friendsProfiles;
     }
+
+    public Set<User> getFriends() { return friends; }
+
 }

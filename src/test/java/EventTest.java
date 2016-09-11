@@ -1,9 +1,7 @@
-import model.BundleGenerator;
-import model.Category;
-import model.Event;
-import model.FoodEvent;
+import model.*;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.experimental.theories.suppliers.TestedOn;
 import org.mockito.Mockito;
 
 import java.time.LocalDateTime;
@@ -95,4 +93,29 @@ public class EventTest {
         Assert.assertTrue(event.hasTheSameCategory(catSet));
 
     }
+
+    @Test
+    public void singleUserAttendTest(){
+        Event event = new Event();
+
+        User userMock = Mockito.mock(User.class);
+
+        event.attend(userMock);
+
+        Assert.assertTrue(event.getAttenders().contains(userMock));
+    }
+
+    @Test
+    public void multipleUsersAttendTest(){
+        Event event = new Event();
+
+        User userAMock = Mockito.mock(User.class);
+        User userBMock = Mockito.mock(User.class);
+
+        event.attend(userAMock);
+        event.attend(userBMock);
+
+        Assert.assertEquals(2, event.getAttenders().size());
+    }
+
 }

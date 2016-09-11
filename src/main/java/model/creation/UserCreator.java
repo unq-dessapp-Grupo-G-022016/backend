@@ -1,9 +1,6 @@
 package model.creation;
 
-import model.Friends;
-import model.Price;
-import model.Profile;
-import model.User;
+import model.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -18,8 +15,8 @@ public class UserCreator {
     Price lowCostTrip;
     //StartPoint;
     Friends friends =  new Friends();
-    Set<String> vehicles= new HashSet<String>();
-
+    Set<Event> personalEvents = new HashSet<>();
+    Set<String> vehicles= new HashSet<>();
 
     public UserCreator withUserName(String userName){
         this.userName=userName;
@@ -38,7 +35,7 @@ public class UserCreator {
     }
 
     public User create(){
-        return new User(userName,profile,lowCostTrip,friends,vehicles);
+        return new User(userName,profile,lowCostTrip,friends,personalEvents,vehicles);
     }
 
 }
