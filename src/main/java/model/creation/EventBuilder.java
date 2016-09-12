@@ -66,10 +66,15 @@ public class EventBuilder {
         price = new Price(40);
         startTime = startTime.now().plusDays(9);
         endTime = startTime.plusHours(3);
+        category = new Category("undefined");
+        hasCategory = false;
         return this;
     }
 
     public Event build(){
+        if (hasCategory) {
+            return new Event(name, address, details, price, startTime, endTime, attenders, category);
+        }
         return new Event(name,address,details,price, startTime, endTime,attenders);
     }
 

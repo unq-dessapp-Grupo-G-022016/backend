@@ -1,5 +1,6 @@
 package model;
 
+import model.creation.EventBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -116,6 +117,24 @@ public class EventTest {
         event.attend(userBMock);
 
         Assert.assertEquals(2, event.getAttenders().size());
+    }
+
+    @Test
+    public void eventWithoutCategory(){
+        EventBuilder eventBuilder = new EventBuilder();
+        Event event = eventBuilder.anyEvent().build();
+
+        Assert.assertFalse(event.hasCategory());
+    }
+
+    @Test
+    public void eventWithCategory(){
+        EventBuilder eventBuilder = new EventBuilder();
+        Category mockCategory = Mockito.mock(Category.class);
+        when(mockCategory.getName()).thenReturn("Cool");
+        Event event = eventBuilder.withCategory(mockCategory).build();
+
+        Assert.assertTrue(event.hasCategory());
     }
 
 }

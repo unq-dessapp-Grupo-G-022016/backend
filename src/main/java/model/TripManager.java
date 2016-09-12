@@ -42,35 +42,13 @@ public class TripManager {
         Set<Category> categories = user.getFriends().categoriesOfUsersThatHaveAnyOfThis(user.getProfile().allCategories());
         //Remove user categories
         categories.removeAll(user.getProfile().allCategories());
-        List<Event> userMatching = profileMatcher(allEvents,categories);
+        List<Event> userMatching = eventsAndCategoriesMatcher(allEvents,categories);
         List<Event> foodEvents = foodEvents(userMatching);
         List<Event> notFoodEvents = notFoodEvents(userMatching);
         return new JoolUse().eventListCrossJoin(foodEvents,notFoodEvents);
     }
 
-    private List<Event> eventsAndCategoriesMatcher(List<Event> events, Set<Category> friendlyCategories) {
-        Iterator<Event> it = events.iterator();
-        while (it.hasNext()){
-            Event e = it.next();
-            if (!e.hasTheSameCategory(friendlyCategories)) {
-                it.remove();
-            }
-        }
-        return events;
-    }
-
-    private List<Event> profileMatcher(List<Event> events, User user) {
-        Iterator<Event> it = events.iterator();
-        while (it.hasNext()){
-            Event e = it.next();
-            if (!e.hasTheSameCategory(user.getProfile().allCategories())) {
-                it.remove();
-            }
-        }
-        return events;
-    }
-
-    private List<Event> profileMatcher(List<Event> events, Set<Category> categories) {
+    private List<Event> eventsAndCategoriesMatcher(List<Event> events, Set<Category> categories) {
         Iterator<Event> it = events.iterator();
         while (it.hasNext()){
             Event e = it.next();

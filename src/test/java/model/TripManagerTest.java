@@ -54,9 +54,45 @@ public class TripManagerTest {
         when(mockUserProfile.allCategories()).thenReturn(userCategories);
         when(mockUser.getFriends()).thenReturn(mockFriends);
         when(mockFriends.allCategories()).thenReturn(friendsCategories);
+        Category mockMexicanCategory = Mockito.mock(Category.class);
+        Category mockVeganCategory = Mockito.mock(Category.class);
+        Category mockTerrorCategory = Mockito.mock(Category.class);
+        Category mockSciFiCategory = Mockito.mock(Category.class);
+        Category mockAdventureCategory = Mockito.mock(Category.class);
+        Event mockFoodEvent1 = Mockito.mock(Event.class);
+        Event mockFoodEvent2 = Mockito.mock(Event.class);
+        Event mockMovieEvent1 = Mockito.mock(Event.class);
+        Event mockMovieEvent2 = Mockito.mock(Event.class);
+        Event mockMovieEvent3 = Mockito.mock(Event.class);
+        userCategories.add(mockMexicanCategory);
+        userCategories.add(mockTerrorCategory);
+        userCategories.add(mockAdventureCategory);
+        friendsCategories.add(mockMexicanCategory);
+        friendsCategories.add(mockVeganCategory);
+        friendsCategories.add(mockTerrorCategory);
+        friendsCategories.add(mockSciFiCategory);
+        eventsList.add(mockFoodEvent1);
+        eventsList.add(mockFoodEvent2);
+        eventsList.add(mockMovieEvent1);
+        eventsList.add(mockMovieEvent2);
+        eventsList.add(mockMovieEvent3);
+        when(mockFoodEvent1.isFoodEvent()).thenReturn(true);
+        when(mockMovieEvent1.isFoodEvent()).thenReturn(false);
+        when(mockFoodEvent2.isFoodEvent()).thenReturn(true);
+        when(mockMovieEvent2.isFoodEvent()).thenReturn(false);
+        when(mockMovieEvent3.isFoodEvent()).thenReturn(false);
+        Set<Category> matchedCategories = new HashSet<Category>();
+        matchedCategories.add(mockMexicanCategory);
+        matchedCategories.add(mockTerrorCategory);
+        when(mockFoodEvent1.hasTheSameCategory(matchedCategories)).thenReturn(true);
+        when(mockFoodEvent2.hasTheSameCategory(matchedCategories)).thenReturn(false);
+        when(mockMovieEvent1.hasTheSameCategory(matchedCategories)).thenReturn(true);
+        when(mockMovieEvent2.hasTheSameCategory(matchedCategories)).thenReturn(false);
+        when(mockMovieEvent3.hasTheSameCategory(matchedCategories)).thenReturn(false);
 
-        Assert.assertEquals(0,tripManager.friendlyTrip(eventsList,mockUser).size());
+        Assert.assertEquals(1,tripManager.friendlyTrip(eventsList,mockUser).size());
     }
+
 
     @Test
     public void surpriseTrip(){

@@ -14,7 +14,7 @@ public class Price {
     }
 
     public boolean isCheap(User user){
-        return this.ammount<user.getLowCostTrip().getAmmount();
+        return this.ammount<=user.getLowCostTrip().getAmmount();
     }
 
     public int getAmmount(){
