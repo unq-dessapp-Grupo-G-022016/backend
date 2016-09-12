@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by leog on 30/08/16.
@@ -45,10 +47,6 @@ public abstract class Event {
 
     public boolean isFoodEvent(){return false;}
 
-    public boolean isMovieEvent(){return false;}
-
-    public boolean isMusicEvent(){return false;}
-
     public boolean timeCompatible(Event event){
         return this.getEndTime().isBefore(event.getStartTime());
     }
@@ -77,13 +75,9 @@ public abstract class Event {
     }
 
     public boolean hasTheSameCategory(Set<Category> categorySet){
-        boolean categoryNameIsInTheSet = false;
-        Iterator<Category> it = categorySet.iterator();
-        while (it.hasNext() && categoryNameIsInTheSet == false){
-            Category categoryFromSet = it.next();
-            categoryNameIsInTheSet = this.getCategory().isEqual(categoryFromSet);
-        }
-        return categoryNameIsInTheSet;
+        Stream<Category> events= categorySet.stream().filter(event -> event.isEqual(this.category));
+        return ! events.collect(Collectors.toList()).isEmpty();
+
     }
 
     public boolean isFree() {
