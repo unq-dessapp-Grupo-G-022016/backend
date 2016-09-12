@@ -81,6 +81,26 @@ public class EventTest {
         Assert.assertTrue(event.hasTheSameCategory(catSet));
 
     }
+    @Test
+    public void eventDoNotHasACategoryThatIsInASetOfCategories(){
+
+        Category veganFood = Mockito.mock(Category.class);
+        Category fastFood = Mockito.mock(Category.class);
+        Category mexicanFood = Mockito.mock(Category.class);
+
+        EventBuilder eventCreator = new EventBuilder();
+        Event event = eventCreator.withCategory(veganFood).buildGeneralEvent();
+
+        when(veganFood.isEqual(fastFood)).thenReturn(false);
+        when(veganFood.isEqual(mexicanFood)).thenReturn(false);
+
+        Set<Category> catSet = new HashSet<Category>();
+        catSet.add(mexicanFood);
+        catSet.add(fastFood);
+
+        Assert.assertFalse(event.hasTheSameCategory(catSet));
+
+    }
 
     @Test
     public void singleUserAttendTest(){
