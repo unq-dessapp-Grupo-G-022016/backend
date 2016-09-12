@@ -17,6 +17,7 @@ public class UserBuilder {
     Friends friends =  new Friends();
     Set<Event> personalEvents = new HashSet<>();
     Set<String> vehicles= new HashSet<>();
+    Set<Event> attendedEvents = new HashSet<>();
 
     public UserBuilder withUserName(String userName){
         this.userName=userName;
@@ -35,7 +36,7 @@ public class UserBuilder {
     }
 
     public User build(){
-        return new User(userName,profile,lowCostTrip,friends,personalEvents,vehicles);
+        return new User(userName,profile,lowCostTrip,friends,personalEvents,vehicles, attendedEvents);
     }
 
 }

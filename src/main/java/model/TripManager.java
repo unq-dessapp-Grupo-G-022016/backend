@@ -1,8 +1,10 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -88,6 +90,14 @@ public class TripManager {
     public List<Event> eventSearch(List<Event> allEvents, String search){
         Stream<Event> events= allEvents.stream().filter(event -> event.getName().contains(search) || event.getDetails().contains(search));
         return events.collect(Collectors.toList());
+    }
+
+
+    public List<Event> sugestions(Event event){
+
+        List<Event> sugetions = new ArrayList<>();
+        event.getAttenders().forEach(user -> sugetions.addAll(user.getAttendedEvents()));
+        return sugetions;
     }
 
 
