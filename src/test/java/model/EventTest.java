@@ -18,11 +18,10 @@ public class EventTest {
 
     @Test
     public void isTimeCompatible(){
-        //EventBuilder eventCreator = new EventBuilder();
         LocalDateTime anyTime = LocalDateTime.now();
-
-        Event firstEvent = new Event();
-        Event secondEvent = new Event();
+        EventBuilder eventCreator = new EventBuilder();
+        Event firstEvent = eventCreator.anyEvent().buildGeneralEvent();
+        Event secondEvent = eventCreator.anyEvent().buildGeneralEvent();
 
         firstEvent.setEndTime(anyTime);
         secondEvent.setStartTime(anyTime.plusHours(1));
@@ -31,24 +30,11 @@ public class EventTest {
     }
 
     @Test
-    public void isTimeCompatibleMocked(){
-        // DO NOT WORK1
-        LocalDateTime anyTime = LocalDateTime.now();
-
-        Event firstEvent = Mockito.mock(Event.class);
-        Event secondEvent = Mockito.mock(Event.class);
-        when(firstEvent.getEndTime()).thenReturn(anyTime.plusHours(2));
-        when(secondEvent.getStartTime()).thenReturn(anyTime.plusHours(3));
-
-        Assert.assertTrue( ! firstEvent.timeCompatible(secondEvent)); //deberia retornar true!
-
-    }
-
-    @Test
     public void hasTheSameCategory(){
 
-        Event event1 = new Event();
-        Event event2 = new Event();
+        EventBuilder eventCreator = new EventBuilder();
+        Event event1 = eventCreator.anyEvent().buildGeneralEvent();
+        Event event2 = eventCreator.anyEvent().buildGeneralEvent();
 
         Category veganCategoryMock = Mockito.mock(Category.class);
         event1.setCategory(veganCategoryMock);
@@ -62,7 +48,8 @@ public class EventTest {
     @Test
     public void hasCategory(){
 
-        Event event1 = new Event();
+        EventBuilder eventCreator = new EventBuilder();
+        Event event1 = eventCreator.anyEvent().buildGeneralEvent();
 
         Category categoryMock = Mockito.mock(Category.class);
         event1.setCategory(categoryMock);
@@ -74,17 +61,17 @@ public class EventTest {
 
     @Test
     public void eventHasACategoryThatIsInASetOfCategories(){
-        Event event = new Event();
 
         Category veganFood = Mockito.mock(Category.class);
         Category fastFood = Mockito.mock(Category.class);
         Category mexicanFood = Mockito.mock(Category.class);
 
-        event.setCategory(veganFood);
+        EventBuilder eventCreator = new EventBuilder();
+        Event event = eventCreator.withCategory(veganFood).buildGeneralEvent();
 
-        when(veganFood.getName()).thenReturn("vegan");
-        when(fastFood.getName()).thenReturn("fast");
-        when(mexicanFood.getName()).thenReturn("mexican");
+        when(veganFood.isEqual(veganFood)).thenReturn(true);
+        when(veganFood.isEqual(fastFood)).thenReturn(false);
+        when(veganFood.isEqual(mexicanFood)).thenReturn(false);
 
         Set<Category> catSet = new HashSet<Category>();
         catSet.add(veganFood);
@@ -97,7 +84,9 @@ public class EventTest {
 
     @Test
     public void singleUserAttendTest(){
-        Event event = new Event();
+
+        EventBuilder eventCreator = new EventBuilder();
+        Event event = eventCreator.anyEvent().buildGeneralEvent();
 
         User userMock = Mockito.mock(User.class);
 
@@ -108,7 +97,9 @@ public class EventTest {
 
     @Test
     public void multipleUsersAttendTest(){
-        Event event = new Event();
+
+        EventBuilder eventCreator = new EventBuilder();
+        Event event = eventCreator.anyEvent().buildGeneralEvent();
 
         User userAMock = Mockito.mock(User.class);
         User userBMock = Mockito.mock(User.class);
@@ -122,7 +113,7 @@ public class EventTest {
     @Test
     public void eventWithoutCategory(){
         EventBuilder eventBuilder = new EventBuilder();
-        Event event = eventBuilder.anyEvent().build();
+        Event event = eventBuilder.anyEvent().buildGeneralEvent();
 
         Assert.assertFalse(event.hasCategory());
     }
@@ -132,9 +123,17 @@ public class EventTest {
         EventBuilder eventBuilder = new EventBuilder();
         Category mockCategory = Mockito.mock(Category.class);
         when(mockCategory.getName()).thenReturn("Cool");
-        Event event = eventBuilder.withCategory(mockCategory).build();
+        Event event = eventBuilder.withCategory(mockCategory).buildGeneralEvent();
 
         Assert.assertTrue(event.hasCategory());
+    }
+
+    @Test
+    public void isFoodEvent(){
+
+        EventBuilder eventCreator = new EventBuilder();
+        Event foodEvent = eventCreator.anyEvent().buildFoodEvent();
+        Assert.assertTrue(foodEvent.isFoodEvent());
     }
 
 }

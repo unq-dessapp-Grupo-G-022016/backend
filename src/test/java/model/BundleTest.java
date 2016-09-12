@@ -52,5 +52,26 @@ public class BundleTest {
 
         Assert.assertTrue(bundle.isValidBundle());
     }
+    @Test
+    public void isNotAValidBundle(){
+        Bundle bundle = new Bundle();
+        LocalDateTime anyTime = LocalDateTime.now();
+
+        Event firstEvent = Mockito.mock(Event.class);
+        Event secondEvent = Mockito.mock(Event.class);
+
+        when(firstEvent.timeCompatible(secondEvent)).thenReturn(false);
+
+        when(firstEvent.getStartTime()).thenReturn(anyTime.plusHours(1));
+        when(secondEvent.getStartTime()).thenReturn(anyTime.plusHours(2));
+
+        bundle.add(secondEvent);
+        bundle.add(firstEvent);
+
+        bundle.orderByStartTime();
+
+        Assert.assertFalse(bundle.isValidBundle());
+    }
+
 
 }

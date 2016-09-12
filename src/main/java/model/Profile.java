@@ -58,13 +58,13 @@ public class Profile {
         categories.addAll(foodTypes);
         return categories;
     }
-
+/*
     public Set<Category> categoriesCompatibility(Profile profile){
         Set<Category>categories = this.allCategories();
         categories.retainAll(profile.allCategories());
         return categories;
     }
-
+*/
     public Set<Category> getFoodTypes(){
         return this.foodTypes;
     }

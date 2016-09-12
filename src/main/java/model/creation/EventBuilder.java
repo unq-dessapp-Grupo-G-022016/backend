@@ -22,8 +22,6 @@ public class EventBuilder {
     Category category;
 
 
-
-
     public EventBuilder withName(String name){
         this.name=name;
         return this;
@@ -71,22 +69,20 @@ public class EventBuilder {
         return this;
     }
 
-    public Event build(){
-        if (hasCategory) {
-            return new Event(name, address, details, price, startTime, endTime, attenders, category);
-        }
-        return new Event(name,address,details,price, startTime, endTime,attenders);
-    }
-
-    public FoodEvent createFoodEvent(){
+    public FoodEvent buildFoodEvent(){
             return new FoodEvent(name,address,details,price, startTime, endTime,attenders,category);}
 
-    public MovieEvent createMovieEvent(){
+    public MovieEvent buildMovieEvent(){
             return new MovieEvent(name,address,details,price, startTime, endTime,attenders,category);
     }
 
-    public MusicEvent createMusicEvent(){
+    public MusicEvent buildMusicEvent(){
             return new MusicEvent(name,address,details,price, startTime, endTime,attenders,category);
+    }
+
+    public GeneralEvent buildGeneralEvent(){
+        return new GeneralEvent(name,address,details,price, startTime, endTime,attenders,category);
+
     }
 
     public EventBuilder withCategory(Category category){

@@ -16,6 +16,7 @@ public class Category {
     }
 
     public boolean isEqual(Category category){
-        return this.getName() == category.getName();
+
+        return this.getName() == category.getName() && !this.getName().contentEquals("undefined");
     }
 }

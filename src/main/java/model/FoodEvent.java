@@ -8,10 +8,6 @@ import java.util.Set;
  */
 public class FoodEvent extends Event {
 
-    /*public FoodEvent(String name, String address, String details, Price getPrice, LocalDateTime date, LocalDateTime duration, Set<User> attenders) {
-        super(name, address, details, getPrice, date, duration, attenders);
-    }*/
-
     public FoodEvent(String name, String address, String details, Price price, LocalDateTime date, LocalDateTime duration, Set<User> attenders, Category category) {
         super(name, address, details, price, date, duration, attenders, category);
     }
@@ -19,6 +15,11 @@ public class FoodEvent extends Event {
     public boolean isFoodEvent(){
     	return true;
     }
+
+    public boolean timeCompatible(Event event){
+        return this.getStartTime().plusHours(2).isBefore(event.getStartTime());
+    }
+
 }
 
 

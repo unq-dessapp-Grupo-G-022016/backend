@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * Created by leog on 30/08/16.
  */
-public class Event {
+public abstract class Event {
 
     String name;
     String address;
@@ -28,18 +28,6 @@ public class Event {
         return endTime;
     }
 
-    public Event(){} //FOR TEST ONLY
-
-    public Event(String name, String address, String details, Price price, LocalDateTime date, LocalDateTime duration, Set<User> attenders) {
-        this.name = name;
-        this.address = address;
-        this.details = details;
-        this.price = price;
-        this.startTime = date;
-        this.endTime = duration;
-        this.attenders = attenders;
-        this.category = new Category("undefined");
-    }
     public Event(String name, String address, String details, Price price, LocalDateTime date, LocalDateTime duration, Set<User> attenders, Category category) {
         this.name = name;
         this.address = address;
@@ -55,9 +43,7 @@ public class Event {
         return price;
     }
 
-    public boolean isFoodEvent(){
-        return false;
-    }
+    public boolean isFoodEvent(){return false;}
 
     public boolean isMovieEvent(){return false;}
 
@@ -91,15 +77,11 @@ public class Event {
     }
 
     public boolean hasTheSameCategory(Set<Category> categorySet){
-        // reminder: undefineds? if this is??
         boolean categoryNameIsInTheSet = false;
         Iterator<Category> it = categorySet.iterator();
         while (it.hasNext() && categoryNameIsInTheSet == false){
             Category categoryFromSet = it.next();
-            String s1 = categoryFromSet.getName();
-            String s2 = this.getCategory().getName();
-            categoryNameIsInTheSet = s1.contentEquals(s2);
-            //res = getCategory.isEqual(((SpecificEvent) event).getCategory());
+            categoryNameIsInTheSet = this.getCategory().isEqual(categoryFromSet);
         }
         return categoryNameIsInTheSet;
     }
