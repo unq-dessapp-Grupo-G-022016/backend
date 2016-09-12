@@ -85,6 +85,12 @@ public class TripManager {
         return events.collect(Collectors.toList());
     }
 
+    public List<Event> eventSearch(List<Event> allEvents, String search){
+        Stream<Event> events= allEvents.stream().filter(event -> event.getName().contains(search) || event.getDetails().contains(search));
+        return events.collect(Collectors.toList());
+    }
+
+
 /*
 
     public List<Bundle> friendlyTrip(){

@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 public class TripManagerTest {
 
     @Test
-    public void cheapTrip(){
+    public void cheapTriTest(){
         TripManager tripManager = new TripManager();
 
         List<Event> eventsList = new ArrayList<>();
@@ -42,7 +42,7 @@ public class TripManagerTest {
     }
 
     @Test
-    public void friendlyTrip(){
+    public void friendlyTripTest(){
         TripManager tripManager = new TripManager();
         List<Event> eventsList = new ArrayList<>();
         Set<Category> userCategories = new HashSet<Category>();
@@ -95,7 +95,7 @@ public class TripManagerTest {
 
 
     @Test
-    public void surpriseTrip(){
+    public void surpriseTripTest(){
         TripManager tripManager = new TripManager();
         Set<Event> allEvents = new HashSet<Event>();
         //user //mock
@@ -103,4 +103,28 @@ public class TripManagerTest {
         //user.getProfile().allCategories()  //mock answer
 
     }
+
+    @Test
+    public void eventSearchTest(){
+        TripManager tripManager = new TripManager();
+        List<Event> eventsList = new ArrayList<>();
+
+        Event mockEvent1 = Mockito.mock(Event.class);
+        Event mockEvent2 = Mockito.mock(Event.class);
+        Event mockEvent3 = Mockito.mock(Event.class);
+
+        when(mockEvent1.getName()).thenReturn("event1");
+        when(mockEvent2.getName()).thenReturn("event2");
+        when(mockEvent3.getName()).thenReturn("event3");
+        when(mockEvent1.getDetails()).thenReturn("event1Details");
+        when(mockEvent2.getDetails()).thenReturn("event2Details");
+        when(mockEvent3.getDetails()).thenReturn("event3Details");
+
+        eventsList.add(mockEvent1);
+        eventsList.add(mockEvent2);
+        eventsList.add(mockEvent3);
+
+        Assert.assertTrue(tripManager.eventSearch(eventsList,"event1Details").contains(mockEvent1));
+    }
+
 }

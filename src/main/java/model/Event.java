@@ -124,6 +124,13 @@ public class Event {
         return attenders;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getDetails() {
+        return details;
+    }
 }
 
 
