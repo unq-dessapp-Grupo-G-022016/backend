@@ -20,4 +20,15 @@ public class PriceTest {
         Assert.assertTrue(price.isCheap(mockUser));
 
     }
+    @Test
+    public void isNotCheapTest(){
+        Price price = new Price(10);
+        Price userCheapPrice = new Price(5);
+
+        User mockUser = Mockito.mock(User.class);
+        when(mockUser.getLowCostTrip()).thenReturn(userCheapPrice);
+
+        Assert.assertFalse(price.isCheap(mockUser));
+
+    }
 }

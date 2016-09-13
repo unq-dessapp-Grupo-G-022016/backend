@@ -76,4 +76,13 @@ public class UserTest {
         Assert.assertEquals("username", user.getUserName());
     }
 
+    @Test
+    public void getProfileTest(){
+        UserBuilder userBuilder = new UserBuilder();
+        Profile mockProfile = Mockito.mock(Profile.class);
+        User user = userBuilder.withProfile(mockProfile).build();
+
+        Assert.assertSame(mockProfile,user.getProfile());
+    }
+
 }

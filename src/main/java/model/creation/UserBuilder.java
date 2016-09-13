@@ -29,6 +29,11 @@ public class UserBuilder {
         return this;
     }
 
+    public UserBuilder withProfile(Profile profile){
+        this.profile = profile;
+        return this;
+    }
+
     public UserBuilder anyUser(){
         this.userName = "anyUsername";
         this.lowCostTrip= new Price(50);

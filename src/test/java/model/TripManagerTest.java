@@ -2,8 +2,10 @@ package model;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -15,6 +17,23 @@ import static org.mockito.Mockito.when;
  * Created by alejandroK on 10/9/2016.
  */
 public class TripManagerTest {
+
+    @Test
+    public void matchForADayTest(){
+        TripManager tripManager = new TripManager();
+        LocalDateTime dayToTrip = LocalDateTime.now();
+        Event mockEvent1 = Mockito.mock(Event.class);
+        Event mockEvent2 = Mockito.mock(Event.class);
+        List<Event> events = new ArrayList<>();
+
+        events.add(mockEvent1);
+        events.add(mockEvent2);
+
+        when(mockEvent1.matchForDay(dayToTrip)).thenReturn(true);
+        when(mockEvent2.matchForDay(dayToTrip)).thenReturn(false);
+
+        Assert.assertEquals(1,tripManager.matchForDay(events,dayToTrip).size());
+    }
 
     @Test
     public void cheapTriTest(){
@@ -29,7 +48,6 @@ public class TripManagerTest {
         Profile mockProfile = Mockito.mock(Profile.class);
 
         when(mockFoodEvent.isFoodEvent()).thenReturn(true);
-        when(mockMovieEvent.isFoodEvent()).thenReturn(false);
         when(mockFoodEvent.isCheap(mockUser)).thenReturn(true);
         when(mockMovieEvent.isCheap(mockUser)).thenReturn(true);
         when(mockMovieEvent.isFree()).thenReturn(true);
@@ -84,12 +102,8 @@ public class TripManagerTest {
         when(mockUser.getFriends()).thenReturn(mockFriends);
         when(mockFriends.allCategories()).thenReturn(friendsCategories);
         when(mockFoodEvent1.isFoodEvent()).thenReturn(true);
-        when(mockMovieEvent1.isFoodEvent()).thenReturn(false);
         when(mockFoodEvent1.hasTheSameCategory(matchedCategories)).thenReturn(true);
-        when(mockFoodEvent2.hasTheSameCategory(matchedCategories)).thenReturn(false);
         when(mockMovieEvent1.hasTheSameCategory(matchedCategories)).thenReturn(true);
-        when(mockMovieEvent2.hasTheSameCategory(matchedCategories)).thenReturn(false);
-        when(mockMovieEvent3.hasTheSameCategory(matchedCategories)).thenReturn(false);
 
         Assert.assertEquals(1,tripManager.friendlyTrip(eventsList,mockUser).size());
     }
@@ -119,7 +133,6 @@ public class TripManagerTest {
         when(mockUser.getFriends()).thenReturn(mockFriends);
         when(mockFriends.allCategories()).thenReturn(new HashSet<Category>());
         when(mockFriends.categoriesOfUsersThatHaveAnyOfThis(new HashSet<Category>())).thenReturn(categorySet);
-        when(mockMovieEvent1.isFoodEvent()).thenReturn(false);
         when(mockFoodEvent1.isFoodEvent()).thenReturn(true);
         when(mockFoodEvent1.hasTheSameCategory(categorySet)).thenReturn(true);
         when(mockMovieEvent1.hasTheSameCategory(categorySet)).thenReturn(true);

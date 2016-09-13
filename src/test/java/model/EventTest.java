@@ -267,6 +267,48 @@ public class EventTest {
         Assert.assertTrue(foodEvent.timeCompatible(generalEvent));
     }
 
+    @Test
+    public void isCheapTest(){
+        EventBuilder eventBuilder = new EventBuilder();
+
+        Price mockPrice = Mockito.mock(Price.class);
+        Event event = eventBuilder.withPrice(mockPrice).buildGeneralEvent();
+        User mockUser = Mockito.mock(User.class);
+
+        when(mockPrice.isCheap(mockUser)).thenReturn(true);
+
+        Assert.assertTrue(event.isCheap(mockUser));
+
+    }
+    @Test
+    public void isNotCheapTest(){
+        EventBuilder eventBuilder = new EventBuilder();
+
+        Price mockPrice = Mockito.mock(Price.class);
+        Event event = eventBuilder.withPrice(mockPrice).buildGeneralEvent();
+        User mockUser = Mockito.mock(User.class);
+
+        when(mockPrice.isCheap(mockUser)).thenReturn(false);
+
+        Assert.assertFalse(event.isCheap(mockUser));
+    }
+    @Test
+    public void matchForDayTest(){
+        EventBuilder eventBuilder = new EventBuilder();
+        LocalDateTime date = LocalDateTime.now();
+        Event event = eventBuilder.withStartTime(date).buildGeneralEvent();
+
+        Assert.assertTrue(event.matchForDay(date));
+    }
+    @Test
+    public void doNotMatchAForDayTest(){
+        EventBuilder eventBuilder = new EventBuilder();
+        LocalDateTime date = LocalDateTime.now();
+        Event event = eventBuilder.withStartTime(date).buildGeneralEvent();
+
+        Assert.assertFalse(event.matchForDay(date.plusDays(2)));
+    }
+
 
 
 
