@@ -9,14 +9,14 @@ import java.util.Set;
 public class User {
 
 
-    String userName;
-    Profile profile;
-    Price lowCostTrip;
+    private String userName;
+    private Profile profile;
+    private Price lowCostTrip;
     //StartPoint;
-    Friends friends;
-    Set<Event> personalEvent;
-    Set<String> vehicles;
-    Set<Event> attendedEvents;
+    private Friends friends;
+    private Set<Event> personalEvent;
+    private Set<String> vehicles;
+    private Set<Event> attendedEvents;
 
     public User(String userName, Profile profile, Price lowCostTrip, Friends friends, Set<Event> personalEvent, Set<String> vehicles, Set<Event> attendedEvents) {
         this.userName = userName;

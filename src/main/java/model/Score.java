@@ -5,9 +5,9 @@ package model;
  */
 public class Score {
 
-    Event event;
-    User user;
-    int points; //from 1 to 5
+    private Event event;
+    private User user;
+    private int points; //from 1 to 5
 
     Score(Event event, User user, int points){
         this.event = event;

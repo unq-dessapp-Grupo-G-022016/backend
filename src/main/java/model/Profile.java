@@ -8,7 +8,7 @@ import java.util.Set;
  */
 public class Profile {
 
-    Set<Category> categories = new HashSet<>();
+    private Set<Category> categories = new HashSet<>();
 
     public Profile() {
     }

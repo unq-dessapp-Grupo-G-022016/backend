@@ -2,7 +2,10 @@ package model;
 
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -11,14 +14,14 @@ import java.util.stream.Stream;
  */
 public abstract class Event {
 
-    String name;
-    String address;
-    String details;
-    Price price;
-    LocalDateTime startTime;
-    LocalDateTime endTime;
-    Set<User>attenders = new HashSet<>();
-    Category category;
+    private String name;
+    private String address;
+    private String details;
+    private Price price;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
+    private Set<User>attenders = new HashSet<>();
+    private Category category;
 
     public LocalDateTime getStartTime() {
         return startTime;

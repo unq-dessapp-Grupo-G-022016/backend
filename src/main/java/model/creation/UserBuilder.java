@@ -10,14 +10,14 @@ import java.util.Set;
  */
 public class UserBuilder {
 
-    String userName;
-    Profile profile = new Profile();
-    Price lowCostTrip;
+    private String userName;
+    private Profile profile = new Profile();
+    private Price lowCostTrip;
     //StartPoint;
-    Friends friends =  new Friends();
-    Set<Event> personalEvents = new HashSet<>();
-    Set<String> vehicles= new HashSet<>();
-    Set<Event> attendedEvents = new HashSet<>();
+    private Friends friends =  new Friends();
+    private Set<Event> personalEvents = new HashSet<>();
+    private Set<String> vehicles= new HashSet<>();
+    private Set<Event> attendedEvents = new HashSet<>();
 
     public UserBuilder withUserName(String userName){
         this.userName=userName;

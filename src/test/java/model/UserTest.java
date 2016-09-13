@@ -3,11 +3,7 @@ package model;
 import model.creation.UserBuilder;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.experimental.theories.suppliers.TestedOn;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-
-import java.util.Set;
 
 /**
  * Created by Leonardo on 11/9/2016.

@@ -5,9 +5,7 @@ package model;
  */
 public class Price {
 
-    int ammount;
-
-
+    private int ammount;
 
     public boolean isFree(){
         return (this.ammount==0);

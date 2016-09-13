@@ -8,8 +8,8 @@ import java.util.List;
  */
 public class Bundle {
 
-    List<Event> bundle = new ArrayList<>();
-    boolean isOrdered = false;
+    private List<Event> bundle = new ArrayList<>();
+    private boolean isOrdered = false;
 
     public void add(Event anEvent){
         bundle.add(anEvent);

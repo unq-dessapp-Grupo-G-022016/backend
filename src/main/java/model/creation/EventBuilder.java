@@ -11,15 +11,15 @@ import java.util.Set;
  */
 public class EventBuilder {
 
-    String name;
-    String address;
-    String details;
-    Price price;
-    LocalDateTime startTime;
-    LocalDateTime endTime;
-    Set<User> attenders = new HashSet<User>();
-    boolean hasCategory = false;
-    Category category;
+    private String name;
+    private String address;
+    private String details;
+    private Price price;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
+    private Set<User> attenders = new HashSet<User>();
+    private boolean hasCategory = false;
+    private Category category;
 
 
     public EventBuilder withName(String name){

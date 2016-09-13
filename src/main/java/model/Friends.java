@@ -9,7 +9,7 @@ import java.util.Set;
  */
 public class Friends {
 
-    Set<User> friends = new HashSet<>();
+    private Set<User> friends = new HashSet<>();
 
     public void add(User friend) {
         this.friends.add(friend);
