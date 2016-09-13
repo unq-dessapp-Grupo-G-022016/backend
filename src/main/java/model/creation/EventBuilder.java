@@ -18,7 +18,6 @@ public class EventBuilder {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private Set<User> attenders = new HashSet<User>();
-    private boolean hasCategory = false;
     private Category category;
 
 
@@ -65,7 +64,6 @@ public class EventBuilder {
         startTime = startTime.now().plusDays(9);
         endTime = startTime.plusHours(3);
         category = new Category("undefined");
-        hasCategory = false;
         return this;
     }
 
@@ -86,7 +84,6 @@ public class EventBuilder {
     }
 
     public EventBuilder withCategory(Category category){
-        this.hasCategory = true;
         this.category = category;
         return this;
     }
