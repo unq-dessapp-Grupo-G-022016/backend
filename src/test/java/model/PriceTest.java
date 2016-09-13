@@ -31,4 +31,16 @@ public class PriceTest {
         Assert.assertFalse(price.isCheap(mockUser));
 
     }
+
+    @Test
+    public void isNotFreeTest(){
+        Price price = new Price(10);
+        Assert.assertFalse(price.isFree());
+    }
+
+    @Test
+    public void isFreeTest(){
+        Price price = new Price(0);
+        Assert.assertTrue(price.isFree());
+    }
 }

@@ -13,4 +13,11 @@ public class CategoryTest {
         Category vegan = new Category("vegan");
         Assert.assertTrue(vegan.isEqual(vegan));
     }
+    @Test
+    public void isNotEqualTest(){
+        Category vegan = new Category("vegan");
+        Category mexican = new Category("mexican");
+
+        Assert.assertFalse(vegan.isEqual(mexican));
+    }
 }
