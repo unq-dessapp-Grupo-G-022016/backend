@@ -11,7 +11,7 @@ import static org.mockito.Mockito.when;
  */
 public class PriceTest {
     @Test
-    public void isCheap(){
+    public void isCheapTest(){
         Price price = new Price(10);
 
         User mockUser = Mockito.mock(User.class);

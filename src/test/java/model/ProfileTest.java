@@ -10,10 +10,23 @@ import org.mockito.Mockito;
 public class ProfileTest {
 
     @Test
-    public void allCategories(){
+    public void allCategoriesTest(){
         Profile profile = new Profile();
         Category mockCategory = Mockito.mock(Category.class);
-        profile.addFoodCategory(mockCategory);
+
+        profile.addCategory(mockCategory);
+
         Assert.assertEquals(1,profile.allCategories().size());
+    }
+
+    @Test
+    public void removeCategoryTest(){
+        Profile profile = new Profile();
+        Category mockCategory = Mockito.mock(Category.class);
+
+        profile.addCategory(mockCategory);
+        profile.removeCategory(mockCategory);
+
+        Assert.assertTrue(profile.allCategories().isEmpty());
     }
 }

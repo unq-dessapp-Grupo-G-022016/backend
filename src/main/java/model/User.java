@@ -28,8 +28,6 @@ public class User {
         this.attendedEvents = attendedEvents;
     }
 
-    public User(){}
-
     public void createPersonalEvent(Event event){
         this.personalEvent.add(event);
     }
@@ -41,13 +39,8 @@ public class User {
     }
 
 
-
     public void attend(Event event){
         this.attendedEvents.add(event);
-    }
-
-    public void addFriend(User friend){
-        friends.add(friend);
     }
 
     public void removeFriend(User friend){
@@ -62,17 +55,17 @@ public class User {
         return this.profile;
     }
 
-    public Set<String> getVehicles() {
-        return vehicles;
-    }
-
     public Price getLowCostTrip() {
         return lowCostTrip;
     }
 
     public String getUserName() {return userName; }
 
+    public Set<Event> getAttendedEvents() { return attendedEvents;}
+
     public Set<Event> getPersonalEvent() {return this.personalEvent;}
 
-    public Set<Event> getAttendedEvents() { return attendedEvents;}
+    public void addFriend(User friend){
+        friends.add(friend);
+    }
 }

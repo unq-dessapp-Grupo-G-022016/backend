@@ -8,64 +8,17 @@ import java.util.Set;
  */
 public class Profile {
 
-
-
-
-    Set<Category>musicalGenres = new HashSet<Category>();
-    Set<Category>movieTypes = new HashSet<Category>();
-    Set<Category>foodTypes = new HashSet<Category>();
-
+    Set<Category> categories = new HashSet<>();
 
     public Profile() {
     }
 
-    public void addMusicCategory(Category category){
-        this.musicalGenres.add(category);
-    }
+    public void addCategory(Category category){this.categories.add(category);}
 
-    public void removeMusicCategory(Category category){
-        this.musicalGenres.remove(category);
-    }
+    public void removeCategory(Category category){this.categories.remove(category);}
 
-    public void addMovieCategory(Category category){
-        this.movieTypes.add(category);
-    }
-
-    public void removeMovieCategory(Category category){
-        this.movieTypes.remove(category);
-    }
-
-    public void addFoodCategory(Category category){
-        this.foodTypes.add(category);
-    }
-
-    public void removeFoodCategory(Category category){
-        this.foodTypes.remove(category);
-    }
-/*
-    public boolean eventCompatibility(Event event){
-        //only for specific events, aka food, movie, music
-        if(event.hasCategory() && event instanceof SpecificEvent){
-            return allCategories().contains(event.category);
-        }
-        return false;// ¿¿
-    }
-*/
     public Set<Category> allCategories(){
-        Set<Category>categories = new HashSet<Category>();
-        categories.addAll(movieTypes);
-        categories.addAll(musicalGenres);
-        categories.addAll(foodTypes);
         return categories;
     }
-/*
-    public Set<Category> categoriesCompatibility(Profile profile){
-        Set<Category>categories = this.allCategories();
-        categories.retainAll(profile.allCategories());
-        return categories;
-    }
-*/
-    public Set<Category> getFoodTypes(){
-        return this.foodTypes;
-    }
+
 }

@@ -9,7 +9,7 @@ import org.junit.Test;
 public class CategoryTest {
 
     @Test
-    public void isEqual(){
+    public void isEqualTest(){
         Category vegan = new Category("vegan");
         Assert.assertTrue(vegan.isEqual(vegan));
     }

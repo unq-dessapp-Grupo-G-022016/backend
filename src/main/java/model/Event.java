@@ -2,9 +2,7 @@ package model;
 
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -47,6 +45,10 @@ public abstract class Event {
 
     public boolean isFoodEvent(){return false;}
 
+    public boolean isMusicEvent(){return false;}
+
+    public boolean isMovieEvent(){return false;}
+
     public boolean timeCompatible(Event event){
         return this.getEndTime().isBefore(event.getStartTime());
     }
@@ -80,6 +82,16 @@ public abstract class Event {
 
     }
 
+    /**
+     * Return suggestions based on event attenders.
+     */
+    public List<Event> eventSuggestions(Event event){
+        List<Event> suggetions = new ArrayList<>();
+        event.getAttenders().forEach(user -> suggetions.addAll(user.getAttendedEvents()));
+        return suggetions;
+    }
+
+
     public boolean isFree() {
         return (this.price.isFree());
     }
@@ -92,10 +104,6 @@ public abstract class Event {
         this.attenders.add(user);
     }
 
-    public void attend(Set<User> users){
-        this.attenders.addAll(users);
-    }
-
     public Set<User> getAttenders() {
         return attenders;
     }
@@ -104,8 +112,7 @@ public abstract class Event {
         return name;
     }
 
-    public String getDetails() {
-        return details;
+    public String getDetails() {return details;
     }
 }
 

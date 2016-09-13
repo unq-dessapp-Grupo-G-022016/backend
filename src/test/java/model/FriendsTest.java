@@ -15,8 +15,7 @@ import static org.mockito.Mockito.when;
 public class FriendsTest {
 
     @Test
-    public void allCategories(){
-
+    public void allCategoriesTest(){
         Friends friends = new Friends();
         User mockUser = Mockito.mock(User.class);
         friends.add(mockUser);
@@ -31,8 +30,7 @@ public class FriendsTest {
     }
 
     @Test
-    public void categoriesOfUsersThatHaveAnyOfThis(){
-
+    public void categoriesOfUsersThatHaveAnyOfThisTest(){
         Friends friends = new Friends();
         Set<Category> categorySet = new HashSet<Category>();
         Set<Category> categorySet1 = new HashSet<Category>();
@@ -59,13 +57,12 @@ public class FriendsTest {
     }
 
     @Test
-    public void remove(){
+    public void removeTest(){
         Friends friends = new Friends();
         User mockUser1 = Mockito.mock(User.class);
         friends.add(mockUser1);
         friends.remove(mockUser1);
 
         Assert.assertEquals(0,friends.getFriends().size());
-
     }
 }

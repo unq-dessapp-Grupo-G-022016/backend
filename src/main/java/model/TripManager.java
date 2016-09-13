@@ -93,13 +93,6 @@ public class TripManager {
     }
 
 
-    public List<Event> sugestions(Event event){
-
-        List<Event> sugetions = new ArrayList<>();
-        event.getAttenders().forEach(user -> sugetions.addAll(user.getAttendedEvents()));
-        return sugetions;
-    }
-
 
 /*
 

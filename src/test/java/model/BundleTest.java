@@ -35,7 +35,7 @@ public class BundleTest {
         Assert.assertEquals(firstEvent,bundle.getBundle().get(0));
     }
     @Test
-    public void isValidBundle(){
+    public void isValidBundleTest(){
         Bundle bundle = new Bundle();
         LocalDateTime anyTime = LocalDateTime.now();
 
@@ -53,7 +53,7 @@ public class BundleTest {
         Assert.assertTrue(bundle.isValidBundle());
     }
     @Test
-    public void isNotAValidBundle(){
+    public void isNotAValidBundleTest(){
         Bundle bundle = new Bundle();
         LocalDateTime anyTime = LocalDateTime.now();
 
