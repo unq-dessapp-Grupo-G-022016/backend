@@ -1,5 +1,7 @@
 package model;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -11,6 +13,7 @@ import java.util.stream.Stream;
  * Created by leog on 30/08/16.
  */
 public class TripManager {
+
 
     public List<Bundle> cheapTrip(List<Event>allEvents, User user){
         List<Event> cheapFoodEvents = cheapFood(allEvents,user);
@@ -49,14 +52,16 @@ public class TripManager {
     }
 
     private List<Event> eventsAndCategoriesMatcher(List<Event> events, Set<Category> categories) {
-        Iterator<Event> it = events.iterator();
+        List<Event> eventsCopy = new ArrayList<Event>();
+        eventsCopy.addAll(events);
+        Iterator<Event> it = eventsCopy.iterator();
         while (it.hasNext()){
             Event e = it.next();
             if (!e.hasTheSameCategory(categories)) {
                 it.remove();
             }
         }
-        return events;
+        return eventsCopy;
     }
 
     private List<Event> cheapFood(List<Event> allEvents, User user){
@@ -90,23 +95,20 @@ public class TripManager {
         return events.collect(Collectors.toList());
     }
 
+    public List<Event> matchForDay(List<Event> allEvents, LocalDateTime date){
+        Stream<Event> events= allEvents.stream().filter(event -> event.matchForDay(date));
+        return events.collect(Collectors.toList());
+    }
+
 
 
 /*
-
-    public List<Bundle> friendlyTrip(){
-
-    }
 
     public List<Bundle> feverTrip(){
 
     }
 
     public List<Bundle> coupleTrip(){
-
-    }
-
-    public List<Bundle> surpriceTrip(){
 
     }
 

@@ -1,0 +1,41 @@
+A donde vamos -RELEASE NOTES-
+
+====== TAG 1 =======================
+NEW FEATURES 
+
+Primer Entrega
+
+<<<Core>>>
+
+ -Creacion de repositorios.
+ -Configuracion en Travis
+ -Estado de build en verde
+ -Proyecto en https://www.codacy.com
+ -Coverage > 90% 
+ -Diagrama UML (en /doc)
+ -2 Mockup de las ventanas de la aplicacion Home - Busqueda de Eventos (https://moqups.com/ )
+ -Pantalla prototipo del uso de la API de gmaps
+ -Deploy automotico utlizando HEROKU
+ -TAG en GitHub
+
+
+<<<Modelo>>>
+
+ -Modelo de objetos completo e implementado
+ -Clean Code segun la materia (todo en Ingles)
+
+
+<<<Testing>>>
+
+ -Testing segun las pautas de la materia
+
+
+NOTES (ej: funcionalidad que falta, alguna consideracion especial):
+- xxx
+- xxx
+
+KNOWN ISSUES (ej: funcionalidad que saben que estan funcionando diferente, algun error conocido en la funcionalidad terminada, etc) :
+- xxx
+- xxx
+
+====================================

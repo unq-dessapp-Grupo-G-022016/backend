@@ -85,9 +85,6 @@ public class TripManagerTest {
         when(mockFriends.allCategories()).thenReturn(friendsCategories);
         when(mockFoodEvent1.isFoodEvent()).thenReturn(true);
         when(mockMovieEvent1.isFoodEvent()).thenReturn(false);
-        when(mockFoodEvent2.isFoodEvent()).thenReturn(true);
-        when(mockMovieEvent2.isFoodEvent()).thenReturn(false);
-        when(mockMovieEvent3.isFoodEvent()).thenReturn(false);
         when(mockFoodEvent1.hasTheSameCategory(matchedCategories)).thenReturn(true);
         when(mockFoodEvent2.hasTheSameCategory(matchedCategories)).thenReturn(false);
         when(mockMovieEvent1.hasTheSameCategory(matchedCategories)).thenReturn(true);

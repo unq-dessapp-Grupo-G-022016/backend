@@ -117,6 +117,10 @@ public abstract class Event {
 
     public String getDetails() {return details;
     }
+
+    public boolean matchForDay(LocalDateTime date) {
+        return this.startTime.getDayOfYear()==date.getDayOfYear();
+    }
 }
 
 
