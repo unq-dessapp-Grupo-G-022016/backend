@@ -2,7 +2,6 @@ package model;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.time.LocalDateTime;

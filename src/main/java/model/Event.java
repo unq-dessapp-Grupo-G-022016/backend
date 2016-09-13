@@ -57,7 +57,7 @@ public abstract class Event {
     }
 
     public boolean hasCategory(){
-        return (!(this.category.getName()=="undefined"));
+        return !(this.category.getName().equals("undefined"));
     }
 
     public void setEndTime(LocalDateTime endTime) {
