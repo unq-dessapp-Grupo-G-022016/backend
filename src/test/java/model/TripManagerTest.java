@@ -162,4 +162,14 @@ public class TripManagerTest {
         Assert.assertTrue(tripManager.eventSearch(eventsList,"event1Details").contains(mockEvent1));
     }
 
+    @Test
+    public void feverTripTest(){
+        TripManager tripManager = new TripManager();
+        List<Event> allEvents = new ArrayList<>();
+        User mockUser = Mockito.mock(User.class);
+
+        Assert.assertEquals(0,tripManager.feverTrip(allEvents,mockUser).size());
+    }
+
+
 }

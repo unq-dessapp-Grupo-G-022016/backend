@@ -27,7 +27,7 @@ public class JoolUse {
         List<Bundle> bList;
         bList = new ArrayList<>();
 
-        res.forEach(a -> toListOfBundles(a,bList));
+        res.forEach(a -> tupleOfEventsToListOfBundles(a,bList));
 
         return bList;
     }
@@ -39,7 +39,7 @@ public class JoolUse {
         return  seq1.retainAll(seq2).toSet();
     }
 
-    private void toListOfBundles(Tuple2<Event, Event> t, List<Bundle> bList) {
+    private void tupleOfEventsToListOfBundles(Tuple2<Event, Event> t, List<Bundle> bList) {
 
         Event a = t.v1;
         Event b = t.v2;
@@ -48,6 +48,30 @@ public class JoolUse {
         bundle.add(b);
         bList.add(bundle);
     }
+
+    private void tupleOfBundleEventToListOfBundles(Tuple2<Bundle, Event> t, List<Bundle> bList) {
+
+        Bundle a = t.v1;
+        Event b = t.v2;
+        a.add(b);
+        bList.add(a);
+    }
+
+    public List<Bundle> bundleListAndEventListCrossJoin(List<Bundle> bundleListA, List<Event> listB){
+
+        Seq<Bundle> seq1 = seq(bundleListA.stream());
+        Seq<Event> seq2 = seq(listB.stream());
+
+        List<Tuple2<Bundle, Event>> res = seq1.crossJoin(seq2).toList();
+
+        List<Bundle> bList;
+        bList = new ArrayList<>();
+
+        res.forEach(a -> tupleOfBundleEventToListOfBundles(a,bList));
+
+        return bList;
+    }
+
 
 
 }
