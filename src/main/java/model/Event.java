@@ -9,20 +9,24 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.Type;
 
 /**
  * Created by leog on 30/08/16.
  */
 @Entity
-public abstract class Event {
+//public abstract class Event {
+public class Event {
 
 	public int getId() {
 		return id;
@@ -66,17 +70,22 @@ public abstract class Event {
     private String address;
 	@Column
     private String details;
-	@ManyToOne
+	@JsonIgnore
+	@ManyToOne (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Price price;
+	@JsonIgnore
     @Type(type="type.LocalDateTimeUserType")
     @Column
     private LocalDateTime startTime;
+    @JsonIgnore
     @Type(type="type.LocalDateTimeUserType")
     @Column
     private LocalDateTime endTime;
-    @ManyToMany
+    @JsonIgnore
+    @ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<User>attenders = new HashSet<>();
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Category category;
 
     public LocalDateTime getStartTime() {

@@ -24,6 +24,7 @@ public class GeneralService {
 	public void setEventService(final EventService eventService) {
 		this.eventService = eventService;
 	}
+	
 	public FriendsService getFriendsService() {
 		return friendsService;
 	}

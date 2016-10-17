@@ -1,5 +1,7 @@
 package webService;
 
+import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -16,7 +18,10 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.lang.StringUtils;
 
+import model.Category;
 import model.Event;
+import model.Price;
+import model.User;
 import service.EventService;
 
 /**
@@ -37,6 +42,31 @@ public class EventRest {
     //private PostRepository postRepository;
     private EventService eventService;
     
+    @GET
+    @Path("/events")
+    @Produces("application/json")
+    public List<Event> getAllPlayers() {
+        List<Event> events = eventService.retriveAll();
+        return events;
+    }
+    
+ 	@GET
+     @Path("/addEvent")
+     @Produces("application/json")
+     public String addEvent(){
+    	Event e = new Event();
+    	e.setName("goingToHell");
+    	e.setAddress("666");
+    	e.setDetails("Devils house");
+    	e.setPrice(new Price(20));
+    	e.setStartTime(LocalDateTime.now());
+    	e.setEndTime(LocalDateTime.now());
+    	Set<User> uset = new HashSet<User>();
+    	e.setAttenders(uset);
+    	e.setCategory(new Category("warm places"));
+    	eventService.save(e);
+     	return "OK";
+     }
     /*
     @GET
     @Path("/event")

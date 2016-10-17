@@ -41,7 +41,6 @@ public class UserRest {
     
     private UserService userService;
     
-    
     @GET
     @Path("/users")
     @Produces("application/json")
@@ -50,17 +49,7 @@ public class UserRest {
         return users;
     }
     
-    /*
-    @GET
-    @Path("/events")
-    @Produces("application/json")
-    public List<Event> getAllPlayers() {
-        List<Event> events = EventService.retriveAll();
-        return event;
-    }
-     */
-    
-    
+   
     @GET
     @Path("/addUser")
     @Produces("application/json")
@@ -70,7 +59,7 @@ public class UserRest {
     	userService.save(user);
     	return "OK";
     }
-    
+ 
     /*
     @POST
     @Produces("application/json")
