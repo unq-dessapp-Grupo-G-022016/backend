@@ -100,6 +100,34 @@ public class TripManager {
         return events.collect(Collectors.toList());
     }
 
+    public List<Bundle> feverTrip(List<Event>allEvents, User user){
+        List<Bundle> feverBundles = new ArrayList<>();
+        JoolUse jooluse = new JoolUse();
+
+        feverBundles = jooluse.eventListCrossJoin(dinnerEvents(allEvents),movieEvents(allEvents));
+        feverBundles = jooluse.bundleListAndEventListCrossJoin(feverBundles,barEvents(allEvents));
+        feverBundles = jooluse.bundleListAndEventListCrossJoin(feverBundles,discoEvents(allEvents));
+        feverBundles = jooluse.bundleListAndEventListCrossJoin(feverBundles,breackfastEvents(allEvents));
+
+        return feverBundles;
+
+    }
+
+    private List<Event> dinnerEvents(List<Event> events){
+        return events;
+    }
+    private List<Event> movieEvents(List<Event> events){
+        return events;
+    }
+    private List<Event> discoEvents(List<Event> events){
+        return events;
+    }
+    private List<Event> barEvents(List<Event> events){
+        return events;
+    }
+    private List<Event> breackfastEvents(List<Event> events){
+        return events;
+    }
 
 
 /*
