@@ -4,13 +4,45 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 /**
  * Created by alejandroK on 10/9/2016.
  */
+@Entity
 public class Friends {
 
+	@Id()
+    @GeneratedValue()
+	private int id;
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setFriends(Set<User> friends) {
+		this.friends = friends;
+	}
+
+	@JsonIgnore
+	@OneToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<User> friends = new HashSet<>();
 
+	public Friends(){
+		
+	}
+	
     public void add(User friend) {
         this.friends.add(friend);
     }

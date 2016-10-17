@@ -3,33 +3,88 @@ package model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
+
+
 /**
  * Created by leog on 30/08/16.
  */
+
+@Entity  
+@Table(name = "Users")  
 public class User {
 
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
-    private String userName;
+	public void setProfile(Profile profile) {
+		this.profile = profile;
+	}
+
+	public void setLowCostTrip(Price lowCostTrip) {
+		this.lowCostTrip = lowCostTrip;
+	}
+
+	public void setFriends(Friends friends) {
+		this.friends = friends;
+	}
+
+	public void setPersonalEvent(Set<Event> personalEvent) {
+		this.personalEvent = personalEvent;
+	}
+
+	public void setAttendedEvents(Set<Event> attendedEvents) {
+		this.attendedEvents = attendedEvents;
+	}
+
+	@Id
+    public String userName;
+	@JsonIgnore
+	@OneToOne (cascade = CascadeType.ALL)
     private Profile profile;
-    private Price lowCostTrip;
+	@JsonIgnore
+    @OneToOne (cascade = CascadeType.ALL)
+	private Price lowCostTrip;
     //StartPoint;
+	@JsonIgnore
+    @OneToOne (cascade = CascadeType.ALL)
     private Friends friends;
+	@JsonIgnore
+    @ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Event> personalEvent;
-    private Set<String> vehicles;
+    //private Set<String> vehicles;
+	@JsonIgnore
+	@ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Event> attendedEvents;
 
+    public User(){
+    	
+    }
+    
     public User(String userName, Profile profile, Price lowCostTrip, Friends friends, Set<Event> personalEvent, Set<String> vehicles, Set<Event> attendedEvents) {
         this.userName = userName;
         this.profile = profile;
         this.lowCostTrip = lowCostTrip;
         this.friends = friends;
         this.personalEvent = personalEvent;
-        this.vehicles = vehicles;
+        //this.vehicles = vehicles;
         this.attendedEvents = attendedEvents;
     }
 
     public void createPersonalEvent(Event event){
-        this.personalEvent.add(event);
+       personalEvent.add(event);
     }
 
     public Set<Event> friendsEvent(){
@@ -68,4 +123,5 @@ public class User {
     public void addFriend(User friend){
         friends.add(friend);
     }
+
 }

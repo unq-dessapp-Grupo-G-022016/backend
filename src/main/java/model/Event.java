@@ -9,18 +9,74 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.Type;
+
 /**
  * Created by leog on 30/08/16.
  */
+@Entity
 public abstract class Event {
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setDetails(String details) {
+		this.details = details;
+	}
+
+	public void setPrice(Price price) {
+		this.price = price;
+	}
+
+	public void setAttenders(Set<User> attenders) {
+		this.attenders = attenders;
+	}
+
+	@Id()
+    @GeneratedValue()
+	private int id;
+	
+	@Column
     private String name;
+	@Column
     private String address;
+	@Column
     private String details;
+	@ManyToOne
     private Price price;
+    @Type(type="type.LocalDateTimeUserType")
+    @Column
     private LocalDateTime startTime;
+    @Type(type="type.LocalDateTimeUserType")
+    @Column
     private LocalDateTime endTime;
+    @ManyToMany
     private Set<User>attenders = new HashSet<>();
+    @ManyToOne
     private Category category;
 
     public LocalDateTime getStartTime() {
@@ -29,6 +85,10 @@ public abstract class Event {
 
     public LocalDateTime getEndTime() {
         return endTime;
+    }
+    
+    public Event(){
+    	
     }
 
     public Event(String name, String address, String details, Price price, LocalDateTime date, LocalDateTime duration, Set<User> attenders, Category category) {

@@ -12,7 +12,7 @@ public class UserBuilder {
 
     private String userName;
     private Profile profile = new Profile();
-    private Price lowCostTrip;
+    private Price lowCostTrip = new Price(100);
     //StartPoint;
     private Friends friends =  new Friends();
     private Set<Event> personalEvents = new HashSet<>();

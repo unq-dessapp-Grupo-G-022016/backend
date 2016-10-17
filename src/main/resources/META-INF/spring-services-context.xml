@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+	<!-- beans de spring -->
+
+	<bean id="service.general" class="service.GeneralService">
+		<property name="categoryService" ref="service.category" />
+		<property name="eventService" ref="service.event" />
+		<property name="friendsService" ref="service.friends" />
+		<property name="priceService" ref="service.price" />
+		<property name="profileService" ref="service.profile" />
+		<property name="userService" ref="service.user" />
+	</bean>
+
+	<bean id="service.category" class="service.CategoryService">
+		<property name="repository" ref="persistence.categoryrepository" />
+	</bean>
+	<bean id="service.event" class="service.EventService">
+		<property name="repository" ref="persistence.eventrepository" />
+	</bean>
+	<bean id="service.friends" class="service.FriendsService">
+		<property name="repository" ref="persistence.friendsrepository" />
+	</bean>
+	<bean id="service.price" class="service.PriceService">
+		<property name="repository" ref="persistence.pricerepository" />
+	</bean>
+	<bean id="service.profile" class="service.ProfileService">
+		<property name="repository" ref="persistence.profilerepository" />
+	</bean>
+	<bean id="service.user" class="service.UserService">
+		<property name="repository" ref="persistence.userrepository" />
+	</bean>
+		
+	<!-- 
+	<bean id="services.general" class="ar.edu.unq.services.GeneralService">
+		<property name="carService" ref="services.car" />
+		<property name="personService" ref="services.person" />
+	</bean>
+
+	<bean id="services.person" class="ar.edu.unq.services.PersonService">
+		<property name="repository" ref="persistence.personrepository" />
+	</bean>
+
+	<bean id="services.car" class="ar.edu.unq.services.CarService">
+		<property name="repository" ref="persistence.carrepository" />
+	</bean>
+	 -->
+
+</beans>

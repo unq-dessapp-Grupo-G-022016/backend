@@ -11,6 +11,10 @@ public class Bundle {
     private List<Event> bundle = new ArrayList<>();
     private boolean isOrdered = false;
 
+    public Bundle(){
+    	
+    }
+    
     public void add(Event anEvent){
         bundle.add(anEvent);
     }
