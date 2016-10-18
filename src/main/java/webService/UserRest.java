@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -84,7 +85,7 @@ public class UserRest {
     	return retValue;
     }
     
-    @GET
+    @DELETE
     @Path("/delete/{userName}")
     @Produces("application/json")
     @Consumes(MediaType.APPLICATION_JSON)
