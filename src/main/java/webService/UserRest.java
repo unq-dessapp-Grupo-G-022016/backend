@@ -69,7 +69,7 @@ public class UserRest {
     	return u;
     }  
     
-    @POST
+    @PUT
     @Path("/update")
     @Produces("application/json")
     @Consumes(MediaType.APPLICATION_JSON)
