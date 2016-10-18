@@ -19,6 +19,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.Type;
 
 /**
@@ -73,14 +75,19 @@ public class Event {
 	@JsonIgnore
 	@ManyToOne (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Price price;
-	@JsonIgnore
+	
     @Type(type="type.LocalDateTimeUserType")
     @Column
+    @JsonSerialize(using = type.LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = type.LocalDateTimeDeserializer.class)
     private LocalDateTime startTime;
-    @JsonIgnore
+    
     @Type(type="type.LocalDateTimeUserType")
     @Column
+    @JsonSerialize(using = type.LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = type.LocalDateTimeDeserializer.class)
     private LocalDateTime endTime;
+    
     @JsonIgnore
     @ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<User>attenders = new HashSet<>();
@@ -88,10 +95,14 @@ public class Event {
     @ManyToOne (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Category category;
 
+
+    @JsonSerialize(using = type.LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = type.LocalDateTimeDeserializer.class)
     public LocalDateTime getStartTime() {
         return startTime;
     }
-
+    @JsonSerialize(using = type.LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = type.LocalDateTimeDeserializer.class)
     public LocalDateTime getEndTime() {
         return endTime;
     }
@@ -128,11 +139,13 @@ public class Event {
     public boolean hasCategory(){
         return !(this.category.getName().equals("undefined"));
     }
-
+    @JsonSerialize(using = type.LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = type.LocalDateTimeDeserializer.class)
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
-
+    @JsonSerialize(using = type.LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = type.LocalDateTimeDeserializer.class)
     public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }

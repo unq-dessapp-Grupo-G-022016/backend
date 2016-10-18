@@ -1,5 +1,8 @@
+###########
 # http://localhost:8080/rest/user/create
+##########
 {
+	"userName": "momo24",
 	"attendedEvents":
 	[
 	],
@@ -12,7 +15,6 @@
 	    [
 	    ]
 	},
-	"userName": "anyUsername",
 	"friends":
 	{
 	    "friends":
@@ -24,34 +26,26 @@
 	    "ammount": 50
 	}
 }
- 
- 
- {
-    "attendedEvents":
+######
+# http://localhost:8080/rest/event/create/
+#####
+{
+    "startTime":
+    "2011-12-03T10:15:30",
+    "category":
+    {
+        "name": "warm places"
+    },
+    "endTime":"2011-12-03T10:15:30",
+    "price":
+    {
+        "ammount": 20
+    },
+            "attenders":
     [
     ],
-    "personalEvent":
-    [
-    ],
-    "profile":
-    {
-        "id": 1,
-        "categories":
-        [
-        ]
-    },
-    "userName": "anyUsername",
-    "friends":
-    {
-        "id": 1,
-        "friends":
-        [
-        ]
-    },
-    "lowCostTrip":
-    {
-        "id": 1,
-        "free": false,
-        "ammount": 50
-    }
+    "details": "Devils house",
+    "address": "666",
+    "name": "goingToHell"
 }
+########
