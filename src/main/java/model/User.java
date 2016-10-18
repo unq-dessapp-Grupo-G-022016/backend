@@ -82,6 +82,16 @@ public class User {
         //this.vehicles = vehicles;
         this.attendedEvents = attendedEvents;
     }
+    
+    public void CloneUser(User userToClone){
+	   this.userName = userToClone.userName;
+       this.profile = userToClone.profile;
+       this.lowCostTrip = userToClone.lowCostTrip;
+       this.friends = userToClone.friends;
+       this.personalEvent = userToClone.personalEvent;
+       //this.vehicles = vehicles;
+       this.attendedEvents = userToClone.attendedEvents;
+    }
 
     public void createPersonalEvent(Event event){
        personalEvent.add(event);

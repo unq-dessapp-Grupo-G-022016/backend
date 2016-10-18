@@ -1,5 +1,6 @@
 package webService;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -40,6 +41,64 @@ public class UserRest {
     //private PostRepository postRepository;
     
     private UserService userService;
+    
+    /*
+     *  C.R.U.D.
+     */
+    @POST
+    @Path("/create")
+    @Produces("application/json")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String Create(User newUser){
+    	userService.save(newUser);
+    	return "OK";
+    }
+    
+    @GET
+    @Path("/read/{userName}")
+    @Produces("application/json")
+    public User Read(@PathParam ("userName") String userName){
+    	List<User> users = userService.retriveAll();
+    	User u = null;
+    	for(User each : users){
+    		if (each.getUserName().equals(userName)){
+    			u = each;
+    		}
+    	}
+    	return u;
+    }  
+    
+    @POST
+    @Path("/update")
+    @Produces("application/json")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String Update(User updatedUser){
+    	String retValue = "NotFound";
+    	List<User> users = userService.retriveAll();
+    	for(User each : users){
+    		if (each.getUserName().equals(updatedUser.getUserName())){
+    			userService.update(updatedUser);
+    			retValue = "OK";
+    		}
+    	}
+    	return retValue;
+    }
+    
+    @GET
+    @Path("/delete/{userName}")
+    @Produces("application/json")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String Delete(@PathParam ("userName") String userName){
+    	List<User> users = userService.retriveAll();
+    	users.forEach(each->{
+    		if(userName.equals(each.getUserName())){
+    			userService.delete(each);
+    		}
+    	});
+    	return "OK";
+    }
+    
+    /////////////////////////
     
     @GET
     @Path("/users")
