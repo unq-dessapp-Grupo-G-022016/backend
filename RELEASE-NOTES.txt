@@ -38,4 +38,31 @@ KNOWN ISSUES (ej: funcionalidad que saben que estan funcionando diferente, algun
 - xxx
 - xxx
 
-====================================
+====== TAG 2 =======================
+NEW FEATURES
+
+
+Segunda Entrega
+
+<<<Core>>>
+
+ -Estado de build en "Verde"
+ -Utiliza HSQLDB
+ -Datos "fake" para probar la aplicación
+ -I18n- US_ES
+ -Implementación de Layout de backend según la arquitectura definida
+ -Implementación del tier de Presentación como aplicación independiente (que levante)
+ -TAG en GitHub
+ -Confeccionar Release Notes de entrega 2 (https://drive.google.com/file/d/0BxyNm_rQ4Q8vZU52eF9QeXR4X3M/view)
+
+
+<<<Funcionalidad>>>
+
+ -Home
+ -Page de Perfiles
+ -Publicación de WebServices REST para Perfiles [CRUD y LIST]
+ -Publicación de WebServices REST para Eventos [Create y LIST]
+
+=====================================
+
+
