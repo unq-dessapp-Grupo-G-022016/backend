@@ -102,6 +102,28 @@ public class UserRest {
     /////////////////////////
     
     @GET
+    @Path("/addFriend/{userName}/{friendName}")
+    @Produces("application/json")
+    public String AddFriend(@PathParam ("userName") String userName,@PathParam ("friendName") String friendName){
+    	List<User> users = userService.retriveAll();
+    	User u = null;
+    	User f = null;
+    	for(User each : users){
+    		if (each.getUserName().equals(userName)){
+    			u = each;
+    		}
+    	}
+    	for(User each : users){
+    		if (each.getUserName().equals(friendName)){
+    			f = each;
+    		}
+    	}
+    	u.addFriend(f);
+    	userService.update(u);
+    	return u.getUserName()+f.getUserName();
+    } 
+    
+    @GET
     @Path("/users")
     @Produces("application/json")
     public List<User> getAllUsers() {

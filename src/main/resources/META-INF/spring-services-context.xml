@@ -8,14 +8,14 @@
 
 	<!-- beans de spring -->
 
-	<bean id="service.general" class="service.GeneralService">
-		<property name="categoryService" ref="service.category" />
-		<property name="eventService" ref="service.event" />
-		<property name="friendsService" ref="service.friends" />
-		<property name="priceService" ref="service.price" />
-		<property name="profileService" ref="service.profile" />
-		<property name="userService" ref="service.user" />
-	</bean>
+<!-- 	<bean id="service.general" class="service.GeneralService"> -->
+<!-- 		<property name="categoryService" ref="service.category" /> -->
+<!-- 		<property name="eventService" ref="service.event" /> -->
+<!-- 		<property name="friendsService" ref="service.friends" /> -->
+<!-- 		<property name="priceService" ref="service.price" /> -->
+<!-- 		<property name="profileService" ref="service.profile" /> -->
+<!-- 		<property name="userService" ref="service.user" /> -->
+<!-- 	</bean> -->
 
 	<bean id="service.category" class="service.CategoryService">
 		<property name="repository" ref="persistence.categoryrepository" />

@@ -11,12 +11,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonManagedReference;
 
 /**
  * Created by alejandroK on 10/9/2016.
  */
 @Entity
+//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Friends {
 
 	@Id()
@@ -63,6 +66,7 @@ public class Friends {
         return friendsProfiles;
     }
 
+    @JsonIgnore
     public Set<User> getFriends() { return friends; }
 
     private Set<Profile> friendsProfilesWithInterests(Set<Category> categories){

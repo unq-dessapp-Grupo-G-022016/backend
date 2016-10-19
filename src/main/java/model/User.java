@@ -14,7 +14,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonManagedReference;
 
 
 /**
@@ -58,7 +60,7 @@ public class User {
     @OneToOne (cascade = CascadeType.ALL)
 	private Price lowCostTrip;
     //StartPoint;
-	@JsonIgnore
+	
     @OneToOne (cascade = CascadeType.ALL)
     private Friends friends;
 	@JsonIgnore
