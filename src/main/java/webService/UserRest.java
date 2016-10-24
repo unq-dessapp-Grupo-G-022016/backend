@@ -101,6 +101,7 @@ public class UserRest {
         return Response.ok().build();
 
     }
+    /*
     @PUT
     @Path("/attend/{userName}/")
     @Produces("application/json")
@@ -121,7 +122,7 @@ public class UserRest {
         return Response.ok(u).build();
 
     }
-    
+    */
     @DELETE
     @Path("/delete/{userName}")
     @Produces("application/json")

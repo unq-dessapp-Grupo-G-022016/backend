@@ -8,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -63,12 +65,21 @@ public class User {
 	
     @OneToOne (cascade = CascadeType.ALL)
     private Friends friends;
-	@JsonIgnore
+	
+    
     @ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+		      name="personalEvents",
+		      joinColumns=@JoinColumn(name="userName", referencedColumnName="userName"),
+		      inverseJoinColumns=@JoinColumn(name="event", referencedColumnName="id"))
     private Set<Event> personalEvent;
     //private Set<String> vehicles;
-	@JsonIgnore
+	
 	@ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(
+		      name="attendedEvents",
+		      joinColumns=@JoinColumn(name="userName", referencedColumnName="userName"),
+		      inverseJoinColumns=@JoinColumn(name="event", referencedColumnName="id"))
     private Set<Event> attendedEvents;
 
     public User(){
