@@ -8,15 +8,22 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
+import javax.ws.rs.OPTIONS;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.cxf.rs.security.cors.CorsHeaderConstants;
+import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
+import org.apache.cxf.rs.security.cors.LocalPreflight;
 
 import model.Event;
 import model.User;
@@ -29,7 +36,17 @@ import service.UserService;
  * 
  * @author cristian
  */
-
+@CrossOriginResourceSharing(
+        allowAllOrigins = true, 
+        allowCredentials = true, 
+        maxAge = 1, 
+        allowHeaders = {
+           "X-custom-1", "X-custom-2"
+        }, 
+        exposeHeaders = {
+           "X-custom-3", "X-custom-4"
+        }
+)
 @Path("/user")
 public class UserRest {
 
@@ -40,7 +57,8 @@ public class UserRest {
      * servicio REST solo debe hacer un delegate simple.
      */
     //private PostRepository postRepository;
-    
+	@Context
+    private HttpHeaders headers;
     private UserService userService;
     
     /*
@@ -58,7 +76,7 @@ public class UserRest {
     @GET
     @Path("/read/{userName}")
     @Produces("application/json")
-    public User Read(@PathParam ("userName") String userName){
+    public Response Read(@PathParam ("userName") String userName){
     	List<User> users = userService.retriveAll();
     	User u = null;
     	for(User each : users){
@@ -66,7 +84,10 @@ public class UserRest {
     			u = each;
     		}
     	}
-    	return u;
+    	if (u == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.ok(u).build();
     }  
     
     @PUT
@@ -126,9 +147,12 @@ public class UserRest {
     @GET
     @Path("/users")
     @Produces("application/json")
-    public List<User> getAllUsers() {
+    public Response getAllUsers() {
         List<User> users = userService.retriveAll();
-        return users;
+        if (users.isEmpty()) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.ok(users).build();
     }
     
    
@@ -188,5 +212,35 @@ public class UserRest {
     public void setUserService(final UserService userDAO) {
         userService = userDAO;
     }
-
+ // This method will do a preflight check itself
+    /*
+    @OPTIONS
+    @Path("/")
+    @LocalPreflight
+    public Response options() {
+        //String origin = headers.getRequestHeader("Origin").get(0);
+        //if ("http://localhost:8080".equals(origin)) {
+            return Response.ok()
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "DELETE PUT")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_CREDENTIALS, "false")
+                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_ORIGIN, "http://frulanga")
+                           .build();
+        //} else {
+        //    return Response.ok().build();
+        //}
+    }*/
+ /*
+    @GET
+    @CrossOriginResourceSharing(
+         //allowOrigins = { "http://localhost:8080" },
+    	allowAllOrigins = true,
+         allowCredentials = true, 
+         exposeHeaders = { "X-custom-3", "X-custom-4" }
+    )
+    @Produces("text/plain")
+    @Path("/annotatedGet/{echo}")
+    public String annotatedGet(@PathParam("echo") String echo) {
+        return echo;
+    }
+ */
 }

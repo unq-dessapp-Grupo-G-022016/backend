@@ -20,7 +20,8 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
 	<bean id="jaxbProvider" class="org.apache.cxf.jaxrs.provider.JAXBElementProvider" />
 
 	<bean id='jacksonProvider' class='org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider' />
-
+	
+	<bean id="cors-filter" class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter"/>
 
 <!-- =========================== -->
 <!-- =========Servicios  ========= -->
@@ -31,11 +32,13 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
 			<ref bean="userRest" />
 			<ref bean="eventRest" />
 		</jaxrs:serviceBeans>
+		
 		<jaxrs:extensionMappings>
 			<entry key="json" value="application/json" />
 			<entry key="xml" value="application/xml" />
 		</jaxrs:extensionMappings>
 		<jaxrs:providers>
+			<ref bean="cors-filter" />
 			<ref bean="jaxbProvider" />
 			<ref bean="jacksonProvider" />
 		</jaxrs:providers>
@@ -43,7 +46,9 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
 			<cxf:logging />
 		</jaxrs:features>
 	</jaxrs:server>
-
+       
+       
+    
     <bean id="service.user" class="service.UserService" />
 	<bean id="userRest" class="webService.UserRest">
 		<property name="userService" ref="service.user" />
