@@ -13,7 +13,7 @@ import model.Friends;
 import model.User;
 
 @SuppressWarnings("serial")
-public class EventRepository extends HibernateGenericDAO<Event> implements GenericRepository<Event> {
+public class EventRepository extends HibernateGenericRepository<Event> implements GenericRepository<Event> {
 
     //private static final long serialVersionUID = -4036535812105672110L;
 

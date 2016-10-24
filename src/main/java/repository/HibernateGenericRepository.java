@@ -11,7 +11,7 @@ import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
  * @param <T>
  */
 @SuppressWarnings("serial")
-public abstract class HibernateGenericDAO<T> extends HibernateDaoSupport implements GenericRepository<T>, Serializable {
+public abstract class HibernateGenericRepository<T> extends HibernateDaoSupport implements GenericRepository<T>, Serializable {
 
  //   private static final long serialVersionUID = 5058950102420892922L;
 

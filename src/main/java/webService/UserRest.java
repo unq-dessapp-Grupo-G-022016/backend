@@ -77,47 +77,43 @@ public class UserRest {
     @Path("/read/{userName}")
     @Produces("application/json")
     public Response Read(@PathParam ("userName") String userName){
-    	List<User> users = userService.retriveAll();
-    	User u = null;
-    	for(User each : users){
-    		if (each.getUserName().equals(userName)){
-    			u = each;
-    		}
-    	}
+    	
+    	User u = userService.findById(userName);
     	if (u == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
         return Response.ok(u).build();
-    }  
+    }
     
     @PUT
     @Path("/update")
     @Produces("application/json")
     @Consumes(MediaType.APPLICATION_JSON)
-    public String Update(User updatedUser){
-    	String retValue = "NotFound";
-    	List<User> users = userService.retriveAll();
-    	for(User each : users){
-    		if (each.getUserName().equals(updatedUser.getUserName())){
-    			userService.update(updatedUser);
-    			retValue = "OK";
-    		}
+    public Response Update(User updatedUser){
+    	User u = userService.findById(updatedUser.userName);
+    	if (u == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+    	else{
+    		userService.update(updatedUser);
     	}
-    	return retValue;
+        return Response.ok().build();
+
     }
     
     @DELETE
     @Path("/delete/{userName}")
     @Produces("application/json")
     @Consumes(MediaType.APPLICATION_JSON)
-    public String Delete(@PathParam ("userName") String userName){
-    	List<User> users = userService.retriveAll();
-    	users.forEach(each->{
-    		if(userName.equals(each.getUserName())){
-    			userService.delete(each);
-    		}
-    	});
-    	return "OK";
+    public Response Delete(@PathParam ("userName") String userName){
+    	User u = userService.findById(userName);
+    	if (u == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+    	else{
+    		userService.delete(u);
+    	}
+        return Response.ok().build();
     }
     
     /////////////////////////

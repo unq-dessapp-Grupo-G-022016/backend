@@ -110,21 +110,14 @@
 	<!-- ________________________________________ -->
 	<!-- ________________________________________ -->
 	
-	<bean id="persistence.categoryrepository" class="repository.CategoryRepository" >
-		<property name="sessionFactory" ref="persistence.sessionFactory" />
-	</bean>
+
 	<bean id="persistence.eventrepository" class="repository.EventRepository" >
 		<property name="sessionFactory" ref="persistence.sessionFactory" />
 	</bean>
 	<bean id="persistence.friendsrepository" class="repository.FriendsRepository" >
 		<property name="sessionFactory" ref="persistence.sessionFactory" />
 	</bean>
-	<bean id="persistence.pricerepository" class="repository.PriceRepository" >
-		<property name="sessionFactory" ref="persistence.sessionFactory" />
-	</bean>
-	<bean id="persistence.profilerepository" class="repository.ProfileRepository" >
-		<property name="sessionFactory" ref="persistence.sessionFactory" />
-	</bean>
+
 	<bean id="persistence.userrepository" class="repository.UserRepository" >
 		<property name="sessionFactory" ref="persistence.sessionFactory" />
 	</bean>

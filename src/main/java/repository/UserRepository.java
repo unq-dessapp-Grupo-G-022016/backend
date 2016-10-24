@@ -11,7 +11,7 @@ import org.springframework.orm.hibernate4.HibernateCallback;
 import model.User;
 
 @SuppressWarnings("serial")
-public class UserRepository extends HibernateGenericDAO<User> implements GenericRepository<User> {
+public class UserRepository extends HibernateGenericRepository<User> implements GenericRepository<User> {
 
     //private static final long serialVersionUID = -4036535812105672110L;
 

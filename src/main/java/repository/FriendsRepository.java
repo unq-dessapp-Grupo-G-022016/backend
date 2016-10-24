@@ -12,7 +12,7 @@ import model.Friends;
 import model.User;
 
 @SuppressWarnings("serial")
-public class FriendsRepository extends HibernateGenericDAO<Friends> implements GenericRepository<Friends> {
+public class FriendsRepository extends HibernateGenericRepository<Friends> implements GenericRepository<Friends> {
 
     //private static final long serialVersionUID = -4036535812105672110L;
 

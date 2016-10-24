@@ -1,5 +1,6 @@
 package service;
 
+import java.io.Serializable;
 //import java.io.Serializable;
 import java.util.List;
 
@@ -39,6 +40,10 @@ public class GenericService<T> //implements Serializable {
     @Transactional
     public void update(final T object) {
         this.getRepository().update(object);
+    }
+    @Transactional
+    public T findById(final Serializable id) {
+        return this.getRepository().findById(id);
     }
 
 }
