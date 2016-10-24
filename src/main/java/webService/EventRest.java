@@ -15,6 +15,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -53,37 +54,35 @@ public class EventRest {
     	eventService.save(newUser);
     	return "OK";
     }
-    /*
-    @GET
-    @Path("/read/{userName}")
-    @Produces("application/json")
-    public User Read(@PathParam ("userName") String userName){
-    	List<User> users = userService.retriveAll();
-    	User u = null;
-    	for(User each : users){
-    		if (each.getUserName().equals(userName)){
-    			u = each;
-    		}
-    	}
-    	return u;
-    }  
     
-    @POST
+      
+    @GET
+    @Path("/read/{idE}")
+    @Produces("application/json")
+    public Response Read(@PathParam ("idE") int idE){
+    	
+    	Event e = eventService.findById(idE);
+    	if (e == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.ok(e).build();
+    }
+    @PUT
     @Path("/update")
     @Produces("application/json")
     @Consumes(MediaType.APPLICATION_JSON)
-    public String Update(User updatedUser){
-    	String retValue = "NotFound";
-    	List<User> users = userService.retriveAll();
-    	for(User each : users){
-    		if (each.getUserName().equals(updatedUser.getUserName())){
-    			userService.update(updatedUser);
-    			retValue = "OK";
-    		}
+    public Response Update(Event updatedEvent){
+    	Event e = eventService.findById(updatedEvent.getId());
+    	if (e == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+    	else{
+    		eventService.update(updatedEvent);
     	}
-    	return retValue;
+        return Response.ok().build();
+
     }
-    
+    /*
     @GET
     @Path("/delete/{userName}")
     @Produces("application/json")

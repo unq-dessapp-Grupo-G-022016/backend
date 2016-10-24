@@ -49,3 +49,25 @@
     "name": "goingToHell"
 }
 ########
+# to update event
+#######
+{
+	"id":1,
+    "startTime":
+    "2011-12-03T10:15:30",
+    "category":
+    {
+        "name": "warm places"
+    },
+    "endTime":"2011-12-03T10:15:30",
+    "price":
+    {
+        "ammount": 20
+    },
+            "attenders":
+    [
+    ],
+    "details": "Devils house",
+    "address": "666",
+    "name": "goingToHell"
+}

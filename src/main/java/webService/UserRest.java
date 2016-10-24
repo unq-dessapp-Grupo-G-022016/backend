@@ -29,6 +29,7 @@ import model.Event;
 import model.User;
 import model.creation.UserBuilder;
 import service.EventService;
+import service.GenericService;
 import service.UserService;
 
 /**
@@ -60,7 +61,7 @@ public class UserRest {
 	@Context
     private HttpHeaders headers;
     private UserService userService;
-    
+    private EventService eventService;
     /*
      *  C.R.U.D.
      */
@@ -98,6 +99,26 @@ public class UserRest {
     		userService.update(updatedUser);
     	}
         return Response.ok().build();
+
+    }
+    @PUT
+    @Path("/attend/{userName}/")
+    @Produces("application/json")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response AttendEvent(@PathParam ("userName") String userName,
+    							//@PathParam ("idEvent") int idEvent
+    							Event e){
+    	User u = userService.findById("momo24");
+    	//Event e = eventService.findById(idEvent);
+    	if (u == null ) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+    	else{
+    		//u.createPersonalEvent(e);
+    		u.attend(e);
+    		//userService.update(u);
+    	}
+        return Response.ok(u).build();
 
     }
     
