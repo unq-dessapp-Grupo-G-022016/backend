@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -18,6 +19,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 
 import model.Category;
 import model.Event;
@@ -31,6 +33,17 @@ import service.EventService;
  * @author cristian
  */
 
+@CrossOriginResourceSharing(
+        allowAllOrigins = true, 
+        allowCredentials = true, 
+        maxAge = 1, 
+        allowHeaders = {
+           "X-custom-1", "X-custom-2"
+        }, 
+        exposeHeaders = {
+           "X-custom-3", "X-custom-4"
+        }
+)
 @Path("/event")
 public class EventRest {
 
@@ -82,19 +95,17 @@ public class EventRest {
         return Response.ok().build();
 
     }
-    /*
-    @GET
-    @Path("/delete/{userName}")
+    
+    @DELETE
+    @Path("/delete/{idE}")
     @Produces("application/json")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public String Delete(@PathParam ("userName") String userName){
-    	List<User> users = userService.retriveAll();
-    	users.forEach(each->{
-    		if(userName.equals(each.getUserName())){
-    			userService.delete(each);
-    		}
-    	});
-    	return "OK";
+    public Response Delete(@PathParam ("idE") int idE){
+    	Event e = eventService.findById(idE);
+    	if (e == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+    	eventService.delete(e);
+    	return Response.ok().build();
     }
     
     /////////////////////////*/
@@ -106,6 +117,7 @@ public class EventRest {
         return events;
     }
     
+    /*
  	@GET
      @Path("/addEvent")
      @Produces("application/json")
@@ -123,6 +135,7 @@ public class EventRest {
     	eventService.save(e);
      	return "OK";
      }
+     */
     /*
     @GET
     @Path("/event")
@@ -163,38 +176,6 @@ public class EventRest {
     }
     */
     
-    /*
-
-    @GET
-    @Path("/{from}")
-    @Produces("application/json")
-    public List<Post> findPostsPublishedByBlogId(@PathParam("from") final Integer from) {
-        List<Post> posts = postRepository.getPosts(from, NUMBER_OF_POST, "");
-        return posts;
-    }
-
-    @GET
-    @Path("/byAuthor/{id}")
-    @Produces("application/json")
-    public List<Post> findPostsPublishedByAuthorId(@PathParam("id") final String id) {
-        List<Post> posts = postRepository.getPosts(id);
-        return posts;
-    }
-
-    @GET
-    @Path("/count")
-    @Produces("application/json")
-    public Integer countPostsPublishedByBlogId(@DefaultValue(StringUtils.EMPTY) @QueryParam("tag") final String tag) {
-        return postRepository.getcount(tag);
-    }
-
-    @GET
-    @Path("/tags")
-    @Produces("application/json")
-    public Set<String> getTagsByBlogId() {
-        return postRepository.getTags();
-    }
-*/
     public void setEventService(final EventService eventDAO) {
         eventService = eventDAO;
     }

@@ -120,7 +120,7 @@ public class UserRest {
     
     /////////////////////////
     
-    @GET
+    @PUT
     @Path("/addFriend/{userName}/{friendName}")
     @Produces("application/json")
     public Response AddFriend(@PathParam ("userName") String userName,@PathParam ("friendName") String friendName){
