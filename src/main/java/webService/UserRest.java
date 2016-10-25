@@ -24,6 +24,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.cxf.rs.security.cors.CorsHeaderConstants;
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.apache.cxf.rs.security.cors.LocalPreflight;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import model.Event;
 import model.User;
@@ -101,28 +102,7 @@ public class UserRest {
         return Response.ok().build();
 
     }
-    /*
-    @PUT
-    @Path("/attend/{userName}/")
-    @Produces("application/json")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response AttendEvent(@PathParam ("userName") String userName,
-    							//@PathParam ("idEvent") int idEvent
-    							Event e){
-    	User u = userService.findById("momo24");
-    	//Event e = eventService.findById(idEvent);
-    	if (u == null ) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-    	else{
-    		//u.createPersonalEvent(e);
-    		u.attend(e);
-    		//userService.update(u);
-    	}
-        return Response.ok(u).build();
 
-    }
-    */
     @DELETE
     @Path("/delete/{userName}")
     @Produces("application/json")
@@ -143,24 +123,32 @@ public class UserRest {
     @GET
     @Path("/addFriend/{userName}/{friendName}")
     @Produces("application/json")
-    public String AddFriend(@PathParam ("userName") String userName,@PathParam ("friendName") String friendName){
-    	List<User> users = userService.retriveAll();
-    	User u = null;
-    	User f = null;
-    	for(User each : users){
-    		if (each.getUserName().equals(userName)){
-    			u = each;
-    		}
-    	}
-    	for(User each : users){
-    		if (each.getUserName().equals(friendName)){
-    			f = each;
-    		}
-    	}
+    public Response AddFriend(@PathParam ("userName") String userName,@PathParam ("friendName") String friendName){
+    	User u = userService.findById(userName);
+    	User f = userService.findById(friendName);
+    	if (u == null || f == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
     	u.addFriend(f);
     	userService.update(u);
-    	return u.getUserName()+f.getUserName();
+    	return Response.ok().build();
     } 
+    
+    /*
+    @GET
+    @Path("/attend/{userName}")
+    @Produces("application/json")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response Attend(@RequestBody Event event, @PathParam ("userName") String userName){
+    	User u = userService.findById(userName);
+    	if (u == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+    	//u.attend(event);
+    	//userService.update(u);
+    	return Response.ok(event).build();
+    } 
+    */
     
     @GET
     @Path("/users")
@@ -173,63 +161,10 @@ public class UserRest {
         return Response.ok(users).build();
     }
     
-   
-    @GET
-    @Path("/addUser")
-    @Produces("application/json")
-    public String addPlayer(){
-    	UserBuilder ub = new UserBuilder();
-    	User user = ub.anyUser().build();
-    	userService.save(user);
-    	return "OK";
-    }
- 
-    /*
-    @POST
-    @Produces("application/json")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/addPlayer/")
-    public String addPlayer(Player newPlayer){
-    	playerService.save(newPlayer);
-    	return "OK";
-    }
-    */
-    
-    /*
-
-    @GET
-    @Path("/{from}")
-    @Produces("application/json")
-    public List<Post> findPostsPublishedByBlogId(@PathParam("from") final Integer from) {
-        List<Post> posts = postRepository.getPosts(from, NUMBER_OF_POST, "");
-        return posts;
-    }
-
-    @GET
-    @Path("/byAuthor/{id}")
-    @Produces("application/json")
-    public List<Post> findPostsPublishedByAuthorId(@PathParam("id") final String id) {
-        List<Post> posts = postRepository.getPosts(id);
-        return posts;
-    }
-
-    @GET
-    @Path("/count")
-    @Produces("application/json")
-    public Integer countPostsPublishedByBlogId(@DefaultValue(StringUtils.EMPTY) @QueryParam("tag") final String tag) {
-        return postRepository.getcount(tag);
-    }
-
-    @GET
-    @Path("/tags")
-    @Produces("application/json")
-    public Set<String> getTagsByBlogId() {
-        return postRepository.getTags();
-    }
-*/
     public void setUserService(final UserService userDAO) {
         userService = userDAO;
     }
+    
  // This method will do a preflight check itself
     /*
     @OPTIONS

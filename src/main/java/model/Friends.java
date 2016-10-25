@@ -9,6 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import org.codehaus.jackson.annotate.JsonBackReference;
@@ -26,22 +29,16 @@ public class Friends {
     @GeneratedValue()
 	private int id;
 	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public void setFriends(Set<User> friends) {
-		this.friends = friends;
-	}
-
-	@JsonIgnore
-	@OneToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+		      name="friedsSet",
+		      joinColumns=@JoinColumn(name="userFriendId", referencedColumnName="id"),
+		      inverseJoinColumns=@JoinColumn(name="friendName", referencedColumnName="userName"))
     private Set<User> friends = new HashSet<>();
 
+    @JsonIgnore
+    public Set<User> getFriends() { return friends; }
+    
 	public Friends(){
 		
 	}
@@ -66,8 +63,7 @@ public class Friends {
         return friendsProfiles;
     }
 
-    @JsonIgnore
-    public Set<User> getFriends() { return friends; }
+
 
     private Set<Profile> friendsProfilesWithInterests(Set<Category> categories){
         Set<Profile> profiles = new HashSet<Profile>();
@@ -81,6 +77,18 @@ public class Friends {
         }
         return profiles;
     }
+    
+    public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setFriends(Set<User> friends) {
+		this.friends = friends;
+	}
 
     public Set<Category> categoriesOfUsersThatHaveAnyOfThis(Set<Category> categories) {
         Set<Category> friendsCategories = new HashSet<Category>();

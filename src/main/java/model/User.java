@@ -29,44 +29,15 @@ import org.codehaus.jackson.annotate.JsonManagedReference;
 @Table(name = "Users")  
 public class User {
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public void setProfile(Profile profile) {
-		this.profile = profile;
-	}
-
-	public void setLowCostTrip(Price lowCostTrip) {
-		this.lowCostTrip = lowCostTrip;
-	}
-
-	public void setFriends(Friends friends) {
-		this.friends = friends;
-	}
-
-	public void setPersonalEvent(Set<Event> personalEvent) {
-		this.personalEvent = personalEvent;
-	}
-
-	public void setAttendedEvents(Set<Event> attendedEvents) {
-		this.attendedEvents = attendedEvents;
-	}
-
 	@Id
     public String userName;
-	@JsonIgnore
 	@OneToOne (cascade = CascadeType.ALL)
     private Profile profile;
-	@JsonIgnore
     @OneToOne (cascade = CascadeType.ALL)
 	private Price lowCostTrip;
     //StartPoint;
-	
-    @OneToOne (cascade = CascadeType.ALL)
+	@OneToOne (cascade = CascadeType.ALL)
     private Friends friends;
-	
-    
     @ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
 		      name="personalEvents",
@@ -74,7 +45,6 @@ public class User {
 		      inverseJoinColumns=@JoinColumn(name="event", referencedColumnName="id"))
     private Set<Event> personalEvent;
     //private Set<String> vehicles;
-	
 	@ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(
 		      name="attendedEvents",
@@ -146,5 +116,29 @@ public class User {
     public void addFriend(User friend){
         friends.add(friend);
     }
+    
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public void setProfile(Profile profile) {
+		this.profile = profile;
+	}
+
+	public void setLowCostTrip(Price lowCostTrip) {
+		this.lowCostTrip = lowCostTrip;
+	}
+
+	public void setFriends(Friends friends) {
+		this.friends = friends;
+	}
+
+	public void setPersonalEvent(Set<Event> personalEvent) {
+		this.personalEvent = personalEvent;
+	}
+
+	public void setAttendedEvents(Set<Event> attendedEvents) {
+		this.attendedEvents = attendedEvents;
+	}
 
 }
