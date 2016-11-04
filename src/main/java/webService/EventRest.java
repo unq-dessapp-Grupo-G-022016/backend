@@ -19,6 +19,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
@@ -65,11 +66,23 @@ public class EventRest {
     @Path("/create")
     @Produces("application/json")
     @Consumes(MediaType.APPLICATION_JSON)
-    public String Create(Event newUser){
-    	eventService.save(newUser);
-    	return "OK";
+    public Response Create(Event newEvent){
+    	if (duplicatedEvent(newEvent)){
+    		return Response.status(409).build();
+    	}
+    	eventService.save(newEvent);
+    	return Response.ok().build();
     }
     
+    private boolean duplicatedEvent(Event event){
+    	Event exampleObject = new Event();
+    	exampleObject.setDay(event.getDay());
+    	exampleObject.setName(event.getName());
+    	exampleObject.setAddress(event.getAddress());
+    	
+    	List<Event> events = eventService.findByExample(exampleObject);
+    	return events.size()>0;
+    }
       
     @GET
     @Path("/read/{idE}")
