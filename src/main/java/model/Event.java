@@ -125,9 +125,12 @@ public class Event {
     private Set<User>attenders = new HashSet<>();
     @JsonIgnore
     */
+    /*
     @ManyToOne (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Category category;
-
+	*/
+	@OneToOne (cascade = CascadeType.ALL)
+    private Profile profile;
 
     @JsonSerialize(using = type.LocalDateTimeSerializer.class)
     @JsonDeserialize(using = type.LocalDateTimeDeserializer.class)
@@ -144,7 +147,7 @@ public class Event {
     	
     }
 
-    public Event(String name, String address, String details, Price price, LocalDateTime date, LocalDateTime duration, Attenders attenders, Category category) {
+    public Event(String name, String address, String details, Price price, LocalDateTime date, LocalDateTime duration, Attenders attenders, Profile profile) {
         this.name = name;
         this.address = address;
         this.details = details;
@@ -152,8 +155,8 @@ public class Event {
         setStartTime(date);
         this.endTime = duration;
         this.attenders = attenders;
-        this.category = category;
-        
+        //this.category = category;
+        this.profile = profile;
     }
 
     public Price getPrice(){
@@ -170,9 +173,14 @@ public class Event {
         return this.getEndTime().isBefore(event.getStartTime());
     }
 
+    /*
+     *  !!!!!!!!!!!!
+     */
     public boolean hasCategory(){
-        return !(this.category.getName().equals("undefined"));
+        //return !(this.category.getName().equals("undefined"));
+    	return true;
     }
+    
     @JsonSerialize(using = type.LocalDateTimeSerializer.class)
     @JsonDeserialize(using = type.LocalDateTimeDeserializer.class)
     public void setEndTime(LocalDateTime endTime) {
@@ -187,13 +195,22 @@ public class Event {
         		+startTime.getDayOfMonth();
     }
 
+    public Profile getProfile(){
+    	return this.profile;
+    }
+    public void setProfile(Profile profile){
+    	this.profile = profile;
+    }
+    /*
     public Category getCategory(){
         return category;
     }
     public void setCategory(Category category) {
         this.category = category;
     }
-
+*/
+    
+    /*
     public boolean hasTheSameCategory(Event anotherEvent) {
         return this.getCategory().getName().equals(anotherEvent.getCategory().getName());
     }
@@ -203,6 +220,7 @@ public class Event {
         return ! events.collect(Collectors.toList()).isEmpty();
 
     }
+    */
 
     /**
      * Return suggestions based on event attenders.

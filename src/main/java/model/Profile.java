@@ -42,7 +42,6 @@ public class Profile {
 		this.categories = categories;
 	}
 
-	@JsonIgnore
 	@ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Category> categories = new HashSet<>();
 

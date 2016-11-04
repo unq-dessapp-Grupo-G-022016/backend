@@ -28,6 +28,7 @@ import model.Attenders;
 import model.Category;
 import model.Event;
 import model.Price;
+import model.Profile;
 import model.User;
 import service.EventService;
 
@@ -163,7 +164,10 @@ public class EventRest {
     	attenders.setRecommendedMaxGroup(0);
     	attenders.setRecommendedMinGroup(0);
     	e.setAttenders(attenders);
-    	e.setCategory(new Category("warm places"));
+    	Profile p = new Profile();
+    	p.addCategory(new Category("warm places"));
+    	e.setProfile(p);
+    	//e.setCategory(new Category("warm places"));
     	//e.setHour(LocalTime.of(12, 50));
     	eventService.save(e);
      	return "OK";

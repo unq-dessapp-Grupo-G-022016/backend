@@ -138,9 +138,15 @@
             "recommendedMaxGroup": 0
         },
         "details": "Devils house",
-        "category":
+        "profile":
         {
-            "name": "warm places"
+            "id": 1,
+            "categories":
+            [
+                {
+                    "name": "warm places"
+                }
+            ]
         },
         "day": 20161104,
         "startTime": "2016-11-04T15:33:19.432"
