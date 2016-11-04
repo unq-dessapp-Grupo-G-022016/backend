@@ -9,7 +9,7 @@ import java.util.Set;
 public class GeneralEvent extends Event {
 
     public GeneralEvent(String name, String address, String details, Price price, LocalDateTime date, LocalDateTime duration, Set<User> attenders, Category category) {
-        super(name, address, details, price, date, duration, attenders, category);
+        //super(name, address, details, price, date, duration, attenders, category);
     }
 
 }

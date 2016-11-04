@@ -5,6 +5,7 @@ public class GeneralService {
 	private EventService eventService;
 	private FriendsService friendsService;
 	private UserService userService;
+	private AttendersService attendersService;
 	
 
 
@@ -22,6 +23,13 @@ public class GeneralService {
 
 	public void setFriendsService(final FriendsService friendsService) {
 		this.friendsService = friendsService;
+	}
+	public AttendersService getAttendersService() {
+		return attendersService;
+	}
+
+	public void setAttendersService(final AttendersService attendersService) {
+		this.attendersService = attendersService;
 	}
 
 	public UserService getUserService() {

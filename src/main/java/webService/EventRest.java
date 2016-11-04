@@ -24,6 +24,7 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 import org.apache.commons.lang.StringUtils;
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 
+import model.Attenders;
 import model.Category;
 import model.Event;
 import model.Price;
@@ -156,7 +157,12 @@ public class EventRest {
     	e.setStartTime(LocalDateTime.now());
     	e.setEndTime(LocalDateTime.now());
     	Set<User> uset = new HashSet<User>();
-    	e.setAttenders(uset);
+    	Attenders attenders = new Attenders();
+    	attenders.setUsers(uset);
+    	attenders.setMaxCapacity(0);
+    	attenders.setRecommendedMaxGroup(0);
+    	attenders.setRecommendedMinGroup(0);
+    	e.setAttenders(attenders);
     	e.setCategory(new Category("warm places"));
     	//e.setHour(LocalTime.of(12, 50));
     	eventService.save(e);

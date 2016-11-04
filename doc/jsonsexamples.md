@@ -119,3 +119,29 @@
 	    "ammount": 50000
 	}
 }
+#### work in progress
+## new event model
+##
+{
+        "address": "666",
+        "name": "goingToHell Again",
+        "id": 2,
+        "price":
+        {
+			"ammount": 20
+        },
+        "endTime": "2016-11-04T15:33:19.432",
+        "attenders":
+        {
+            "maxCapacity": 0,
+            "recommendedMinGroup": 0,
+            "recommendedMaxGroup": 0
+        },
+        "details": "Devils house",
+        "category":
+        {
+            "name": "warm places"
+        },
+        "day": 20161104,
+        "startTime": "2016-11-04T15:33:19.432"
+    }

@@ -117,7 +117,9 @@
 	<bean id="persistence.friendsrepository" class="repository.FriendsRepository" >
 		<property name="sessionFactory" ref="persistence.sessionFactory" />
 	</bean>
-
+	<bean id="persistence.attendersrepository" class="repository.AttendersRepository" >
+		<property name="sessionFactory" ref="persistence.sessionFactory" />
+	</bean>
 	<bean id="persistence.userrepository" class="repository.UserRepository" >
 		<property name="sessionFactory" ref="persistence.sessionFactory" />
 	</bean>

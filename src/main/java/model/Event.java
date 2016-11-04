@@ -20,6 +20,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
@@ -89,7 +90,7 @@ public class Event {
 		this.price = price;
 	}
 
-	public void setAttenders(Set<User> attenders) {
+	public void setAttenders(Attenders attenders) {
 		this.attenders = attenders;
 	}
 
@@ -118,11 +119,12 @@ public class Event {
     @JsonSerialize(using = type.LocalDateTimeSerializer.class)
     @JsonDeserialize(using = type.LocalDateTimeDeserializer.class)
     private LocalDateTime endTime;
-    
+    /*
     @JsonIgnore
     @ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<User>attenders = new HashSet<>();
     @JsonIgnore
+    */
     @ManyToOne (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Category category;
 
@@ -142,7 +144,7 @@ public class Event {
     	
     }
 
-    public Event(String name, String address, String details, Price price, LocalDateTime date, LocalDateTime duration, Set<User> attenders, Category category) {
+    public Event(String name, String address, String details, Price price, LocalDateTime date, LocalDateTime duration, Attenders attenders, Category category) {
         this.name = name;
         this.address = address;
         this.details = details;
@@ -207,7 +209,7 @@ public class Event {
      */
     public List<Event> eventSuggestions(Event event){
         List<Event> suggetions = new ArrayList<>();
-        event.getAttenders().forEach(user -> suggetions.addAll(user.getAttendedEvents()));
+        event.getAttenders().getUsers().forEach(user -> suggetions.addAll(user.getAttendedEvents()));
         return suggetions;
     }
 
@@ -224,7 +226,7 @@ public class Event {
         this.attenders.add(user);
     }
 
-    public Set<User> getAttenders() {
+    public Attenders getAttenders() {
         return attenders;
     }
 
@@ -238,6 +240,9 @@ public class Event {
     public boolean matchForDay(LocalDateTime date) {
         return this.startTime.getDayOfYear()==date.getDayOfYear();
     }
+    
+    @OneToOne (cascade = CascadeType.ALL)
+    private Attenders attenders;
 }
 
 

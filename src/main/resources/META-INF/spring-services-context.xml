@@ -23,7 +23,9 @@
 	<bean id="service.friends" class="service.FriendsService">
 		<property name="repository" ref="persistence.friendsrepository" />
 	</bean>
-
+<bean id="service.attenders" class="service.AttendersService">
+		<property name="repository" ref="persistence.attendersrepository" />
+	</bean>
 	<bean id="service.user" class="service.UserService">
 		<property name="repository" ref="persistence.userrepository" />
 	</bean>
