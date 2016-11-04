@@ -1,6 +1,8 @@
 package webService;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -117,7 +119,18 @@ public class EventRest {
         return events;
     }
     
-    /*
+    @GET
+    @Path("/getbydate/{date}")
+    @Produces("application/json")
+    public List<Event> getby(@PathParam ("date") int date){
+    	Event exampleObject = new Event();
+    	exampleObject.setDay(date);
+    	//exampleObject.setName("goingToHell");
+    	List<Event> events = eventService.findByExample(exampleObject);
+    	return events;
+    }
+    
+    
  	@GET
      @Path("/addEvent")
      @Produces("application/json")
@@ -132,49 +145,11 @@ public class EventRest {
     	Set<User> uset = new HashSet<User>();
     	e.setAttenders(uset);
     	e.setCategory(new Category("warm places"));
+    	//e.setHour(LocalTime.of(12, 50));
     	eventService.save(e);
      	return "OK";
      }
-     */
-    /*
-    @GET
-    @Path("/event")
-    @Produces("application/json")
-    public List<Event> getAllPlayers() {
-        List<Event> events = EventService.retriveAll();
-        return events;
-    }
-    */
-    /*
-    @GET
-    @Path("/events")
-    @Produces("application/json")
-    public List<Event> getAllPlayers() {
-        List<Event> events = EventService.retriveAll();
-        return event;
-    }
-     */
-    
-    /*
-    @GET
-    @Path("/addPlayerDummy")
-    @Produces("application/json")
-    public String addPlayer(){
-    	Player newPlayer = new Player("looser");
-    	newPlayer.setScore(9);
-    	playerService.save(newPlayer);
-    	return "OK";
-    }
-    
-    @POST
-    @Produces("application/json")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/addPlayer/")
-    public String addPlayer(Player newPlayer){
-    	playerService.save(newPlayer);
-    	return "OK";
-    }
-    */
+     
     
     public void setEventService(final EventService eventDAO) {
         eventService = eventDAO;

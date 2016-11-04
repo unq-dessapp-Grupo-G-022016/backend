@@ -45,5 +45,10 @@ public class GenericService<T> //implements Serializable {
     public T findById(final Serializable id) {
         return this.getRepository().findById(id);
     }
+    @Transactional
+    public List<T> findByExample(T exampleObject){
+    	return this.getRepository().findByExample(exampleObject);
+    }
+    
 
 }

@@ -1,7 +1,9 @@
 package model;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -30,6 +32,34 @@ import org.hibernate.annotations.Type;
 @Entity
 //public abstract class Event {
 public class Event {
+	
+	public int getDay() {
+		return day;
+	}
+
+	public void setDay(int day) {
+		this.day = day;
+	}
+
+
+	@Column
+	private int day;
+	
+	/*
+	@Column
+    @JsonSerialize(using = type.LocalTimeSerializer.class)
+    @JsonDeserialize(using = type.LocalTimeDeserializer.class)
+	private LocalTime hour;
+	
+	public LocalTime getHour() {
+		return hour;
+	}
+
+	public void setHour(LocalTime hour) {
+		this.hour = hour;
+	}
+	*/
+
 
 	public int getId() {
 		return id;
@@ -117,10 +147,11 @@ public class Event {
         this.address = address;
         this.details = details;
         this.price = price;
-        this.startTime = date;
+        setStartTime(date);
         this.endTime = duration;
         this.attenders = attenders;
         this.category = category;
+        
     }
 
     public Price getPrice(){
@@ -149,6 +180,9 @@ public class Event {
     @JsonDeserialize(using = type.LocalDateTimeDeserializer.class)
     public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
+        this.day = startTime.getYear() * 10000
+        		+startTime.getMonthValue() * 100
+        		+startTime.getDayOfMonth();
     }
 
     public Category getCategory(){
