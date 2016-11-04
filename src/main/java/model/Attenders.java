@@ -86,7 +86,7 @@ public class Attenders {
     @JsonIgnore
     public Set<User> getUsers() {
         // TODO Auto-generated method stub
-        return getUsers();
+        return this.users;
     }
 
 

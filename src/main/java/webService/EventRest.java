@@ -3,6 +3,7 @@ package webService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -132,6 +133,15 @@ public class EventRest {
     public List<Event> getAllPlayers() {
         List<Event> events = eventService.retriveAll();
         return events;
+    }
+    @GET
+    @Path("/eventsdto")
+    @Produces("application/json")
+    public List<EventDTO> alleventsdto() {
+        List<Event> events = eventService.retriveAll();
+        List<EventDTO> eventsDto = new ArrayList<EventDTO>();
+        events.forEach(event -> eventsDto.add(new EventDTO(event)));
+        return eventsDto;
     }
     
     @GET
