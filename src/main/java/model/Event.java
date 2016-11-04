@@ -42,6 +42,17 @@ public class Event {
 		this.day = day;
 	}
 
+	@Column
+	private boolean strictSchedule;
+	
+
+	public boolean isStrictSchedule() {
+		return strictSchedule;
+	}
+
+	public void setStrictSchedule(boolean strictSchedule) {
+		this.strictSchedule = strictSchedule;
+	}
 
 	@Column
 	private int day;
@@ -157,6 +168,18 @@ public class Event {
         this.attenders = attenders;
         //this.category = category;
         this.profile = profile;
+    }
+    public Event(String name, String address, String details, Price price, LocalDateTime date, LocalDateTime duration, Attenders attenders, Profile profile, boolean strictSchedule) {
+        this.name = name;
+        this.address = address;
+        this.details = details;
+        this.price = price;
+        setStartTime(date);
+        this.endTime = duration;
+        this.attenders = attenders;
+        //this.category = category;
+        this.profile = profile;
+        this.strictSchedule = strictSchedule;
     }
 
     public Price getPrice(){
