@@ -50,8 +50,8 @@ public class TripManagerTest {
         when(mockFoodEvent.isCheap(mockUser)).thenReturn(true);
         when(mockMovieEvent.isCheap(mockUser)).thenReturn(true);
         when(mockMovieEvent.isFree()).thenReturn(true);
-        when(mockFoodEvent.hasTheSameCategory(new HashSet<Category>())).thenReturn(true);
-        when(mockMovieEvent.hasTheSameCategory(new HashSet<Category>())).thenReturn(true);
+        //when(mockFoodEvent.hasTheSameCategory(new HashSet<Category>())).thenReturn(true);
+        //when(mockMovieEvent.hasTheSameCategory(new HashSet<Category>())).thenReturn(true);
         when(mockUser.getProfile()).thenReturn(mockProfile);
         when(mockProfile.allCategories()).thenReturn(new HashSet<Category>());
 
@@ -101,8 +101,8 @@ public class TripManagerTest {
         when(mockUser.getFriends()).thenReturn(mockFriends);
         when(mockFriends.allCategories()).thenReturn(friendsCategories);
         when(mockFoodEvent1.isFoodEvent()).thenReturn(true);
-        when(mockFoodEvent1.hasTheSameCategory(matchedCategories)).thenReturn(true);
-        when(mockMovieEvent1.hasTheSameCategory(matchedCategories)).thenReturn(true);
+        //when(mockFoodEvent1.hasTheSameCategory(matchedCategories)).thenReturn(true);
+        //when(mockMovieEvent1.hasTheSameCategory(matchedCategories)).thenReturn(true);
 
         Assert.assertEquals(1,tripManager.friendlyTrip(eventsList,mockUser).size());
     }
@@ -133,8 +133,8 @@ public class TripManagerTest {
         when(mockFriends.allCategories()).thenReturn(new HashSet<Category>());
         when(mockFriends.categoriesOfUsersThatHaveAnyOfThis(new HashSet<Category>())).thenReturn(categorySet);
         when(mockFoodEvent1.isFoodEvent()).thenReturn(true);
-        when(mockFoodEvent1.hasTheSameCategory(categorySet)).thenReturn(true);
-        when(mockMovieEvent1.hasTheSameCategory(categorySet)).thenReturn(true);
+        //when(mockFoodEvent1.hasTheSameCategory(categorySet)).thenReturn(true);
+        //when(mockMovieEvent1.hasTheSameCategory(categorySet)).thenReturn(true);
 
         Assert.assertEquals(1,tripManager.surpriseTrip(allEvents,mockUser).size());
     }

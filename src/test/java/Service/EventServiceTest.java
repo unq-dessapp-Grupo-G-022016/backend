@@ -55,8 +55,8 @@ public class EventServiceTest {
     	e.setStartTime(LocalDateTime.now());
     	e.setEndTime(LocalDateTime.now());
     	Set<User> uset = new HashSet<User>();
-    	e.setAttenders(uset);
-    	e.setCategory(new Category("warm places"));
+    	//e.setAttenders(uset);
+    	//e.setCategory(new Category("warm places"));
     	eventService.save(e);
     	
         Assert.assertEquals(1, eventService.retriveAll().size());
