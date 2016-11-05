@@ -29,6 +29,7 @@
 	<bean id="service.user" class="service.UserService">
 		<property name="repository" ref="persistence.userrepository" />
 	</bean>
+	
 		
 	<!-- 
 	<bean id="services.general" class="ar.edu.unq.services.GeneralService">

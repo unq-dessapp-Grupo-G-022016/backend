@@ -1,4 +1,4 @@
-package webService;
+package DTOs;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;

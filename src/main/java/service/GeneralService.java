@@ -1,11 +1,14 @@
 package service;
 
+import DTOs.EventDTO;
+
 public class GeneralService {
 
 	private EventService eventService;
 	private FriendsService friendsService;
 	private UserService userService;
 	private AttendersService attendersService;
+	private EventDTO eventDTOService;
 	
 
 
@@ -16,6 +19,7 @@ public class GeneralService {
 	public void setEventService(final EventService eventService) {
 		this.eventService = eventService;
 	}
+
 	
 	public FriendsService getFriendsService() {
 		return friendsService;
@@ -35,9 +39,16 @@ public class GeneralService {
 	public UserService getUserService() {
 		return userService;
 	}
+	public EventDTO getEventDTOService(){
+		return eventDTOService;
+	}
 
 	public void setUserService(final UserService userService) {
 		this.userService = userService;
+	}
+	
+	public void setEventDTOService(final EventDTO eventDTOService) {
+		this.eventDTOService = eventDTOService;
 	}
 
 }

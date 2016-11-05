@@ -25,12 +25,14 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 import org.apache.commons.lang.StringUtils;
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 
+import DTOs.EventDTO;
 import model.Attenders;
 import model.Category;
 import model.Event;
 import model.Price;
 import model.Profile;
 import model.User;
+import service.EventDTOService;
 import service.EventService;
 
 /**
@@ -61,6 +63,7 @@ public class EventRest {
      */
     //private PostRepository postRepository;
     private EventService eventService;
+    private EventDTOService eventServiceDTO;
     
     /*
      *  C.R.U.D.

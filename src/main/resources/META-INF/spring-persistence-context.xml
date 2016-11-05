@@ -114,6 +114,11 @@
 	<bean id="persistence.eventrepository" class="repository.EventRepository" >
 		<property name="sessionFactory" ref="persistence.sessionFactory" />
 	</bean>
+	
+	<bean id="persistence.eventdtorepository" class="repository.EventDTORepository" >
+		<property name="sessionFactory" ref="persistence.sessionFactory" />
+	</bean>
+	
 	<bean id="persistence.friendsrepository" class="repository.FriendsRepository" >
 		<property name="sessionFactory" ref="persistence.sessionFactory" />
 	</bean>
