@@ -57,9 +57,11 @@ public class TripManager {
         Iterator<Event> it = eventsCopy.iterator();
         while (it.hasNext()){
             Event e = it.next();
+            /*
             if (!e.hasTheSameCategory(categories)) {
                 it.remove();
             }
+            */
         }
         return eventsCopy;
     }
