@@ -192,7 +192,9 @@ public class EventRest {
     	e.setProfile(p);
     	//e.setCategory(new Category("warm places"));
     	//e.setHour(LocalTime.of(12, 50));
-    	eventService.save(e);
+    	for(int i=1;i<20;i++){
+        	eventService.save(e);
+    	}
      	return "OK";
      }
      
