@@ -8,7 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateCallback;
 
-import DTOs.EventDTO;
+import dtos.EventDTO;
 import model.Event;
 import model.Friends;
 import model.User;

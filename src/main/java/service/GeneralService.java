@@ -1,6 +1,6 @@
 package service;
 
-import DTOs.EventDTO;
+import dtos.EventDTO;
 
 public class GeneralService {
 

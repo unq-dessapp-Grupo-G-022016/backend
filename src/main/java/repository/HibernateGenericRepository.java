@@ -59,7 +59,12 @@ public abstract class HibernateGenericRepository<T> extends HibernateDaoSupport 
     public T findById(final Serializable id) {
         return this.getHibernateTemplate().get(this.persistentClass, id);
     }
-
+    
+    
+    public List<?> find(String query){
+    	return this.getHibernateTemplate().find(query);
+    }
+    
     protected abstract Class<T> getDomainClass();
 
     public void save(final T entity) {

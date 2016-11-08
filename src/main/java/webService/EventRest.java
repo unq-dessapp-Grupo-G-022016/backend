@@ -25,7 +25,7 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 import org.apache.commons.lang.StringUtils;
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 
-import DTOs.EventDTO;
+import dtos.EventDTO;
 import model.Attenders;
 import model.Category;
 import model.Event;
@@ -155,6 +155,16 @@ public class EventRest {
     	exampleObject.setDay(date);
     	//exampleObject.setName("goingToHell");
     	List<Event> events = eventService.findByExample(exampleObject);
+    	return events;
+    }
+    @GET
+    @Path("/getbyq/")
+    @Produces("application/json")
+    public List<Event> getbyq(@PathParam ("date") int date){
+    	Event exampleObject = new Event();
+    	exampleObject.setDay(date);
+    	//exampleObject.setName("goingToHell");
+    	List<Event> events = (List<Event>) eventService.find("select name from Event");
     	return events;
     }
     

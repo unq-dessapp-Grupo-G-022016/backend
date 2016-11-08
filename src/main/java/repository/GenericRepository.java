@@ -26,4 +26,5 @@ public interface GenericRepository<T> {
 
 	List<T> findByExample(T exampleObject);
 
+    public List<?> find(String query);
 }

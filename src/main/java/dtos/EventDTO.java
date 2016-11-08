@@ -1,14 +1,103 @@
-package DTOs;
+package dtos;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+
+import com.google.gson.Gson;
 
 import model.Event;
 
 public class EventDTO {
 	
 	String address;
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public Set<String> getAttenders() {
+		return attenders;
+	}
+
+	public void setAttenders(Set<String> attenders) {
+		this.attenders = attenders;
+	}
+
+	public String getDetails() {
+		return details;
+	}
+
+	public void setDetails(String details) {
+		this.details = details;
+	}
+
+	public int getStartTimeDate() {
+		return startTimeDate;
+	}
+
+	public void setStartTimeDate(int startTimeDate) {
+		this.startTimeDate = startTimeDate;
+	}
+
+	public int getStartTimeHour() {
+		return startTimeHour;
+	}
+
+	public void setStartTimeHour(int startTimeHour) {
+		this.startTimeHour = startTimeHour;
+	}
+
+	public int getEndTimeDate() {
+		return endTimeDate;
+	}
+
+	public void setEndTimeDate(int endTimeDate) {
+		this.endTimeDate = endTimeDate;
+	}
+
+	public int getEntTimeHour() {
+		return entTimeHour;
+	}
+
+	public void setEntTimeHour(int entTimeHour) {
+		this.entTimeHour = entTimeHour;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public Set<String> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(Set<String> categories) {
+		this.categories = categories;
+	}
+
+	public boolean isStrictSchedule() {
+		return strictSchedule;
+	}
+
+	public void setStrictSchedule(boolean strictSchedule) {
+		this.strictSchedule = strictSchedule;
+	}
 	Set<String> attenders;
 	String details;
 	int startTimeDate;
@@ -19,6 +108,12 @@ public class EventDTO {
 	int price;
 	Set<String> categories;
 	boolean strictSchedule;
+	
+	public String toString(){
+		Gson gson = new Gson();
+		String jsonInString = gson.toJson(this);
+		return jsonInString;
+	}
 	
 	public EventDTO(){
 		

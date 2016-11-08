@@ -50,5 +50,10 @@ public class GenericService<T> //implements Serializable {
     	return this.getRepository().findByExample(exampleObject);
     }
     
+    @Transactional
+    public List<?> find(String query){
+    	return this.getRepository().find(query);
+    }
+    
 
 }

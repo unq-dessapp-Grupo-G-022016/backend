@@ -46,7 +46,6 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
 			<cxf:logging />
 		</jaxrs:features>
 	</jaxrs:server>
-
 		
     <bean id="service.user" class="service.UserService" />	
 	<bean id="userRest" class="webService.UserRest">

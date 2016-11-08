@@ -1,6 +1,6 @@
 package service;
 
-import DTOs.EventDTO;
+import dtos.EventDTO;
 import model.Attenders;
 
 public class EventDTOService extends GenericService<EventDTO>{
