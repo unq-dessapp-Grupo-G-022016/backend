@@ -196,6 +196,11 @@ public class EventRest {
     	for(int i=1;i<20;i++){
     		String newname = "goingToHell"+i;
     		e.setName(newname);
+    	 	Set<User> uset2 = new HashSet<User>();
+        	Attenders attenders2 = new Attenders();
+        	attenders.setUsers(uset2);
+        	e.setAttenders(attenders2);
+
         	eventService.save(e);
     	}
      	return "OK";

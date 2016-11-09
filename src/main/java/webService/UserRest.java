@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
@@ -96,6 +97,17 @@ public class UserRest {
         }
         return Response.ok(u).build();
     }
+    @GET
+    @Path("/readdto/{userName}")
+    @Produces("application/json")
+    public Response Readdto(@PathParam ("userName") String userName){
+    	
+    	User u = userService.findById(userName);
+    	if (u == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.ok(new UserDTO(u)).build();
+    }
     
     @PUT
     @Path("/update")
@@ -129,7 +141,7 @@ public class UserRest {
     }
     
     /////////////////////////
-    
+    @Transactional
     @PUT
     @Path("/addFriend/{userName}/{friendName}")
     @Produces("application/json")
@@ -185,17 +197,15 @@ public class UserRest {
     @Path("/addUser")
     @Produces("application/json")
     public String addEvent(){
-    	User u = new User();
-    	u.setAttendedEvents(new HashSet<Event>());
-    	u.setFriends(new Friends());
-    	u.setLowCostTrip(new Price(100));
-    	u.setPersonalEvent(new HashSet<Event>());
-    	u.setProfile(new Profile());
-    	u.setUserName("bigMomo");
-    	userService.save(u);
     	for(int i=1;i<20;i++){
+    		User u = new User();
     		String newname = "momo"+i;
     		u.setUserName(newname);
+    		u.setAttendedEvents(new HashSet<Event>());
+        	u.setFriends(new Friends());
+        	u.setLowCostTrip(new Price(100));
+        	u.setPersonalEvent(new HashSet<Event>());
+        	u.setProfile(new Profile());
         	userService.save(u);
     	}
     	return "OK";

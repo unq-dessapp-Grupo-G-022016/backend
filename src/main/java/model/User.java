@@ -38,14 +38,14 @@ public class User {
     //StartPoint;
 	@OneToOne (cascade = CascadeType.ALL)
     private Friends friends;
-    @ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany (fetch = FetchType.EAGER, targetEntity=Event.class, cascade = CascadeType.ALL)
     @JoinTable(
 		      name="personalEvents",
 		      joinColumns=@JoinColumn(name="userName", referencedColumnName="userName"),
 		      inverseJoinColumns=@JoinColumn(name="event", referencedColumnName="id"))
     private Set<Event> personalEvent;
     //private Set<String> vehicles;
-	@ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany (fetch = FetchType.EAGER, targetEntity=Event.class, cascade = CascadeType.ALL)
 	@JoinTable(
 		      name="attendedEvents",
 		      joinColumns=@JoinColumn(name="userName", referencedColumnName="userName"),
@@ -140,5 +140,5 @@ public class User {
 	public void setAttendedEvents(Set<Event> attendedEvents) {
 		this.attendedEvents = attendedEvents;
 	}
-
+	
 }

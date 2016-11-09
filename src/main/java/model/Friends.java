@@ -29,7 +29,7 @@ public class Friends {
     @GeneratedValue()
 	private int id;
 	
-	@ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany (fetch = FetchType.EAGER, targetEntity=User.class, cascade = CascadeType.ALL)
     @JoinTable(
 		      name="friedsSet",
 		      joinColumns=@JoinColumn(name="userFriendId", referencedColumnName="id"),

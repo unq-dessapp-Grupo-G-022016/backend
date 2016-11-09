@@ -37,11 +37,11 @@ public class GenericService<T> //implements Serializable {
         this.getRepository().save(object);
     }
 
-    @Transactional
+    //@Transactional
     public void update(final T object) {
         this.getRepository().update(object);
     }
-    @Transactional
+    //@Transactional
     public T findById(final Serializable id) {
         return this.getRepository().findById(id);
     }

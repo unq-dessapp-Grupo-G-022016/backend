@@ -42,7 +42,7 @@ public class Profile {
 		this.categories = categories;
 	}
 
-	@ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany (fetch = FetchType.EAGER, targetEntity=Category.class, cascade = CascadeType.ALL)
     private Set<Category> categories = new HashSet<>();
 
     public void addCategory(Category category){this.categories.add(category);}
