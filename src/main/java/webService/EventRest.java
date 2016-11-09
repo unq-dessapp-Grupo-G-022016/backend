@@ -140,11 +140,11 @@ public class EventRest {
     @GET
     @Path("/eventsdto")
     @Produces("application/json")
-    public List<EventDTO> alleventsdto() {
+    public Response alleventsdto() {
         List<Event> events = eventService.retriveAll();
         List<EventDTO> eventsDto = new ArrayList<EventDTO>();
         events.forEach(event -> eventsDto.add(new EventDTO(event)));
-        return eventsDto;
+        return Response.ok(eventsDto).build();
     }
     
     @GET
@@ -164,7 +164,8 @@ public class EventRest {
     	Event exampleObject = new Event();
     	exampleObject.setDay(date);
     	//exampleObject.setName("goingToHell");
-    	List<Event> events = (List<Event>) eventService.find("select name from Event");
+    	@SuppressWarnings("unchecked")
+		List<Event> events = (List<Event>) eventService.find("select name from Event");
     	return events;
     }
     
@@ -193,6 +194,8 @@ public class EventRest {
     	//e.setCategory(new Category("warm places"));
     	//e.setHour(LocalTime.of(12, 50));
     	for(int i=1;i<20;i++){
+    		String newname = "goingToHell"+i;
+    		e.setName(newname);
         	eventService.save(e);
     	}
      	return "OK";

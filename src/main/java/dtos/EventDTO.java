@@ -60,11 +60,11 @@ public class EventDTO {
 	}
 
 	public int getEntTimeHour() {
-		return entTimeHour;
+		return endTimeHour;
 	}
 
 	public void setEntTimeHour(int entTimeHour) {
-		this.entTimeHour = entTimeHour;
+		this.endTimeHour = entTimeHour;
 	}
 
 	public String getName() {
@@ -103,21 +103,24 @@ public class EventDTO {
 	int startTimeDate;
 	int startTimeHour;
 	int endTimeDate;
-	int entTimeHour;
+	int endTimeHour;
 	String name;
 	int price;
 	Set<String> categories;
 	boolean strictSchedule;
 	
+	/*
 	public String toString(){
 		Gson gson = new Gson();
 		String jsonInString = gson.toJson(this);
 		return jsonInString;
 	}
+	*/
 	
 	public EventDTO(){
 		
 	}
+	
 	public EventDTO(Event event){
 		this.address = event.getAddress();
 		setAttenders(event);
@@ -134,7 +137,7 @@ public class EventDTO {
 		this.startTimeDate = dateTimeToDateInt(event.getStartTime());
 		this.endTimeDate = dateTimeToDateInt(event.getEndTime());
 		this.startTimeHour = dateTimeToHourInt(event.getStartTime());
-		this.endTimeDate = dateTimeToHourInt(event.getEndTime());				
+		this.endTimeHour = dateTimeToHourInt(event.getEndTime());				
 	}
 	
 	private int dateTimeToHourInt(LocalDateTime dateTime) {

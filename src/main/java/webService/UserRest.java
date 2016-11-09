@@ -1,6 +1,9 @@
 package webService;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -26,7 +29,14 @@ import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.apache.cxf.rs.security.cors.LocalPreflight;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import dtos.EventDTO;
+import dtos.UserDTO;
+import model.Attenders;
+import model.Category;
 import model.Event;
+import model.Friends;
+import model.Price;
+import model.Profile;
 import model.User;
 import model.creation.UserBuilder;
 import service.EventService;
@@ -159,6 +169,36 @@ public class UserRest {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
         return Response.ok(users).build();
+    }
+    
+    @GET
+    @Path("/usersdto")
+    @Produces("application/json")
+    public Response alleventsdto() {
+        List<User> events = userService.retriveAll();
+        List<UserDTO> eventsDto = new ArrayList<UserDTO>();
+        events.forEach(event -> eventsDto.add(new UserDTO(event)));
+        return Response.ok(eventsDto).build();
+    }
+    
+    @GET
+    @Path("/addUser")
+    @Produces("application/json")
+    public String addEvent(){
+    	User u = new User();
+    	u.setAttendedEvents(new HashSet<Event>());
+    	u.setFriends(new Friends());
+    	u.setLowCostTrip(new Price(100));
+    	u.setPersonalEvent(new HashSet<Event>());
+    	u.setProfile(new Profile());
+    	u.setUserName("bigMomo");
+    	userService.save(u);
+    	for(int i=1;i<20;i++){
+    		String newname = "momo"+i;
+    		u.setUserName(newname);
+        	userService.save(u);
+    	}
+    	return "OK";
     }
     
     public void setUserService(final UserService userDAO) {
