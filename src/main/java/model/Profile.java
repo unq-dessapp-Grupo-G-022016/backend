@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -43,6 +45,10 @@ public class Profile {
 	}
 
 	@ManyToMany (fetch = FetchType.EAGER, targetEntity=Category.class, cascade = CascadeType.ALL)
+	@JoinTable(
+		      name="categoriesSet",
+		      joinColumns=@JoinColumn(name="userProfileId", referencedColumnName="id"),
+		      inverseJoinColumns=@JoinColumn(name="category", referencedColumnName="name"))
     private Set<Category> categories = new HashSet<>();
 
     public void addCategory(Category category){this.categories.add(category);}

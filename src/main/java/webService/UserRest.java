@@ -85,6 +85,21 @@ public class UserRest {
     	userService.save(newUser);
     	return "OK";
     }
+    @POST
+    @Path("/createdto/{userName}")
+    @Produces("application/json")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String Createdto(@PathParam ("userName") String userName){
+    	User u = new User();
+		u.setUserName(userName);
+		u.setAttendedEvents(new HashSet<Event>());
+    	u.setFriends(new Friends());
+    	u.setLowCostTrip(new Price(0));
+    	u.setPersonalEvent(new HashSet<Event>());
+    	u.setProfile(new Profile());
+    	userService.save(u);
+    	return "OK";
+    }
     
     @GET
     @Path("/read/{userName}")
@@ -246,4 +261,44 @@ public class UserRest {
         return echo;
     }
  */
+    /*
+     *  the dark side
+     */
+    @GET
+    @Path("/getcategories/")
+    @Produces("application/json")
+    public List<Category> getbyq(){
+    	//exampleObject.setName("goingToHell");
+    	@SuppressWarnings("unchecked")
+		List<Category> events = (List<Category>) userService.find("select name from Category");
+    	return events;
+    }
+    @GET
+    @Path("/addcategory/{c}")
+    @Produces("application/json")
+    public String getbyq(@PathParam ("c") String c){
+    	User u = new User();
+		u.setUserName("fakeUser");
+		u.setAttendedEvents(new HashSet<Event>());
+    	u.setFriends(new Friends());
+    	u.setLowCostTrip(new Price(0));
+    	u.setPersonalEvent(new HashSet<Event>());
+    	Category category = new Category(c);
+    	Profile p = new Profile();
+    	p.addCategory(category);
+    	u.setProfile(p);
+    	userService.save(u);
+    	User u2 = new User();
+		u2.setUserName("fakeUser2");
+		u2.setAttendedEvents(new HashSet<Event>());
+    	u2.setFriends(new Friends());
+    	u2.setLowCostTrip(new Price(0));
+    	u2.setPersonalEvent(new HashSet<Event>());
+    	Category category2 = new Category(c);
+    	Profile p2 = new Profile();
+    	p2.addCategory(category2);
+    	u2.setProfile(p2);
+    	userService.save(u2);
+    	return "OK";
+    }
 }
