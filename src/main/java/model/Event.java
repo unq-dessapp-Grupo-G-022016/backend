@@ -157,7 +157,7 @@ public class Event {
     public Event(){
     	
     }
-
+/*
     public Event(String name, String address, String details, Price price, LocalDateTime date, LocalDateTime duration, Attenders attenders, Profile profile) {
         this.name = name;
         this.address = address;
@@ -169,6 +169,7 @@ public class Event {
         //this.category = category;
         this.profile = profile;
     }
+*/    
     public Event(String name, String address, String details, Price price, LocalDateTime date, LocalDateTime duration, Attenders attenders, Profile profile, boolean strictSchedule) {
         this.name = name;
         this.address = address;
