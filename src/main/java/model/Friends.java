@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonManagedReference;
+import org.hibernate.annotations.Cascade;
 
 /**
  * Created by alejandroK on 10/9/2016.
@@ -31,7 +32,7 @@ public class Friends {
 	
 	@ManyToMany (fetch = FetchType.EAGER, targetEntity=User.class, cascade = CascadeType.ALL)
     @JoinTable(
-		      name="friedsSet",
+		      name="friendsSet",
 		      joinColumns=@JoinColumn(name="userFriendId", referencedColumnName="id"),
 		      inverseJoinColumns=@JoinColumn(name="friendName", referencedColumnName="userName"))
     private Set<User> friends = new HashSet<>();

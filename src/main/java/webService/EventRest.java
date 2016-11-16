@@ -34,6 +34,7 @@ import model.Profile;
 import model.User;
 import service.EventDTOService;
 import service.EventService;
+import service.UserService;
 
 /**
  * 
@@ -64,7 +65,9 @@ public class EventRest {
     //private PostRepository postRepository;
     private EventService eventService;
     private EventDTOService eventServiceDTO;
-    
+
+	private UserService userService;
+	
     /*
      *  C.R.U.D.
      */
@@ -145,6 +148,17 @@ public class EventRest {
         List<EventDTO> eventsDto = new ArrayList<EventDTO>();
         events.forEach(event -> eventsDto.add(new EventDTO(event)));
         return Response.ok(eventsDto).build();
+    }
+    
+    @PUT
+    @Path("/attend/{eventId}/{userName}")
+    @Produces("application/json")
+    public Response attend(@PathParam ("eventId") int id,@PathParam ("userName") String userName){
+    	int i = 0;
+    	Event e = this.eventService.findById(id);
+    	User u = this.userService.findById(userName);
+    	e.attend(u);
+    	return Response.ok().build();
     }
     
     @GET

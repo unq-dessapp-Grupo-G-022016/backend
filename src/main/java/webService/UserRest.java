@@ -140,6 +140,7 @@ public class UserRest {
 
     }
 
+    @Transactional()
     @DELETE
     @Path("/delete/{userName}")
     @Produces("application/json")
@@ -150,7 +151,17 @@ public class UserRest {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
     	else{
-    		userService.delete(u);
+    		//u.removeAllFriend();
+    		//userService.find("delete from Friends where friendName='"+u.getUserName()+"'");
+    		//u.removemeFromAllFriendsAndRemoveThemFromMe();
+    		u.getFriends().getFriends().forEach(f -> {
+    			User databaseF = userService.findById(f.userName);
+    			databaseF.removeFriend(u);
+    			userService.update(databaseF);
+    			u.removeFriend(databaseF);
+    			userService.update(u);
+    		});
+    		//userService.delete(u);
     	}
         return Response.ok().build();
     }
@@ -167,6 +178,7 @@ public class UserRest {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
     	u.addFriend(f);
+    	f.addFriend(u);
     	userService.update(u);
     	return Response.ok().build();
     } 
@@ -208,6 +220,7 @@ public class UserRest {
         return Response.ok(eventsDto).build();
     }
     
+    @Transactional
     @GET
     @Path("/addUser")
     @Produces("application/json")

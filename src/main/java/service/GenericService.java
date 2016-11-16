@@ -22,17 +22,17 @@ public class GenericService<T> //implements Serializable {
         this.repository = repository;
     }
 
-    @Transactional
+    //@Transactional
     public void delete(final T object) {
         this.getRepository().delete(object);
     }
 
-    @Transactional(readOnly = true)
+    //@Transactional(readOnly = true)
     public List<T> retriveAll() {
         return this.getRepository().findAll();
     }
 
-    @Transactional
+    //@Transactional
     public void save(final T object) {
         this.getRepository().save(object);
     }
@@ -45,12 +45,12 @@ public class GenericService<T> //implements Serializable {
     public T findById(final Serializable id) {
         return this.getRepository().findById(id);
     }
-    @Transactional
+    //@Transactional
     public List<T> findByExample(T exampleObject){
     	return this.getRepository().findByExample(exampleObject);
     }
     
-    @Transactional
+    //@Transactional
     public List<?> find(String query){
     	return this.getRepository().find(query);
     }

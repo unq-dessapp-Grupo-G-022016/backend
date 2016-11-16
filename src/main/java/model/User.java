@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonManagedReference;
+import org.hibernate.annotations.Cascade;
 
 
 /**
@@ -29,7 +30,7 @@ import org.codehaus.jackson.annotate.JsonManagedReference;
 @Table(name = "Users")  
 public class User {
 
-	@Id
+	@Id 
     public String userName;
 	@OneToOne (cascade = CascadeType.ALL)
     private Profile profile;
@@ -139,6 +140,12 @@ public class User {
 
 	public void setAttendedEvents(Set<Event> attendedEvents) {
 		this.attendedEvents = attendedEvents;
+	}
+
+	public void removemeFromAllFriendsAndRemoveThemFromMe() {
+		// TODO Auto-generated method stub
+		this.getFriends().getFriends().forEach(f -> f.removeFriend(this));
+		this.getFriends().getFriends().removeAll(this.getFriends().getFriends());
 	}
 	
 }
