@@ -32,7 +32,6 @@ import model.Event;
 import model.Price;
 import model.Profile;
 import model.User;
-import service.EventDTOService;
 import service.EventService;
 import service.UserService;
 
@@ -64,7 +63,6 @@ public class EventRest {
      */
     //private PostRepository postRepository;
     private EventService eventService;
-    private EventDTOService eventServiceDTO;
 
 	private UserService userService;
 	

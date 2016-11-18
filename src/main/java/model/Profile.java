@@ -4,8 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -13,6 +15,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.hibernate.annotations.Cascade;
 
 /**
  * Created by leog on 30/08/16.
@@ -44,12 +47,34 @@ public class Profile {
 		this.categories = categories;
 	}
 
-	@ManyToMany (fetch = FetchType.EAGER, targetEntity=Category.class, cascade = CascadeType.ALL)
+	@ManyToMany (fetch = FetchType.EAGER, targetEntity=Category.class)
+	@org.hibernate.annotations.Cascade(value=org.hibernate.annotations.CascadeType.SAVE_UPDATE)
 	@JoinTable(
 		      name="categoriesSet",
 		      joinColumns=@JoinColumn(name="userProfileId", referencedColumnName="id"),
 		      inverseJoinColumns=@JoinColumn(name="category", referencedColumnName="name"))
-    private Set<Category> categories = new HashSet<>();
+  
+	/*
+	@ManyToMany(fetch = FetchType.LAZY,
+    cascade =
+    {
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.PERSIST
+    },
+    targetEntity = Category.class)
+@JoinTable(name = "ProfileCategories",
+    inverseJoinColumns = @JoinColumn(name = "profileId",
+            nullable = false,
+            updatable = false),
+    joinColumns = @JoinColumn(name = "categoryName",
+            nullable = false,
+            updatable = false),
+    foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT),
+    inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
+    */
+	private Set<Category> categories = new HashSet<>();
 
     public void addCategory(Category category){this.categories.add(category);}
 

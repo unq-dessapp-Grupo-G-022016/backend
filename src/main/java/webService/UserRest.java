@@ -161,7 +161,7 @@ public class UserRest {
     			u.removeFriend(databaseF);
     			userService.update(u);
     		});
-    		//userService.delete(u);
+    		userService.delete(u);
     	}
         return Response.ok().build();
     }
@@ -286,32 +286,15 @@ public class UserRest {
 		List<Category> events = (List<Category>) userService.find("select name from Category");
     	return events;
     }
+    @Transactional
     @GET
-    @Path("/addcategory/{c}")
+    @Path("/addcategory/{userName}/{c}")
     @Produces("application/json")
-    public String getbyq(@PathParam ("c") String c){
-    	User u = new User();
-		u.setUserName("fakeUser");
-		u.setAttendedEvents(new HashSet<Event>());
-    	u.setFriends(new Friends());
-    	u.setLowCostTrip(new Price(0));
-    	u.setPersonalEvent(new HashSet<Event>());
-    	Category category = new Category(c);
-    	Profile p = new Profile();
-    	p.addCategory(category);
-    	u.setProfile(p);
+    public String getbyq(@PathParam ("userName") String userName,@PathParam ("c") String c){
+    	User u = userService.findById(userName);
+    	Category category = new Category(c); 
+    	u.getProfile().addCategory(category);
     	userService.save(u);
-    	User u2 = new User();
-		u2.setUserName("fakeUser2");
-		u2.setAttendedEvents(new HashSet<Event>());
-    	u2.setFriends(new Friends());
-    	u2.setLowCostTrip(new Price(0));
-    	u2.setPersonalEvent(new HashSet<Event>());
-    	Category category2 = new Category(c);
-    	Profile p2 = new Profile();
-    	p2.addCategory(category2);
-    	u2.setProfile(p2);
-    	userService.save(u2);
     	return "OK";
     }
 }

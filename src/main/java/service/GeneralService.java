@@ -5,10 +5,8 @@ import dtos.EventDTO;
 public class GeneralService {
 
 	private EventService eventService;
-	private FriendsService friendsService;
 	private UserService userService;
-	private AttendersService attendersService;
-	private EventDTO eventDTOService;
+	private CategoryService categoryService;
 	
 
 
@@ -20,35 +18,19 @@ public class GeneralService {
 		this.eventService = eventService;
 	}
 
-	
-	public FriendsService getFriendsService() {
-		return friendsService;
-	}
-
-	public void setFriendsService(final FriendsService friendsService) {
-		this.friendsService = friendsService;
-	}
-	public AttendersService getAttendersService() {
-		return attendersService;
-	}
-
-	public void setAttendersService(final AttendersService attendersService) {
-		this.attendersService = attendersService;
-	}
-
 	public UserService getUserService() {
 		return userService;
 	}
-	public EventDTO getEventDTOService(){
-		return eventDTOService;
+	public CategoryService getCategoryService(){
+		return categoryService;
 	}
 
 	public void setUserService(final UserService userService) {
 		this.userService = userService;
 	}
 	
-	public void setEventDTOService(final EventDTO eventDTOService) {
-		this.eventDTOService = eventDTOService;
+	public void setCategoryService(final CategoryService categoryService) {
+		this.categoryService = categoryService;
 	}
 
 }

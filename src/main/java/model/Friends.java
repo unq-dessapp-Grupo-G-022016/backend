@@ -30,7 +30,8 @@ public class Friends {
     @GeneratedValue()
 	private int id;
 	
-	@ManyToMany (fetch = FetchType.EAGER, targetEntity=User.class, cascade = CascadeType.ALL)
+	@ManyToMany (fetch = FetchType.EAGER, targetEntity=User.class)//, cascade=CascadeType.ALL)
+	@org.hibernate.annotations.Cascade(value=org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
 		      name="friendsSet",
 		      joinColumns=@JoinColumn(name="userFriendId", referencedColumnName="id"),
