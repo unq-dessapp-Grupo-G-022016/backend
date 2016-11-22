@@ -3,6 +3,7 @@ package webService;
 
 import java.util.List;
 
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -45,16 +46,15 @@ public class CategoryRest {
      */
 	@Transactional
     @POST
-    @Path("/create")
-    @Produces("application/json")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response Create(Category cat){
-		Category e = null;
-		e = categoryService.findById(cat.getName());
-    	if (e == null) {
+    @Path("/create/{cat}")
+    public Response Create(@PathParam ("cat") String cat){
+		Category catcat = new Category();
+		catcat.setName(cat);
+		List<Category> e = categoryService.findByExample(catcat);
+    	if (e.isEmpty()) {
     		return Response.status(409).build();
     	}
-    	categoryService.save(cat);
+    	categoryService.save(new Category(cat));
     	return Response.ok().build();
     }
 	/*
@@ -65,16 +65,20 @@ public class CategoryRest {
     }
     */
     @GET
-    @Path("/read/{idE}")
+    @Path("/read/{cat}")
     @Produces("application/json")
-    public Response Read(@PathParam ("idE") int idE){
+    public Response Read(@PathParam ("cat") String cat){
+    	//Category catcat = new Category();
+		//catcat.setName(cat);
     	
-    	Category e = categoryService.findById(idE);
-    	if (e == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-        return Response.ok(e).build();
+		List<Category> e = (List<Category>) categoryService.find("from Category where name = "+cat+"");
+    	if (e.isEmpty()) {
+    		return Response.status(Response.Status.NOT_FOUND).build();
+    	}
+    	
+        return Response.ok(e.get(0)).build();
     }
+    
     @Transactional
     @PUT
     @Path("/update")
@@ -130,7 +134,7 @@ public class CategoryRest {
     	categoryService.save(cat);
     	cat = new Category("Escabios");
     	categoryService.save(cat);
-    	cat = new Category("Orgullo Gay");
+    	cat = new Category("Gay-Pride");
     	categoryService.save(cat);
     	cat = new Category("Pro-Lesbo");
     	categoryService.save(cat);
