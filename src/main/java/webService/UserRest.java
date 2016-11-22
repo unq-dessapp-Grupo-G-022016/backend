@@ -85,6 +85,7 @@ public class UserRest {
     	userService.save(newUser);
     	return "OK";
     }
+    @Transactional
     @POST
     @Path("/createdto/{userName}")
     @Produces("application/json")
@@ -99,6 +100,17 @@ public class UserRest {
     	u.setProfile(new Profile());
     	userService.save(u);
     	return "OK";
+    }
+    @Transactional
+    @PUT
+    @Path("/updatepricedto/{userName}/{price}")
+    @Produces("application/json")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String Createdto(@PathParam ("userName") String userName,@PathParam ("price") int price){
+        User u = userService.findById(userName);
+        u.getLowCostTrip().setAmmount(price);
+        userService.save(u);
+        return "OK";
     }
     
     @GET
