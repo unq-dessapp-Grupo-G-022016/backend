@@ -40,6 +40,7 @@ import model.Price;
 import model.Profile;
 import model.User;
 import model.creation.UserBuilder;
+import service.CategoryService;
 import service.EventService;
 import service.GenericService;
 import service.UserService;
@@ -74,6 +75,7 @@ public class UserRest {
     private HttpHeaders headers;
     private UserService userService;
     private EventService eventService;
+    private CategoryService categoryService;
     /*
      *  C.R.U.D.
      */
@@ -88,9 +90,8 @@ public class UserRest {
     @Transactional
     @POST
     @Path("/createdto/{userName}")
-    @Produces("application/json")
     @Consumes(MediaType.APPLICATION_JSON)
-    public String Createdto(@PathParam ("userName") String userName){
+    public Response Createdto(@PathParam ("userName") String userName){
     	User u = new User();
 		u.setUserName(userName);
 		u.setAttendedEvents(new HashSet<Event>());
@@ -99,8 +100,9 @@ public class UserRest {
     	u.setPersonalEvent(new HashSet<Event>());
     	u.setProfile(new Profile());
     	userService.save(u);
-    	return "OK";
+    	return Response.ok().build();
     }
+
     @Transactional
     @PUT
     @Path("/updatepricedto/{userName}/{price}")
@@ -254,6 +256,9 @@ public class UserRest {
     public void setUserService(final UserService userDAO) {
         userService = userDAO;
     }
+    public void setCategoryService(final CategoryService userDAO) {
+        categoryService = userDAO;
+    }
     
  // This method will do a preflight check itself
     /*
@@ -296,8 +301,11 @@ public class UserRest {
     @Produces("application/json")
     public String getbyq(@PathParam ("userName") String userName,@PathParam ("c") String c){
     	User u = userService.findById(userName);
-    	Category category = new Category(c); 
-    	u.getProfile().addCategory(category);
+
+    	Category category = new Category(c);
+
+    	categoryService.save(category);
+        u.getProfile().addCategory(category);
     	userService.save(u);
     	return "OK";
     }
