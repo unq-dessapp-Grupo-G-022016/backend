@@ -277,15 +277,7 @@ public class UserRest {
     /*
      *  the dark side
      */
-    @GET
-    @Path("/getcategories/")
-    @Produces("application/json")
-    public List<Category> getbyq(){
-    	//exampleObject.setName("goingToHell");
-    	@SuppressWarnings("unchecked")
-		List<Category> events = (List<Category>) userService.find("select name from Category");
-    	return events;
-    }
+  
     @Transactional
     @GET
     @Path("/addcategory/{userName}/{c}")

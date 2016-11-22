@@ -31,6 +31,7 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
 		<jaxrs:serviceBeans>
 			<ref bean="userRest" />
 			<ref bean="eventRest" />
+			<ref bean="categoryRest" />
 		</jaxrs:serviceBeans>
 		
 		<jaxrs:extensionMappings>

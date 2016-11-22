@@ -3,6 +3,7 @@ package webService;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -18,7 +19,9 @@ import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 
 import model.Category;
 import model.Event;
+import model.User;
 import service.CategoryService;
+import service.EventService;
 import service.UserService;
 
 
@@ -40,22 +43,27 @@ public class CategoryRest {
     /*
      *  C.R.U.D.
      */
+	@Transactional
     @POST
     @Path("/create")
     @Produces("application/json")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response Create(Category cat){
-    	if (duplicatedCategory(cat)){
+		Category e = null;
+		e = categoryService.findById(cat.getName());
+    	if (e == null) {
     		return Response.status(409).build();
     	}
     	categoryService.save(cat);
     	return Response.ok().build();
     }
+	/*
     private boolean duplicatedCategory(Category cat){
     	Category exampleObject = new Category(cat.getName());
     	List<Category> events = categoryService.findByExample(exampleObject);
     	return events.size()>0;
     }
+    */
     @GET
     @Path("/read/{idE}")
     @Produces("application/json")
@@ -67,6 +75,7 @@ public class CategoryRest {
         }
         return Response.ok(e).build();
     }
+    @Transactional
     @PUT
     @Path("/update")
     @Produces("application/json")
@@ -82,7 +91,7 @@ public class CategoryRest {
         return Response.ok().build();
 
     }
-    
+    @Transactional
     @DELETE
     @Path("/delete/{idE}")
     @Produces("application/json")
@@ -94,5 +103,41 @@ public class CategoryRest {
     	categoryService.delete(e);
     	return Response.ok().build();
     }
+    /*
+     * 
+     */
+    @GET
+    @Path("/categories")
+    @Produces("application/json")
+    public Response getAllUsers() {
+        List<Category> users = categoryService.retriveAll();
+        if (users.isEmpty()) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.ok(users).build();
+    }
+    @Transactional
+    @GET
+    @Path("/addCategories")
+    public Response addCategories(){
+    	Category cat = new Category("Vegano");
+    	categoryService.save(cat);
+    	cat = new Category("Rabioles");
+    	categoryService.save(cat);
+    	cat = new Category("Aburrido");
+    	categoryService.save(cat);
+    	cat = new Category("Disco");
+    	categoryService.save(cat);
+    	cat = new Category("Escabios");
+    	categoryService.save(cat);
+    	cat = new Category("Orgullo Gay");
+    	categoryService.save(cat);
+    	cat = new Category("Pro-Lesbo");
+    	categoryService.save(cat);
+		return Response.ok().build();
+    }
 
+    public void setCategoryService(final CategoryService eventDAO) {
+        categoryService = eventDAO;
+    }
 }
