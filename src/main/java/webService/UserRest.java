@@ -299,14 +299,15 @@ public class UserRest {
     @GET
     @Path("/addcategory/{userName}/{c}")
     @Produces("application/json")
-    public String getbyq(@PathParam ("userName") String userName,@PathParam ("c") String c){
+    public Response getbyq(@PathParam ("userName") String userName,@PathParam ("c") String c){
     	User u = userService.findById(userName);
-
-    	Category category = new Category(c);
-
-    	categoryService.save(category);
-        u.getProfile().addCategory(category);
+    	Category cat = categoryService.findById(c);
+    	if (cat == null){
+            Category category = new Category(c);
+            categoryService.save(category);
+        }
+        u.getProfile().addCategory(cat);
     	userService.save(u);
-    	return "OK";
+    	return Response.ok().build();
     }
 }

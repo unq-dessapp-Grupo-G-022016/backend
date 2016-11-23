@@ -48,12 +48,12 @@ public class CategoryRest {
     @POST
     @Path("/create/{cat}")
     public Response Create(@PathParam ("cat") String cat){
-		Category catcat = new Category();
-		catcat.setName(cat);
-		List<Category> e = categoryService.findByExample(catcat);
-    	if (e.isEmpty()) {
+
+        Category e = categoryService.findById(cat);
+    	if (e != null) {
     		return Response.status(409).build();
     	}
+    	e = new Category(cat);
     	categoryService.save(new Category(cat));
     	return Response.ok().build();
     }
@@ -71,12 +71,12 @@ public class CategoryRest {
     	//Category catcat = new Category();
 		//catcat.setName(cat);
     	
-		List<Category> e = (List<Category>) categoryService.find("from Category where name = "+cat+"");
-    	if (e.isEmpty()) {
+		Category e = categoryService.findById(cat);
+    	if (e == null) {
     		return Response.status(Response.Status.NOT_FOUND).build();
     	}
     	
-        return Response.ok(e.get(0)).build();
+        return Response.ok(e).build();
     }
     
     @Transactional
