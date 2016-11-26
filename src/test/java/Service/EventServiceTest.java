@@ -20,6 +20,8 @@ import model.User;
 import model.creation.EventBuilder;
 import service.EventService;
 
+import javax.transaction.Transactional;
+
 /**
  * TODO: description
  */
@@ -44,6 +46,7 @@ public class EventServiceTest {
     	eventService.delete(eventService.retriveAll().get(0));
         Assert.assertEquals(0, eventService.retriveAll().size());
     }
+    @Transactional
     @Test
     public void testSave() {
     	//eventService.save(eventBuilder.anyEvent().buildGeneralEvent());
@@ -58,7 +61,7 @@ public class EventServiceTest {
     	//e.setAttenders(uset);
     	//e.setCategory(new Category("warm places"));
     	eventService.save(e);
-    	
+
         Assert.assertEquals(1, eventService.retriveAll().size());
     }
     
