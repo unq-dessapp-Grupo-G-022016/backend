@@ -181,9 +181,9 @@ public class EventRest {
     	return events;
     }
     
-    
+
  	@GET
-     @Path("/addEvent")
+     @Path("/addEvents")
      @Produces("application/json")
      public String addEvent(){
     	Event e = new Event();

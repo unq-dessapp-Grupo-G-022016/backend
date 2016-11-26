@@ -237,7 +237,7 @@ public class UserRest {
     
     @Transactional
     @GET
-    @Path("/addUser")
+    @Path("/addUsers")
     @Produces("application/json")
     public String addEvent(){
     	for(int i=1;i<20;i++){
