@@ -108,11 +108,12 @@ public class UserRest {
     @Path("/updatepricedto/{userName}/{price}")
     @Produces("application/json")
     @Consumes(MediaType.APPLICATION_JSON)
-    public String Createdto(@PathParam ("userName") String userName,@PathParam ("price") int price){
+    public Response Createdto(@PathParam ("userName") String userName,@PathParam ("price") int price){
         User u = userService.findById(userName);
         u.getLowCostTrip().setAmmount(price);
+        // todo : try/catch
         userService.save(u);
-        return "OK";
+        return Response.ok(u).build();
     }
     
     @GET
@@ -295,19 +296,21 @@ public class UserRest {
      *  the dark side
      */
   
-    @Transactional
+
     @GET
-    @Path("/addcategory/{userName}/{c}")
+    @Path("/addCategory/{userName}/{c}")
     @Produces("application/json")
     public Response getbyq(@PathParam ("userName") String userName,@PathParam ("c") String c){
+        Category cat = null;
     	User u = userService.findById(userName);
-    	Category cat = categoryService.findById(c);
+    	cat = categoryService.findById(c);
     	if (cat == null){
-            Category category = new Category(c);
-            categoryService.save(category);
+            categoryService.create(c);
+            cat = categoryService.findById(c);
         }
-        u.getProfile().addCategory(cat);
-    	userService.save(u);
-    	return Response.ok().build();
+        //if user has category error
+
+        return userService.addCategory(u,cat);
+
     }
 }

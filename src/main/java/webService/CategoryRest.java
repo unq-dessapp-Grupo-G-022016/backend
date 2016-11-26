@@ -74,7 +74,7 @@ public class CategoryRest {
         return Response.ok(e).build();
     }
     
-    
+    /*
     @PUT
     @Path("/update")
     @Produces("application/json")
@@ -84,7 +84,8 @@ public class CategoryRest {
         return categoryService.updateByName(updatedCategory.getName());
 
     }
-    
+    */
+
     @DELETE
     @Path("/delete/{id}")
     @Produces("application/json")

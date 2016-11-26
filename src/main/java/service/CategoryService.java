@@ -20,7 +20,7 @@ public class CategoryService extends GenericService<Category>{
     	this.getRepository().save(new Category(cat));
     	return Response.ok().build();
 	}
-	
+/*
 	@Transactional
 	public Response updateByName(String name){
 		Category e = this.getRepository().findById(name);
@@ -32,7 +32,7 @@ public class CategoryService extends GenericService<Category>{
     	}
         return Response.ok().build();
 	}
-	
+*/
 	@Transactional
 	public Response deleteByName(String name){
 		Category e = this.getRepository().findById(name);
