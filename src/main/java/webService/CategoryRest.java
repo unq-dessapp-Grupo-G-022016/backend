@@ -44,18 +44,13 @@ public class CategoryRest {
     /*
      *  C.R.U.D.
      */
-	@Transactional
+	
     @POST
     @Path("/create/{cat}")
     public Response Create(@PathParam ("cat") String cat){
 
-        Category e = categoryService.findById(cat);
-    	if (e != null) {
-    		return Response.status(409).build();
-    	}
-    	e = new Category(cat);
-    	categoryService.save(new Category(cat));
-    	return Response.ok().build();
+		return categoryService.create(cat);
+        
     }
 	/*
     private boolean duplicatedCategory(Category cat){
@@ -79,33 +74,23 @@ public class CategoryRest {
         return Response.ok(e).build();
     }
     
-    @Transactional
+    
     @PUT
     @Path("/update")
     @Produces("application/json")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response Update(Category updatedEvent){
-    	Category e = categoryService.findById(updatedEvent.getName());
-    	if (e == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-    	else{
-    		categoryService.update(updatedEvent);
-    	}
-        return Response.ok().build();
+    public Response Update(Category updatedCategory){
+    	
+        return categoryService.updateByName(updatedCategory.getName());
 
     }
-    @Transactional
+    
     @DELETE
-    @Path("/delete/{idE}")
+    @Path("/delete/{id}")
     @Produces("application/json")
-    public Response Delete(@PathParam ("idE") int idE){
-    	Category e = categoryService.findById(idE);
-    	if (e == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-    	categoryService.delete(e);
-    	return Response.ok().build();
+    public Response Delete(@PathParam ("id") String id){
+    	
+    	return categoryService.deleteByName(id);
     }
     /*
      * 
@@ -120,6 +105,7 @@ public class CategoryRest {
         }
         return Response.ok(users).build();
     }
+    
     @Transactional
     @GET
     @Path("/addCategories")
