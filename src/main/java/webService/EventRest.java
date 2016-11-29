@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
@@ -129,6 +130,12 @@ public class EventRest {
     	eventService.delete(e);
     	return Response.ok().build();
     }
+
+    //////////////////////////////
+    /*
+    // bundles...
+     */
+
     
     /////////////////////////*/
     @GET
@@ -147,7 +154,8 @@ public class EventRest {
         events.forEach(event -> eventsDto.add(new EventDTO(event)));
         return Response.ok(eventsDto).build();
     }
-    
+
+    @Transactional
     @PUT
     @Path("/attend/{eventId}/{userName}")
     @Produces("application/json")
@@ -156,6 +164,9 @@ public class EventRest {
     	Event e = this.eventService.findById(id);
     	User u = this.userService.findById(userName);
     	e.attend(u);
+    	u.attend(e);
+    	eventService.update(e);
+    	userService.update(u);
     	return Response.ok().build();
     }
     
@@ -221,6 +232,9 @@ public class EventRest {
     
     public void setEventService(final EventService eventDAO) {
         eventService = eventDAO;
+    }
+    public void setUserService(final UserService eventDAO) {
+        userService = eventDAO;
     }
 
 }

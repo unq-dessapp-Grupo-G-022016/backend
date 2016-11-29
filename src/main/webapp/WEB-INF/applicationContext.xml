@@ -59,6 +59,7 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
 
 	<bean id="eventRest" class="webService.EventRest">
 		<property name="eventService" ref="service.event" />
+		<property name="userService" ref="service.user" />
 	</bean>
 	
 	<bean id="service.category" class="service.CategoryService" />

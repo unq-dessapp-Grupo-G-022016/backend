@@ -91,6 +91,8 @@ public class EventDTO {
 		this.categories = categories;
 	}
 
+	public int getId(){ return this.id ;}
+
 	public boolean isStrictSchedule() {
 		return strictSchedule;
 	}
@@ -108,6 +110,7 @@ public class EventDTO {
 	int price;
 	Set<String> categories;
 	boolean strictSchedule;
+	int id;
 	
 	/*
 	public String toString(){
@@ -122,6 +125,7 @@ public class EventDTO {
 	}
 	
 	public EventDTO(Event event){
+		this.id = event.getId();
 		this.address = event.getAddress();
 		setAttenders(event);
 		this.details = event.getDetails();
