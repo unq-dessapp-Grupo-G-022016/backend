@@ -23,16 +23,12 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
+import model.*;
+import model.creation.Events;
 import org.apache.commons.lang.StringUtils;
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 
 import dtos.EventDTO;
-import model.Attenders;
-import model.Category;
-import model.Event;
-import model.Price;
-import model.Profile;
-import model.User;
 import service.EventService;
 import service.UserService;
 
@@ -103,6 +99,17 @@ public class EventRest {
         }
         return Response.ok(e).build();
     }
+    @GET
+    @Path("/readdto/{idE}")
+    @Produces("application/json")
+    public Response Readdto(@PathParam ("idE") int idE){
+
+        Event e = eventService.findById(idE);
+        if (e == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.ok(new EventDTO(e)).build();
+    }
     @PUT
     @Path("/update")
     @Produces("application/json")
@@ -135,6 +142,17 @@ public class EventRest {
     /*
     // bundles...
      */
+    @GET
+    @Path("/cheap/{day}/{user}")
+    @Produces("application/json")
+    public Response cheap(@PathParam("day") int day, @PathParam("user") String user){
+        List<List<Event>> bundles = new ArrayList<List<Event>>();
+
+        List<Bundle> cheaptrips = new TripManager().cheapTrip(this.getby(day),userService.findById(user));
+        cheaptrips.forEach(bundle -> bundles.add(bundle.getBundle()));
+
+        return Response.ok(bundles).build();
+    }
 
     
     /////////////////////////*/
@@ -226,6 +244,9 @@ public class EventRest {
 
         	eventService.save(e);
     	}
+
+    	new Events().someEvents().forEach(event -> eventService.save(event));
+
      	return "OK";
      }
      

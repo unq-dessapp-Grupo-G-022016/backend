@@ -187,7 +187,7 @@ public class Event {
         return price;
     }
 
-    public boolean isFoodEvent(){return false;}
+    public boolean isFoodEvent(){return getProfile().hasCategory("Food");}
 
     public boolean isMusicEvent(){return false;}
 

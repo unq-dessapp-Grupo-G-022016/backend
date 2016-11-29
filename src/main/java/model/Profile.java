@@ -2,6 +2,7 @@ package model;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import javax.persistence.CascadeType;
 import javax.persistence.ConstraintMode;
@@ -83,5 +84,11 @@ public class Profile {
     public Set<Category> allCategories(){
         return categories;
     }
+
+    public boolean hasCategory(String categoryName){
+
+		Stream<Category> cat = getCategories().stream().filter(c -> (c.getName().equals(categoryName)));
+		return (cat.toArray().length>0);
+	}
 
 }
