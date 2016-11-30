@@ -19,8 +19,8 @@ public class TripManager {
         List<Event> cheapFoodEvents = cheapFood(allEvents,user);
         List<Event> notFoodEvents = notFoodEvents(allEvents);
         List<Event> notFoodFreeEvents = freeEvents(notFoodEvents);
-        cheapFoodEvents = eventsAndCategoriesMatcher(cheapFoodEvents, user.getProfile().allCategories());
-        notFoodFreeEvents = eventsAndCategoriesMatcher(notFoodFreeEvents, user.getProfile().allCategories());
+        //cheapFoodEvents = eventsAndCategoriesMatcher(cheapFoodEvents, user.getProfile().allCategories());
+        //notFoodFreeEvents = eventsAndCategoriesMatcher(notFoodFreeEvents, user.getProfile().allCategories());
         return new JoolUse().eventListCrossJoin(cheapFoodEvents,notFoodFreeEvents);
     }
 

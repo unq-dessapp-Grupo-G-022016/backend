@@ -148,10 +148,16 @@ public class EventRest {
     public Response cheap(@PathParam("day") int day, @PathParam("user") String user){
         List<List<Event>> bundles = new ArrayList<List<Event>>();
 
-        List<Bundle> cheaptrips = new TripManager().cheapTrip(this.getby(day),userService.findById(user));
+        List<Bundle> cheaptrips = new TripManager().cheapTrip(this.getbydate(day),userService.findById(user));
         cheaptrips.forEach(bundle -> bundles.add(bundle.getBundle()));
 
-        return Response.ok(bundles).build();
+        return Response.ok(cheaptrips.size()).build();
+    }
+    public List<Event> getbydate(int date){
+        Event exampleObject = new Event();
+        exampleObject.setDay(date);
+        //exampleObject.setName("goingToHell");
+        return  eventService.findByExample(exampleObject);
     }
 
     
@@ -245,7 +251,34 @@ public class EventRest {
         	eventService.save(e);
     	}
 
-    	new Events().someEvents().forEach(event -> eventService.save(event));
+        Event e1 = new Event();
+        e1.setName("Guerrin");
+        e1.setAddress("Av. Corrientes 1368, C1043ABN CABA");
+        e1.setDetails("La pizzería Guerrin está entre las más antiguas y tradicionales de la calle corrientes. " +
+                "Fué fundada hacia el año 1932 por el Sr. Arturo Malvezzi y el Sr. Guido Grondona, emigrantes " +
+                "Genoveses que habían llegado de Italia en el año 1927.");
+
+        e1.setPrice(new Price(20));
+        e1.setStartTime(LocalDateTime.now());
+        e1.setEndTime(LocalDateTime.now());
+        Set<User> users1 = new HashSet<User>();
+        Attenders attenders1 = new Attenders();
+        attenders1.setUsers(users1);
+        attenders1.setMaxCapacity(1000);
+        attenders1.setRecommendedMaxGroup(100);
+        attenders1.setRecommendedMinGroup(1);
+        e1.setAttenders(attenders1);
+        Profile p1 = new Profile();
+        p1.addCategory(new Category("Food"));
+        //p.addCategory(new Category(""));
+        e1.setProfile(p1);
+        //e.setCategory(new Category("warm places"));
+        //e.setHour(LocalTime.of(12, 50));
+        eventService.save(e1);
+
+
+
+
 
      	return "OK";
      }
