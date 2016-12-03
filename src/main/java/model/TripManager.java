@@ -1,10 +1,7 @@
 package model;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -19,8 +16,8 @@ public class TripManager {
         List<Event> cheapFoodEvents = cheapFood(allEvents,user);
         List<Event> notFoodEvents = notFoodEvents(allEvents);
         List<Event> notFoodFreeEvents = freeEvents(notFoodEvents);
-        //cheapFoodEvents = eventsAndCategoriesMatcher(cheapFoodEvents, user.getProfile().allCategories());
-        //notFoodFreeEvents = eventsAndCategoriesMatcher(notFoodFreeEvents, user.getProfile().allCategories());
+        cheapFoodEvents = eventsAndCategoriesMatcher(cheapFoodEvents, user.getProfile().allCategories());
+        notFoodFreeEvents = eventsAndCategoriesMatcher(notFoodFreeEvents, user.getProfile().allCategories());
         return new JoolUse().eventListCrossJoin(cheapFoodEvents,notFoodFreeEvents);
     }
 
@@ -44,8 +41,15 @@ public class TripManager {
         //Remove friends without common interests
         Set<Category> categories = user.getFriends().categoriesOfUsersThatHaveAnyOfThis(user.getProfile().allCategories());
         //Remove user categories
-        categories.removeAll(user.getProfile().allCategories());
-        List<Event> userMatching = eventsAndCategoriesMatcher(allEvents,categories);
+        Set<String> cat1 = new HashSet<String>();
+        user.getProfile().allCategories().forEach(cn -> cat1.add(cn.getName()));
+        Set<String> cat2 = new HashSet<String>();
+        categories.forEach(cn -> cat2.add(cn.getName()));
+        cat2.removeAll(cat1);
+        Set<Category> resultCategories = new HashSet<Category>();
+        cat2.forEach(c -> resultCategories.add(new Category(c)));
+
+        List<Event> userMatching = eventsAndCategoriesMatcher(allEvents,resultCategories);
         List<Event> foodEvents = foodEvents(userMatching);
         List<Event> notFoodEvents = notFoodEvents(userMatching);
         return new JoolUse().eventListCrossJoin(foodEvents,notFoodEvents);
@@ -57,11 +61,11 @@ public class TripManager {
         Iterator<Event> it = eventsCopy.iterator();
         while (it.hasNext()){
             Event e = it.next();
-            /*
+
             if (!e.hasTheSameCategory(categories)) {
                 it.remove();
             }
-            */
+
         }
         return eventsCopy;
     }

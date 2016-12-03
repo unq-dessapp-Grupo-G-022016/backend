@@ -2,10 +2,7 @@ package webService;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
@@ -19,10 +16,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.*;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.cxf.rs.security.cors.CorsHeaderConstants;
@@ -313,4 +307,22 @@ public class UserRest {
         return userService.addCategory(u,cat);
 
     }
+
+    @Transactional
+    @PUT
+    @Path("/personalEvent/{userName}/{eventId}")
+    @Produces("application/json")
+    public Response attend(@PathParam ("userName") String userName ,@PathParam ("eventId") int id){
+        int i = 0;
+        Event e = this.eventService.findById(id);
+        User u = this.userService.findById(userName);
+        e.attend(u);
+        u.attend(e);
+        u.getPersonalEvent().add(e);
+        eventService.update(e);
+        userService.update(u);
+        return Response.ok().build();
+    }
+
+
 }

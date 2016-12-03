@@ -237,14 +237,16 @@ public class Event {
     /*
     public boolean hasTheSameCategory(Event anotherEvent) {
         return this.getCategory().getName().equals(anotherEvent.getCategory().getName());
-    }
 
+*/
     public boolean hasTheSameCategory(Set<Category> categorySet){
-        Stream<Category> events= categorySet.stream().filter(event -> event.isEqual(this.category));
-        return ! events.collect(Collectors.toList()).isEmpty();
+        Stream<Category> categories = categorySet.stream().filter(cat ->
+            this.getProfile().hasCategory(cat.getName())
+        );
+        return ! categories.collect(Collectors.toList()).isEmpty();
 
     }
-    */
+
 
     /**
      * Return suggestions based on event attenders.

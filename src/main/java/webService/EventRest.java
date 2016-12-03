@@ -75,7 +75,7 @@ public class EventRest {
     		return Response.status(409).build();
     	}
     	eventService.save(newEvent);
-    	return Response.ok().build();
+    	return Response.ok(newEvent.getId()).build();
     }
     
     private boolean duplicatedEvent(Event event){
@@ -153,12 +153,40 @@ public class EventRest {
 
         return Response.ok(bundles).build();
     }
+    @GET
+    @Path("/surprise/{day}/{user}")
+    @Produces("application/json")
+    public Response surprise(@PathParam("day") int day, @PathParam("user") String user){
+        List<List<Event>> bundles = new ArrayList<List<Event>>();
+
+        List<Bundle> cheaptrips = new TripManager().surpriseTrip(this.getbydate(day),userService.findById(user));
+        cheaptrips.forEach(bundle -> bundles.add(bundle.getBundle()));
+
+        return Response.ok(bundles).build();
+    }
+    @GET
+    @Path("/friendly/{day}/{user}")
+    @Produces("application/json")
+    public Response friendly(@PathParam("day") int day, @PathParam("user") String user){
+        List<List<Event>> bundles = new ArrayList<List<Event>>();
+
+        List<Bundle> cheaptrips = new TripManager().friendlyTrip(this.getbydate(day),userService.findById(user));
+        cheaptrips.forEach(bundle -> bundles.add(bundle.getBundle()));
+
+        return Response.ok(bundles).build();
+    }
+
+
+
+
+
     public List<Event> getbydate(int date){
         Event exampleObject = new Event();
         exampleObject.setDay(date);
         //exampleObject.setName("goingToHell");
         return  eventService.findByExample(exampleObject);
     }
+
 
     
     /////////////////////////*/

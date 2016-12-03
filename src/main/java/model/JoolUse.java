@@ -3,7 +3,9 @@ package model;
 import org.jooq.lambda.Seq;
 import org.jooq.lambda.tuple.Tuple2;
 
+import javax.xml.soap.SAAJResult;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -33,10 +35,21 @@ public class JoolUse {
     }
 
     public Set<Category> categoriesSetsIntersection(Set<Category> categoriesA, Set<Category> categoriesB){
-        Seq<Category> seq1 = seq(categoriesA.stream());
-        Seq<Category> seq2 = seq(categoriesB.stream());
 
-        return  seq1.retainAll(seq2).toSet();
+        Set<String> cat1 = new HashSet<String>();
+        categoriesA.forEach(cn -> cat1.add(cn.getName()));
+        Set<String> cat2 = new HashSet<String>();
+        categoriesB.forEach(cn -> cat2.add(cn.getName()));
+
+        Seq<String> seq1 = seq(cat1.stream());
+        Seq<String> seq2 = seq(cat2.stream());
+
+        Set<String> result = seq1.retainAll(seq2).toSet();
+
+        Set<Category> catResult = new HashSet<Category>();
+        result.forEach(catname -> catResult.add(new Category(catname)));
+
+        return  catResult;
     }
 
     private void tupleOfEventsToListOfBundles(Tuple2<Event, Event> t, List<Bundle> bList) {

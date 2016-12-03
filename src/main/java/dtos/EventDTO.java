@@ -102,10 +102,12 @@ public class EventDTO {
 	}
 	Set<String> attenders;
 	String details;
+
 	int startTimeDate;
 	int startTimeHour;
 	int endTimeDate;
 	int endTimeHour;
+
 	String name;
 	int price;
 	Set<String> categories;
