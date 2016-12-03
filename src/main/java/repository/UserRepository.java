@@ -8,7 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateCallback;
 
-import model.User;
+import model.persistents.User;
 
 @SuppressWarnings("serial")
 public class UserRepository extends HibernateGenericRepository<User> implements GenericRepository<User> {

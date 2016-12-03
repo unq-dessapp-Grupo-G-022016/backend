@@ -1,5 +1,7 @@
 package model;
 
+import model.persistents.Event;
+import model.tools.Bundle;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;

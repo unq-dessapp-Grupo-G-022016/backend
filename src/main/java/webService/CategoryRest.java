@@ -3,28 +3,19 @@ package webService;
 
 import java.util.List;
 
-import javax.persistence.Query;
 import javax.transaction.Transactional;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 
-import model.Category;
-import model.Event;
-import model.User;
+import model.persistents.Category;
 import service.CategoryService;
-import service.EventService;
-import service.UserService;
-
 
 
 @CrossOriginResourceSharing(

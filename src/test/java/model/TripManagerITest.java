@@ -1,5 +1,8 @@
 package model;
 
+import model.persistents.*;
+import model.tools.Bundle;
+import model.tools.TripManager;
 import org.junit.Assert;
 import org.junit.Test;
 

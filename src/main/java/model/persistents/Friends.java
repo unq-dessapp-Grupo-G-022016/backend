@@ -1,10 +1,9 @@
-package model;
+package model.persistents;
 
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,12 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 
-import org.codehaus.jackson.annotate.JsonBackReference;
+import model.tools.JoolUse;
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonManagedReference;
-import org.hibernate.annotations.Cascade;
 
 /**
  * Created by alejandroK on 10/9/2016.

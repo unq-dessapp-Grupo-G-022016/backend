@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import model.Category;
-import model.Event;
-import model.User;
+import model.persistents.Category;
+import model.persistents.Event;
+import model.persistents.User;
 
 public class UserDTO {
 

@@ -1,4 +1,7 @@
-package model;
+package model.old;
+
+import model.persistents.Event;
+import model.persistents.User;
 
 /**
  * Created by alejandrok on 9/12/16.

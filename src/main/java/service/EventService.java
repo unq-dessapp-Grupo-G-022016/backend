@@ -1,6 +1,6 @@
 package service;
 
-import model.Event;
+import model.persistents.Event;
 
 import javax.transaction.Transactional;
 

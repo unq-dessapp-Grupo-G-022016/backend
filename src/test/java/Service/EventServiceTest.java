@@ -13,10 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import model.Category;
-import model.Event;
-import model.Price;
-import model.User;
+import model.persistents.Event;
+import model.persistents.Price;
+import model.persistents.User;
 import model.creation.EventBuilder;
 import service.EventService;
 

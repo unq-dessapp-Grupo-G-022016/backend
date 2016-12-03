@@ -1,6 +1,12 @@
 package model.creation;
 
-import model.*;
+import model.old.FoodEvent;
+import model.old.GeneralEvent;
+import model.old.MovieEvent;
+import model.old.MusicEvent;
+import model.persistents.Category;
+import model.persistents.Price;
+import model.persistents.User;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;

@@ -1,9 +1,10 @@
-package model;
+package model.tools;
 
+import model.persistents.Category;
+import model.persistents.Event;
 import org.jooq.lambda.Seq;
 import org.jooq.lambda.tuple.Tuple2;
 
-import javax.xml.soap.SAAJResult;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;

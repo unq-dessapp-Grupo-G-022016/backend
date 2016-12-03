@@ -25,7 +25,7 @@ public class ArqTest {
     public void testReflect() {
 
 
-        Reflections reflections = new Reflections("model");
+        Reflections reflections = new Reflections("model.persistents");
 
         //config
         List<ClassLoader> classLoadersList = new LinkedList<ClassLoader>();
@@ -35,13 +35,14 @@ public class ArqTest {
         Reflections reflectionsb = new Reflections(new ConfigurationBuilder()
                 .setScanners(new SubTypesScanner(false /* don't exclude Object.class */), new ResourcesScanner())
                 .setUrls(ClasspathHelper.forClassLoader(classLoadersList.toArray(new ClassLoader[0])))
-                .filterInputsBy(new FilterBuilder().include(FilterBuilder.prefix("model"))));
+                .filterInputsBy(new FilterBuilder().include(FilterBuilder.prefix("model.persistents"))));
         //
 
         Set<Class<?>> annotated = reflections.getTypesAnnotatedWith(Entity.class);
 
         Set<Class<? extends Object>> allClasses = reflectionsb.getSubTypesOf(Object.class);
 
+        Assert.assertEquals(allClasses.size(), annotated.size());
 
         /*
 //
@@ -57,16 +58,10 @@ public class ArqTest {
         for (Class<?>ac:allClasses) {
             System.out.println(ac.toString());
         }
-*/
-
-/*
         Assert.assertEquals(11,annotated.size());
-
         Assert.assertEquals(11,allClasses.size());
-
         */
 
-        Assert.assertTrue(allClasses.size() > annotated.size());
 
 
 

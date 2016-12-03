@@ -1,42 +1,29 @@
 package webService;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.*;
 
 import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
-import javax.ws.rs.OPTIONS;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.*;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.cxf.rs.security.cors.CorsHeaderConstants;
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
-import org.apache.cxf.rs.security.cors.LocalPreflight;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import dtos.EventDTO;
 import dtos.UserDTO;
-import model.Attenders;
-import model.Category;
-import model.Event;
-import model.Friends;
-import model.Price;
-import model.Profile;
-import model.User;
-import model.creation.UserBuilder;
+import model.persistents.Category;
+import model.persistents.Event;
+import model.persistents.Friends;
+import model.persistents.Price;
+import model.persistents.Profile;
+import model.persistents.User;
 import service.CategoryService;
 import service.EventService;
-import service.GenericService;
 import service.UserService;
 
 /**

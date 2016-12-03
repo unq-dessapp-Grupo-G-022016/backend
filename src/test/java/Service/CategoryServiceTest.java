@@ -1,10 +1,6 @@
 package Service;
 
-import model.Category;
-import model.Event;
-import model.Price;
-import model.User;
-import model.creation.EventBuilder;
+import model.persistents.Category;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -14,12 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import service.CategoryService;
-import service.EventService;
-
-import javax.transaction.Transactional;
-import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by alejandrok on 26/11/16.

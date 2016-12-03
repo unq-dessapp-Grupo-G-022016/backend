@@ -1,7 +1,7 @@
 package service;
 
-import model.Category;
-import model.User;
+import model.persistents.Category;
+import model.persistents.User;
 
 import javax.transaction.Transactional;
 import javax.ws.rs.core.Response;

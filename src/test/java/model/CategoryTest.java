@@ -1,5 +1,6 @@
 package model;
 
+import model.persistents.Category;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,22 +1,16 @@
-package model;
+package model.persistents;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import javax.persistence.CascadeType;
-import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.hibernate.annotations.Cascade;
 
 /**
  * Created by leog on 30/08/16.

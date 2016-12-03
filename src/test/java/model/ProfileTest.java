@@ -1,5 +1,7 @@
 package model;
 
+import model.persistents.Category;
+import model.persistents.Profile;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;

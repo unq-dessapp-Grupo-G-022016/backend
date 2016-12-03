@@ -8,9 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateCallback;
 
-import model.Event;
-import model.Friends;
-import model.User;
+import model.persistents.Event;
+import model.persistents.User;
 
 @SuppressWarnings("serial")
 public class EventRepository extends HibernateGenericRepository<Event> implements GenericRepository<Event> {

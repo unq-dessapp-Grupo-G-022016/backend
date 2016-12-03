@@ -1,6 +1,6 @@
 package model.creation;
 
-import model.*;
+import model.persistents.*;
 
 import java.util.HashSet;
 import java.util.Set;

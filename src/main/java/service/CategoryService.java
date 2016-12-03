@@ -1,12 +1,9 @@
 package service;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 import javax.ws.rs.core.Response;
 
-import model.Category;
-import model.Event;
+import model.persistents.Category;
 
 public class CategoryService extends GenericService<Category>{
 	

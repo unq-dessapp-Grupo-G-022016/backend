@@ -1,6 +1,6 @@
 package model.creation;
 
-import model.*;
+import model.persistents.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

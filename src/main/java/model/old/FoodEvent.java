@@ -1,4 +1,9 @@
-package model;
+package model.old;
+
+import model.persistents.Category;
+import model.persistents.Event;
+import model.persistents.Price;
+import model.persistents.User;
 
 import java.time.LocalDateTime;
 import java.util.Set;

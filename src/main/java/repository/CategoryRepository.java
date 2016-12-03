@@ -8,9 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateCallback;
 
-import model.Category;
-import model.Event;
-import model.User;
+import model.persistents.Category;
+import model.persistents.User;
 
 @SuppressWarnings("serial")
 public class CategoryRepository extends HibernateGenericRepository<Category> implements GenericRepository<Category> {

@@ -1,6 +1,10 @@
 package model;
 
 import model.creation.EventBuilder;
+import model.persistents.Category;
+import model.persistents.Event;
+import model.persistents.Price;
+import model.persistents.User;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;

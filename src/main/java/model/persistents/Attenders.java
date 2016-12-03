@@ -1,4 +1,4 @@
-package model;
+package model.persistents;
 
 import java.util.HashSet;
 import java.util.Set;

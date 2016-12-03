@@ -1,5 +1,9 @@
 package model;
 
+import model.persistents.Category;
+import model.persistents.Friends;
+import model.persistents.Profile;
+import model.persistents.User;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;

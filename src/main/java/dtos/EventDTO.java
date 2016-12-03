@@ -4,9 +4,7 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.google.gson.Gson;
-
-import model.Event;
+import model.persistents.Event;
 
 public class EventDTO {
 	

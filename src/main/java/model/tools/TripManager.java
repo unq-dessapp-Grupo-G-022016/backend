@@ -1,4 +1,8 @@
-package model;
+package model.tools;
+
+import model.persistents.Category;
+import model.persistents.Event;
+import model.persistents.User;
 
 import java.time.LocalDateTime;
 import java.util.*;

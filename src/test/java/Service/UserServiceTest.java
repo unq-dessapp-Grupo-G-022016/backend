@@ -6,18 +6,15 @@ import javax.transaction.Transactional;
 
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import model.Category;
-import model.User;
-import model.creation.EventBuilder;
+import model.persistents.Category;
+import model.persistents.User;
 import model.creation.UserBuilder;
-import service.EventService;
 import service.UserService;
 
 /**
