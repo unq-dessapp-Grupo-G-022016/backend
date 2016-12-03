@@ -50,8 +50,9 @@
 	</bean>
 	 -->
 
-	<!--
+
 	<bean name="aopLogging" class="aspect.Log" />
+	<!--
 	<aop:config>
 		<aop:aspect ref="aopLogging">
 			<aop:pointcut id="pointcut" expression="execution(*

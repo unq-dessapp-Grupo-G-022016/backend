@@ -151,7 +151,7 @@ public class EventRest {
         List<Bundle> cheaptrips = new TripManager().cheapTrip(this.getbydate(day),userService.findById(user));
         cheaptrips.forEach(bundle -> bundles.add(bundle.getBundle()));
 
-        return Response.ok(cheaptrips.size()).build();
+        return Response.ok(bundles).build();
     }
     public List<Event> getbydate(int date){
         Event exampleObject = new Event();
@@ -247,6 +247,12 @@ public class EventRest {
         	Attenders attenders2 = new Attenders();
         	attenders.setUsers(uset2);
         	e.setAttenders(attenders2);
+        	if (i%2==0){
+        	    e.setPrice(new Price(0));
+            }
+            else{
+        	    e.setPrice(new Price(20));
+            }
 
         	eventService.save(e);
     	}
