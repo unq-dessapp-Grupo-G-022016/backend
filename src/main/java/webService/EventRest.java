@@ -221,6 +221,21 @@ public class EventRest {
     	userService.update(u);
     	return Response.ok().build();
     }
+    @Transactional
+    @PUT
+    @Path("/personal/{eventId}/{userName}")
+    @Produces("application/json")
+    public Response personal(@PathParam ("eventId") int id,@PathParam ("userName") String userName){
+        int i = 0;
+        Event e = this.eventService.findById(id);
+        User u = this.userService.findById(userName);
+        //e.attend(u);
+        //u.attend(e);
+        u.createPersonalEvent(e);
+        eventService.update(e);
+        userService.update(u);
+        return Response.ok().build();
+    }
     
     @GET
     @Path("/getbydate/{date}")
