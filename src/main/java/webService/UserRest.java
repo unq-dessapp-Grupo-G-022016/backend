@@ -245,6 +245,36 @@ public class UserRest {
         	u.setProfile(new Profile());
         	userService.save(u);
     	}
+        {
+            User u = new User();
+            String newname = "leog91@gmail.com";
+            u.setUserName(newname);
+            u.setAttendedEvents(new HashSet<Event>());
+            u.setFriends(new Friends());
+            u.setLowCostTrip(new Price(30));
+            u.setPersonalEvent(new HashSet<Event>());
+            u.setProfile(new Profile());
+            //u.getProfile().addCategory(new Category("Atomico"));
+            userService.save(u);
+
+        }
+
+        {
+            User u = new User();
+            String newname = "alejandro11k@gmail.com";
+            u.setUserName(newname);
+            u.setAttendedEvents(new HashSet<Event>());
+            u.setFriends(new Friends());
+            u.setLowCostTrip(new Price(100));
+            u.setPersonalEvent(new HashSet<Event>());
+            u.setProfile(new Profile());
+            //u.getProfile().addCategory(new Category("Termonuclear"));
+            //u.getProfile().addCategory(new Category("Ultrasonico"));
+            //u.getProfile().addCategory(new Category("Atomico"));
+            userService.save(u);
+        }
+
+
     	return "OK";
     }
     

@@ -277,9 +277,11 @@ public class EventRest {
         	e.setAttenders(attenders2);
         	if (i%2==0){
         	    e.setPrice(new Price(0));
+        	    //e.getProfile().addCategory(new Category("Atomico"));
             }
             else{
         	    e.setPrice(new Price(20));
+                //e.getProfile().addCategory(new Category("Termonuclear"));
             }
 
         	eventService.save(e);
@@ -303,7 +305,9 @@ public class EventRest {
         attenders1.setRecommendedMinGroup(1);
         e1.setAttenders(attenders1);
         Profile p1 = new Profile();
-        p1.addCategory(new Category("Food"));
+        //p1.addCategory(new Category("Food"));
+        //p1.addCategory(new Category("Atomico"));
+        //p1.addCategory(new Category("Termonuclear"));
         //p.addCategory(new Category(""));
         e1.setProfile(p1);
         //e.setCategory(new Category("warm places"));
