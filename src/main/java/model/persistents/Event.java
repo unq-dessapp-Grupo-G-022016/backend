@@ -283,6 +283,16 @@ public class Event {
     
     @OneToOne (cascade = CascadeType.ALL)
     private Attenders attenders;
+    
+    @Column
+    private String image;
+    
+    public void setImageUrl(String url){
+    	this.image = url;
+    }
+    public String getImageUrl(){
+    	return this.image;
+    }
 }
 
 

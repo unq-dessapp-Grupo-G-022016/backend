@@ -134,7 +134,10 @@ public class EventDTO {
 		this.price = event.getPrice().getAmmount();
 		setCategories(event);
 		this.strictSchedule = event.isStrictSchedule();
+		this.imageUrl = event.getImageUrl();
 	}
+	
+	
 
 	private void setTime(Event event) {
 		// TODO Auto-generated method stub
@@ -167,6 +170,15 @@ public class EventDTO {
 		Set<String> setOfString = new HashSet<String>();
 		event.getProfile().allCategories().forEach(category-> setOfString.add(category.getName()));
 		this.categories = setOfString;
+	}
+	
+	private String imageUrl;
+	
+	public void setImageUrl(String url){
+		this.imageUrl = url;
+	}
+	public String getImageUrl(){
+		return this.imageUrl;
 	}
 	
 

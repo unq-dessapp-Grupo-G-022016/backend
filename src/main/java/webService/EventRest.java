@@ -322,7 +322,7 @@ public class EventRest {
         	    e.setPrice(new Price(20));
                 e.getProfile().addCategory(te);
             }
-
+        	e.setImageUrl("http://earthobservatory.nasa.gov/blogs/earthmatters/files/2011/08/smptebars-468x351.png");
         	eventService.save(e);
     	}
 
@@ -351,6 +351,7 @@ public class EventRest {
         e1.setProfile(p1);
         //e.setCategory(new Category("warm places"));
         //e.setHour(LocalTime.of(12, 50));
+        e1.setImageUrl("https://media-cdn.tripadvisor.com/media/photo-s/04/9f/09/51/pizzeria-guerrin.jpg");
         eventService.save(e1);
     	}
     	
@@ -380,6 +381,7 @@ public class EventRest {
             e2.setProfile(p2);
             //e.setCategory(new Category("warm places"));
             //e.setHour(LocalTime.of(12, 50));
+            e2.setImageUrl("http://earthobservatory.nasa.gov/blogs/earthmatters/files/2011/08/smptebars-468x351.png");
             eventService.save(e2);
 
     	}
@@ -410,6 +412,7 @@ public class EventRest {
             e3.setProfile(p3);
             //e.setCategory(new Category("warm places"));
             //e.setHour(LocalTime.of(12, 50));
+            e3.setImageUrl("http://earthobservatory.nasa.gov/blogs/earthmatters/files/2011/08/smptebars-468x351.png");
             eventService.save(e3);
     	}
 
