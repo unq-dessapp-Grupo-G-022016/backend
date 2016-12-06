@@ -220,7 +220,7 @@ public class UserRest {
     @GET
     @Path("/addUsers")
     @Produces("application/json")
-    public String addUser(){
+    public Response addUser(){
     	this.categoryService.save(new Category("Food"));
     	this.categoryService.save(new Category("Atomico"));
     	this.categoryService.save(new Category("Termonuclear"));
@@ -262,7 +262,7 @@ public class UserRest {
 
         {
             User u = new User();
-            String newname = "alejandro11k@gmail.com";
+            String newname = "k11alejandro@gmail.com";
             u.setUserName(newname);
             u.setAttendedEvents(new HashSet<Event>());
             u.setFriends(new Friends());
@@ -275,7 +275,7 @@ public class UserRest {
         }
 
 
-    	return "OK";
+    	return Response.ok().build();
     }
     
     public void setUserService(final UserService userDAO) {
