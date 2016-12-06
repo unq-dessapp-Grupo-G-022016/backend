@@ -24,6 +24,7 @@ import model.tools.TripManager;
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 
 import dtos.EventDTO;
+import service.CategoryService;
 import service.EventService;
 import service.UserService;
 
@@ -55,7 +56,7 @@ public class EventRest {
      */
     //private PostRepository postRepository;
     private EventService eventService;
-
+    private CategoryService categoryService;
 	private UserService userService;
 	
     /*
@@ -255,10 +256,21 @@ public class EventRest {
     }
     
 
- 	@GET
+     
+ 	 @GET
      @Path("/addEvents")
      @Produces("application/json")
      public String addEvent(){
+ 		
+ 		Category food = this.categoryService.findById("Food");
+ 		
+ 		Category at = this.categoryService.findById("Atomico");
+    	Category te = this.categoryService.findById("Termonuclear");
+    	Category fa = this.categoryService.findById("Fantabulosico");
+    	Category tr = this.categoryService.findById("Tranca");
+    	Category to =this.categoryService.findById("Tornado");
+    	
+    	{
     	Event e = new Event();
     	e.setName("goingToHell");
     	e.setAddress("666");
@@ -274,29 +286,47 @@ public class EventRest {
     	attenders.setRecommendedMinGroup(0);
     	e.setAttenders(attenders);
     	Profile p = new Profile();
-    	p.addCategory(new Category("warm places"));
+    	p.addCategory(fa);
     	e.setProfile(p);
     	//e.setCategory(new Category("warm places"));
     	//e.setHour(LocalTime.of(12, 50));
+    	}
+    	
+    	
     	for(int i=1;i<20;i++){
+    		Event e = new Event();
     		String newname = "goingToHell"+i;
     		e.setName(newname);
-    	 	Set<User> uset2 = new HashSet<User>();
-        	Attenders attenders2 = new Attenders();
-        	attenders.setUsers(uset2);
-        	e.setAttenders(attenders2);
+    		
+    		e.setAddress("666");
+        	e.setDetails("Devils house");
+        	e.setPrice(new Price(20));
+        	e.setStartTime(LocalDateTime.now());
+        	e.setEndTime(LocalDateTime.now());
+        	Set<User> uset = new HashSet<User>();
+        	Attenders attenders = new Attenders();
+        	attenders.setUsers(uset);
+        	attenders.setMaxCapacity(0);
+        	attenders.setRecommendedMaxGroup(0);
+        	attenders.setRecommendedMinGroup(0);
+        	e.setAttenders(attenders);
+        	Profile p = new Profile();
+        	p.addCategory(fa);
+        	e.setProfile(p);
+        	
         	if (i%2==0){
         	    e.setPrice(new Price(0));
-        	    //e.getProfile().addCategory(new Category("Atomico"));
+        	    e.getProfile().addCategory(at);
             }
             else{
         	    e.setPrice(new Price(20));
-                //e.getProfile().addCategory(new Category("Termonuclear"));
+                e.getProfile().addCategory(te);
             }
 
         	eventService.save(e);
     	}
 
+    	{
         Event e1 = new Event();
         e1.setName("Guerrin");
         e1.setAddress("Av. Corrientes 1368, C1043ABN CABA");
@@ -315,28 +345,35 @@ public class EventRest {
         attenders1.setRecommendedMinGroup(1);
         e1.setAttenders(attenders1);
         Profile p1 = new Profile();
-        //p1.addCategory(new Category("Food"));
-        //p1.addCategory(new Category("Atomico"));
-        //p1.addCategory(new Category("Termonuclear"));
-        //p.addCategory(new Category(""));
+        p1.addCategory(food);
+        p1.addCategory(at);
+        p1.addCategory(te);
         e1.setProfile(p1);
         //e.setCategory(new Category("warm places"));
         //e.setHour(LocalTime.of(12, 50));
         eventService.save(e1);
-
-
-
-
+    	}
+    	
+    	{
+    		
+    	}
+    	
+    	{
+    		
+    	}
 
      	return "OK";
      }
      
     
-    public void setEventService(final EventService eventDAO) {
-        eventService = eventDAO;
+ 	public void setUserService(final UserService userDAO) {
+        userService = userDAO;
     }
-    public void setUserService(final UserService eventDAO) {
-        userService = eventDAO;
+    public void setCategoryService(final CategoryService userDAO) {
+        categoryService = userDAO;
+    }
+    public void setEventService(final EventService userDAO) {
+        eventService = userDAO;
     }
 
 }

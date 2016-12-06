@@ -220,7 +220,20 @@ public class UserRest {
     @GET
     @Path("/addUsers")
     @Produces("application/json")
-    public String addEvent(){
+    public String addUser(){
+    	this.categoryService.save(new Category("Food"));
+    	this.categoryService.save(new Category("Atomico"));
+    	this.categoryService.save(new Category("Termonuclear"));
+    	this.categoryService.save(new Category("Fantabulosico"));
+    	this.categoryService.save(new Category("Tranca"));
+    	this.categoryService.save(new Category("Triplex"));
+    	
+    	Category at = this.categoryService.findById("Atomico");
+    	Category te = this.categoryService.findById("Termonuclear");
+    	Category fa = this.categoryService.findById("Fantabulosico");
+    	Category tr = this.categoryService.findById("Tranca");
+    	Category to =this.categoryService.findById("Tornado");
+    	
     	for(int i=1;i<20;i++){
     		User u = new User();
     		String newname = "momo"+i;
@@ -241,7 +254,8 @@ public class UserRest {
             u.setLowCostTrip(new Price(30));
             u.setPersonalEvent(new HashSet<Event>());
             u.setProfile(new Profile());
-            //u.getProfile().addCategory(new Category("Atomico"));
+            u.getProfile().addCategory(at);
+            u.getProfile().addCategory(te);
             userService.save(u);
 
         }
@@ -255,9 +269,8 @@ public class UserRest {
             u.setLowCostTrip(new Price(100));
             u.setPersonalEvent(new HashSet<Event>());
             u.setProfile(new Profile());
-            //u.getProfile().addCategory(new Category("Termonuclear"));
-            //u.getProfile().addCategory(new Category("Ultrasonico"));
-            //u.getProfile().addCategory(new Category("Atomico"));
+            u.getProfile().addCategory(at);
+            u.getProfile().addCategory(fa);
             userService.save(u);
         }
 
@@ -271,38 +284,11 @@ public class UserRest {
     public void setCategoryService(final CategoryService userDAO) {
         categoryService = userDAO;
     }
-    
- // This method will do a preflight check itself
-    /*
-    @OPTIONS
-    @Path("/")
-    @LocalPreflight
-    public Response options() {
-        //String origin = headers.getRequestHeader("Origin").get(0);
-        //if ("http://localhost:8080".equals(origin)) {
-            return Response.ok()
-                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_METHODS, "DELETE PUT")
-                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_CREDENTIALS, "false")
-                           .header(CorsHeaderConstants.HEADER_AC_ALLOW_ORIGIN, "http://frulanga")
-                           .build();
-        //} else {
-        //    return Response.ok().build();
-        //}
-    }*/
- /*
-    @GET
-    @CrossOriginResourceSharing(
-         //allowOrigins = { "http://localhost:8080" },
-    	allowAllOrigins = true,
-         allowCredentials = true, 
-         exposeHeaders = { "X-custom-3", "X-custom-4" }
-    )
-    @Produces("text/plain")
-    @Path("/annotatedGet/{echo}")
-    public String annotatedGet(@PathParam("echo") String echo) {
-        return echo;
+    public void setEventService(final EventService userDAO) {
+        eventService = userDAO;
     }
- */
+    
+
     /*
      *  the dark side
      */
